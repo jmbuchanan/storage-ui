@@ -186,10 +186,14 @@ footer {
   }
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 500px) {
 
-  nav {
-    background-color: red;
-  }  
-
+  .container {
+    grid-template-rows: 180px 1fr 1fr 1fr 80px;
+  }
+  
+  .links {
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
 }
