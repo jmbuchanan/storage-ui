@@ -7,24 +7,30 @@ html {
 }
 
 body {
+  margin: 0px;
   font-family: Arial;
+  color: #404040;
 }
 
 .container {
   height: 930px;
   display: grid;
   grid-template-columns: 17.5% 32.5% 1fr 17.5%;
-  grid-template-rows: 110px 40% 1fr 80px;
+  grid-template-rows: 80px 40% 1fr 80px;
 }
 
 header {
   grid-area: 1 / 1 / 2 / 5;
+  background-color: #212F3D;
 }
 
 nav {
   grid-area: 1 / 2 / 2 / 4;
-  border-bottom: 2px solid black;
-  margin-bottom: 10px;
+  color: white;
+}
+
+.nav-link {
+  font-size: 22px;
 }
 
 .links {
@@ -44,11 +50,15 @@ nav {
 .links li a {
   text-decoration: none;
   font-size: 22px;
-  color: black;
+  color: inherit;
 }
 
 .logo {
   justify-self: flex-start;
+}
+
+.default-body {
+  grid-area: 2 / 2 / 4 / 4;
 }
 
 .picture-div {
@@ -88,16 +98,29 @@ nav {
   content: '✓ ';
 }
 
-article {
+.body-text {
   grid-row: 3;
   grid-column: 2;
+  padding-right: 10px;
+}
+
+.body-text h1 {
+  color: #2C3E50;
+}
+
+.body-text p {
+  line-height: 1.6;
 }
 
 .map {
   grid-row: 3;
   grid-column: 3;
+  padding: 15px 0px;
+}
+
+.map iframe {
+  height: 100%;
   width: 100%;
-  margin: 15px 0px;
 }
 
 footer {
@@ -106,34 +129,35 @@ footer {
   justify-content: center;
   grid-row: 4;
   grid-column: 1 / 5;
-  background-color: gray;
+  background-color:  #364D63;
+  font-size: 18px;
+  line-height: 1.6;
   text-align: center;
   color: white;
 }
 
-@media only screen and (max-width: 700px) {
-
+@media only screen and (max-width: 900px) {
 
   .container {
     height: 1200px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 120px 1fr 1fr 1fr 80px;
+    grid-template-rows: 80px 1fr 1fr 1fr 80px;
   }
 
   nav {
     grid-row: 1;
     grid-column: 1;
-    border-bottom: 4px solid black;
-    margin-bottom: 10px;
+    margin: 0px 10px 0px 10px;
   }
   header {
     grid-row: 1;
     grid-column: 1;
   }
     
-  .links li a {
-    font-size: 16px;
+  .default-body {
+    grid-area: 2 / 1 / 4 / 2;
+    margin: 0px 10px;
   }
 
   .picture-div {
@@ -141,23 +165,31 @@ footer {
     grid-column: 1;
   }
   
-  article {
+  .body-text {
     grid-row: 3;
     grid-column: 1;
+    margin: 0px 10px;
   }
   
   .map {
     grid-row: 4;
     grid-column: 1;
     height: 400px;
+    margin: 0px 10px;
   }
 
   footer {
     grid-row: 5;
     grid-column: 1;
-    background-color: gray;
     text-align: center;
     color: white;
   }
 }
 
+@media only screen and (max-width: 420px) {
+
+  nav {
+    background-color: red;
+  }  
+
+}
