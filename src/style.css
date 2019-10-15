@@ -51,6 +51,8 @@ nav {
   text-decoration: none;
   font-size: 22px;
   color: inherit;
+  display: inline-block;
+  padding: 25px 15px;
 }
 
 .logo {
@@ -194,6 +196,11 @@ footer {
   
   .links {
     flex-direction: column;
-    padding-bottom: 10px;
+    justify-content: space-around;
   }
+
+  .links li a {
+    padding: 0px 100px;
+  }
+
 }
