@@ -1,7 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './style.css';
+<<<<<<< HEAD
 import logo from './img/logo.svg';
+=======
+import logo from './img/logo1.gif';
+>>>>>>> affa5e5a12518900fb1e49fa2d89775c8c3190f2
 
 import Home from './routes/Home';
 import Units from './routes/Units';
