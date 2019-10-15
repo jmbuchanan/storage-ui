@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './style.css';
-import logo from './img/logo.gif';
+import logo from './img/logo.svg';
 
 import Home from './routes/Home';
 import Units from './routes/Units';
@@ -18,7 +18,7 @@ function App() {
       <nav>
         <ul className="links">
           <li className="logo">
-            <Link to="/"><img src={logo} alt="Jefferson Mini Warehouses Logo" /></Link>
+            <Link to="/"><object data={logo}></object></Link>
           </li>
           <li><Link className="nav-link" to="/units">Units</Link></li>
           <li><Link className="nav-link" to="/billing">Pay Bill</Link></li>
