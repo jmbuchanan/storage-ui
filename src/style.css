@@ -156,6 +156,7 @@ footer {
     grid-column: 1;
     margin: 0px 10px 0px 10px;
   }
+  
   header {
     grid-row: 1;
     grid-column: 1;
@@ -190,7 +191,7 @@ footer {
     text-align: center;
     color: white;
   }
-
+}
 
 @media only screen and (max-width: 500px) {
 
