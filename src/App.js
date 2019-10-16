@@ -18,7 +18,7 @@ function App() {
       <nav>
         <ul className="links">
           <li className="logo">
-            <Link className="nav-link" to="/"><object data={logo}></object></Link>
+            <Link className="nav-link" to="/"><img src={logo} alt="logo" /></Link>
           </li>
           <li><Link className="nav-link" to="/units">Units</Link></li>
           <li><Link className="nav-link" to="/billing">Pay Bill</Link></li>

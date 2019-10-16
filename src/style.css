@@ -51,16 +51,12 @@ nav {
   text-decoration: none;
   font-size: 18px;
   color: inherit;
-  display: block;
+  display: inline-block;
   padding: 25px 15px;
 }
 
 .logo {
   justify-self: flex-start;
-}
-
-object {
-  pointer-events: none;
 }
 
 .default-body {
