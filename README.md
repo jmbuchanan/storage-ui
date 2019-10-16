@@ -3,7 +3,7 @@ Front end for a storage website.
 TODO: 
 
   -  Update favicon to reflect font and color of logo
-  -  Make higher res logo in GIMP and scale down to appropriate size
+  -  &#x2714;Make higher res logo in GIMP and scale down to appropriate size 
   -  SEO so this page appears in google search results
   -  Add dropdown (&#9776;) to mobile view
   -  Banner carousel on home page
