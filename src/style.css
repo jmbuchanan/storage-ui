@@ -59,6 +59,10 @@ nav {
   justify-self: flex-start;
 }
 
+object {
+  pointer-events: none;
+}
+
 .default-body {
   grid-area: 2 / 2 / 4 / 4;
 }
