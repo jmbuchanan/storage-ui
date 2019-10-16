@@ -200,11 +200,11 @@ footer {
   
   .links {
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .links li a {
-    padding: 0px 100px;
+    padding: 5px 100px;
   }
 
 }
