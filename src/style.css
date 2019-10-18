@@ -138,6 +138,23 @@ footer {
   color: white;
 }
 
+/**************************
+Units
+**************************/
+.unit-div-parent {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.unit-div {
+  height: 180px;
+  width: 60%;
+  border-style: solid;
+  border-color:  #364D63;
+}
+
 @media only screen and (max-width: 900px) {
 
   .container {
