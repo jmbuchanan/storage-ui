@@ -5,7 +5,7 @@ import storageOne from '../img/storage-1.jpg';
 var Banner = function () {
   return (
     <div className="picture-div">
-        <img src={ storageOne } className="picture" alt="storage units"/>
+        <img src={ storageOne } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
     </div>
   );
 }
