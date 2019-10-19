@@ -247,8 +247,15 @@ Units
     width: 100%;
   }
 
+  .logo {
+    padding: 15px 15px 15px 0px;
+  }
+
   .menu-button {
     display: block;
+    height: 80px;
+    width: 60px;
+    padding: 20px 0px 20px 20px; 
   }
 
   .nav-links {

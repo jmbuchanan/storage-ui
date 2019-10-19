@@ -52,13 +52,13 @@ class NavBar extends Component {
       <Router>
       <nav>
         <div className="logo-and-menu-button">
-          <Link className="logo" to="/"><img src={logo} alt="Logo for Jefferson Mini Warehouses" /></Link>
+          <Link className="logo" onClick={this.handleClick} to="/"><img src={logo} alt="Logo for Jefferson Mini Warehouses" /></Link>
           <Link className="menu-button" onClick={this.handleClick}>&#9776;</Link>
         </div>
         <ul className="nav-links toggle-nav-links">
-          <li><Link to="/units">Units</Link></li>
-          <li><Link to="/billing">Pay Bill</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
+          <li><Link onClick={this.handleClick} to="/units">Units</Link></li>
+          <li><Link onClick={this.handleClick} to="/billing">Pay Bill</Link></li>
+          <li><Link onClick={this.handleClick} to="/contact">Contact Us</Link></li>
         </ul>
       </nav>		
         <Route exact path="/" component={Home} />
