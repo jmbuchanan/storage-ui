@@ -7,7 +7,7 @@ var BodyText = function () {
       <p>Jefferson Mini Warehouses offers premium climate-controlled storage units
            in Jackson County. With cutting-edge security, professional management, 
            and over 40 units with a variety of sizes, we are here to meet all of your storage needs. 
-           Call today to learn more!</p>
+           Call today to learn more! 706-612-5081</p>
     </div>
   );
 
