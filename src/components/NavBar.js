@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../img/logo.svg';
-
-import Home from '../routes/Home';
-import Units from '../routes/Units';
-import Billing from '../routes/Billing';
-import Contact from '../routes/Contact';
-import CustomersTable from '../routes/CustomersTable';
 
 class NavBar extends Component {
   constructor(props) {
@@ -14,82 +8,48 @@ class NavBar extends Component {
     
     this.state = {isToggled: false};
 
-    this.handleClick = this.handleClick.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.removeToggle = this.removeToggle.bind(this);
   }
 
-  handleClick() {
-    this.setState(function(prevState) {
-      return {isToggled: !prevState.isToggled};
-    });
+  toggle() {
+    this.setState(state => (
+      {isToggled: !state.isToggled}
+    ));
   }
 
-  renderNonToggledNavBar() {
-    return (
-      <>
-      <Router>
-      <nav>
-        <div className="logo-and-menu-button">
-          <Link className="logo" to="/"><img src={logo} alt="Logo for Jefferson Mini Warehouses" /></Link>
-          <Link className="menu-button" onClick={this.handleClick}>&#9776;</Link>
-        </div>
-        <ul className="nav-links">
-          <li><Link to="/units">Units</Link></li>
-          <li><Link to="/billing">Pay Bill</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-        </ul>
-      </nav>
-        <Route exact path="/" component={Home} />
-        <Route path = "/units" component={Units} />
-        <Route path = "/billing" component={Billing} />
-        <Route path = "/contact" component={Contact} />
-        <Route path = "/admin/customers" component={CustomersTable} />
-      </Router>
-      </>
-    )
-  }
-
-  renderToggledNavBar() {
-    return (
-      <>
-      <Router>
-      <nav>
-        <div className="logo-and-menu-button">
-          <Link className="logo" onClick={this.handleClick} to="/"><img src={logo} alt="Logo for Jefferson Mini Warehouses" /></Link>
-          <Link className="menu-button" onClick={this.handleClick}>&#9776;</Link>
-        </div>
-        <ul className="nav-links toggle-nav-links">
-          <li><Link onClick={this.handleClick} to="/units">Units</Link></li>
-          <li><Link onClick={this.handleClick} to="/billing">Pay Bill</Link></li>
-          <li><Link onClick={this.handleClick} to="/contact">Contact Us</Link></li>
-        </ul>
-      </nav>		
-        <Route exact path="/" component={Home} />
-        <Route path = "/units" component={Units} />
-        <Route path = "/billing" component={Billing} />
-        <Route path = "/contact" component={Contact} />
-        <Route path = "/admin/customers" component={CustomersTable} />
-      </Router>
-      </>
-    )
-  }
-
-  renderNav() {
-    var x;
+  removeToggle() {
     if (this.state.isToggled) {
-      x = this.renderToggledNavBar();
+      this.setState(state => (
+        {isToggled: false}
+      ));
     }
-    else {
-      x = this.renderNonToggledNavBar();
-    }
-    return x;
   }
 
   render() {
+
+    const toggled = !this.state.isToggled ? "nav-links" : "nav-links toggle-nav-links";
+    
     return (
       <>
-      {this.renderNav()}
+      <header>
+      </header>
+      <nav>
+        <div className="logo-and-menu-button">
+          <Link className="logo" onClick={this.removeToggle} to="/">
+            <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
+          </Link>
+          <Link className="menu-button" onClick={this.toggle}>&#9776;</Link>
+        </div>
+        <ul className={toggled}>
+          <li><Link onClick={this.removeToggle} to="/units">Units</Link></li>
+          <li><Link onClick={this.removeToggle} to="/billing">Pay Bill</Link></li>
+          <li><Link onClick={this.removeToggle} to="/contact">Contact Us</Link></li>
+        </ul>
+      </nav>
       </>
-    );
+      );
+    }
   }
-}
+
 export default NavBar;

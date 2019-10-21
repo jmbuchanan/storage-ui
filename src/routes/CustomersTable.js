@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-class query extends Component {
+class CustomersTable extends Component {
 
     constructor(props) {
       super(props);
@@ -73,4 +73,4 @@ class query extends Component {
     }
 }
 
-export default query;
+export default CustomersTable;
