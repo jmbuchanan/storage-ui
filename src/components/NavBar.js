@@ -6,6 +6,7 @@ import Home from '../routes/Home';
 import Units from '../routes/Units';
 import Billing from '../routes/Billing';
 import Contact from '../routes/Contact';
+import CustomersTable from '../routes/CustomersTable';
 
 class NavBar extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class NavBar extends Component {
         <Route path = "/units" component={Units} />
         <Route path = "/billing" component={Billing} />
         <Route path = "/contact" component={Contact} />
+        <Route path = "/admin/customers" component={CustomersTable} />
       </Router>
       </>
     )
@@ -65,6 +67,7 @@ class NavBar extends Component {
         <Route path = "/units" component={Units} />
         <Route path = "/billing" component={Billing} />
         <Route path = "/contact" component={Contact} />
+        <Route path = "/admin/customers" component={CustomersTable} />
       </Router>
       </>
     )
