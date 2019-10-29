@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  height: 951px;
+  min-height: 951px;
   display: grid;
   grid-template-columns: 17.5% 32.5% 1fr 17.5%;
   grid-template-rows: 80px 40% 1fr 80px;
@@ -84,6 +84,7 @@ nav {
 
 .default-body {
   grid-area: 2 / 2 / 4 / 4;
+  overflow: scroll;
 }
 
 .picture-div {
@@ -183,6 +184,31 @@ Units
   font-weight: bold;
 
 }
+
+
+/**************************
+Tables
+**************************/
+table {
+  padding-top: 15px;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #404040;
+  padding: 8px;
+}
+
+th {
+  text-align: left;
+  background-color: #364D63;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 
 @media only screen and (max-width: 900px) {
 
