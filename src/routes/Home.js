@@ -6,11 +6,13 @@ import GoogleMap from '../components/GoogleMap';
 
 function Home() {
     return (
-      <>
-        <Banner />
-        <BodyText />
-        <GoogleMap />
-      </>
+      <div className="default-body">
+        <div className="home">
+          <Banner />
+          <BodyText />
+          <GoogleMap />
+        </div>
+      </div>
     );
 }
 
