@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './Home';
-import Units from './Units';
-import Billing from './Billing';
-import Contact from './Contact';
-import CustomersTable from './CustomersTable';
-import UnitsTable from './UnitsTable';
+import Home from '../home/Home';
+import Units from '../units/Units';
+import Billing from '../billing/Billing';
+import Contact from '../contact/Contact';
+import CustomersTable from '../admin/CustomersTable';
+import UnitsTable from '../admin/UnitsTable';
 
 class Routes extends Component {
   render() {

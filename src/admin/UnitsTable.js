@@ -15,7 +15,7 @@ class UnitsTable extends Component {
       const api = "http://localhost:8080/units/getAllUnits";
 
       axios.get(api)
-        .then((result) => {
+        .then(result => {
           console.log(result);
           this.setState({data: result.data})
         })
