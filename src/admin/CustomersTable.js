@@ -54,6 +54,8 @@ class CustomersTable extends Component {
 
     return (
       <div className="default-body">
+        <a href="/admin">Return</a>
+        <h1>Customers</h1>
         <table>
           <tr>
             <th>Customer Id</th>

@@ -14,7 +14,13 @@ class UnitsTable extends Component {
     componentDidMount() {
       const api = "http://localhost:8080/units/getAllUnits";
 
-      axios.get(api)
+
+      axios.get(api, {
+        auth: {
+          username: 'admin',
+          password: 'password'
+        }
+      })
         .then(result => {
           console.log(result);
           this.setState({data: result.data})
@@ -50,6 +56,8 @@ class UnitsTable extends Component {
 
     return (
       <div className="default-body">
+        <a href="/admin">Return</a>
+        <h1>Units</h1>
         <table>
           <tr>
             <th>Unit Number</th>
