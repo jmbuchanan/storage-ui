@@ -15,12 +15,7 @@ class UnitsTable extends Component {
       const api = "http://localhost:8080/units/getAllUnits";
 
 
-      axios.get(api, {
-        auth: {
-          username: 'admin',
-          password: 'password'
-        }
-      })
+      axios.get(api)
         .then(result => {
           console.log(result);
           this.setState({data: result.data})
@@ -44,9 +39,9 @@ class UnitsTable extends Component {
           <td>{data.unitNumber}</td>
           <td>{data.large ? "t" : "f"}</td>
           <td>{data.occupied ? "t" : "f"}</td>
-          <td>{(data.startDate == null) ? "" : data.startDate.substring(0,10)}</td>
+          <td className="hidden-when-mobile">{(data.startDate == null) ? "" : data.startDate.substring(0,10)}</td>
           <td>{data.delinquent ? "t" : "f"}</td>
-          <td>{data.daysDelinquent}</td>
+          <td className="hidden-when-mobile">{data.daysDelinquent}</td>
         </tr>
         )
       )
@@ -58,17 +53,23 @@ class UnitsTable extends Component {
       <div className="default-body">
         <a href="/admin">Return</a>
         <h1>Units</h1>
+        <div className="table-div">
         <table>
+          <thead>
           <tr>
             <th>Unit Number</th>
             <th>Large</th>
             <th>Occupied</th>
-            <th>Start Date</th>
+            <th className="hidden-when-mobile">Start Date</th>
             <th>Delinquent</th>
-            <th>Days Delinquent</th>
+            <th className="hidden-when-mobile">Days Delinquent</th>
           </tr>
+          </thead>
+          <tbody>
           {this.renderContent()}
+          </tbody>
         </table>
+        </div>
       </div>
     );
     }

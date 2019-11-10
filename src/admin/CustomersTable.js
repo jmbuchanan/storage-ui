@@ -36,15 +36,15 @@ class CustomersTable extends Component {
 
       return content.map((data, i) => (
         <tr key={i}>
-          <td>{data.customerId}</td>
-          <td>{data.email}</td>
-          <td>{data.phoneNumber}</td>
+          <td className="hidden-when-mobile">{data.customerId}</td>
           <td>{data.firstName}</td>
           <td>{data.lastName}</td>
-          <td>{data.streetAddress}</td>
-          <td>{data.secondStreetAddress}</td>
-          <td>{data.state}</td>
-          <td>{data.zip}</td>
+          <td>{data.email}</td>
+          <td>{data.phoneNumber}</td>
+          <td className="hidden-when-mobile">{data.streetAddress}</td>
+          <td className="hidden-when-mobile">{data.secondStreetAddress}</td>
+          <td className="hidden-when-mobile">{data.state}</td>
+          <td className="hidden-when-mobile">{data.zip}</td>
         </tr>
         )
       )
@@ -56,20 +56,26 @@ class CustomersTable extends Component {
       <div className="default-body">
         <a href="/admin">Return</a>
         <h1>Customers</h1>
+        <div className="table-div">
         <table>
+          <thead>
           <tr>
-            <th>Customer Id</th>
+            <th className="hidden-when-mobile">Id</th>
+            <th>First</th>
+            <th>Last</th>
             <th>Email</th>
-            <th>Phone Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Street Address</th>
-            <th>Street Address (2)</th>
-            <th>State</th>
-            <th>Zip</th>
+            <th>Number</th>
+            <th className="hidden-when-mobile">Address</th>
+            <th className="hidden-when-mobile">Address (2)</th>
+            <th className="hidden-when-mobile">State</th>
+            <th className="hidden-when-mobile">Zip</th>
           </tr>
+          </thead>
+          <tbody>
           {this.renderContent()}
+          </tbody>
         </table>
+        </div>
       </div>
     );
     }

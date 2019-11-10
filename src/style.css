@@ -79,6 +79,7 @@ nav {
 
 .default-body {
   grid-area: 2 / 2 / 3 / 3;
+  padding: 15px;
 }
 
 .home {
@@ -165,6 +166,9 @@ Units
 /**************************
 Tables
 **************************/
+.table-div {
+}
+
 table {
   padding-top: 15px;
   width: 100%;
@@ -292,4 +296,13 @@ tr:nth-child(even) {
   .toggle-nav-links {
     display: block;
   }
+
+  .hidden-when-mobile {
+    display: none;
+  }
+
+  td, th {
+    font-size: 14px;
+  }
+
 }
