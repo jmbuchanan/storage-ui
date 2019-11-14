@@ -39,7 +39,7 @@ class Header extends Component {
           <Link className="logo" onClick={this.removeToggle} to="/">
             <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
           </Link>
-          <Link className="menu-button" onClick={this.toggle}>&#9776;</Link>
+          <div className="menu-button" onClick={this.toggle}>&#9776;</div>
         </div>
         <ul className={toggled}>
           <li><Link onClick={this.removeToggle} to="/units">Units</Link></li>
