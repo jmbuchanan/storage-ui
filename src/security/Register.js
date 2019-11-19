@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 
-class Login extends Component {
 
+
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,74 +33,65 @@ class Login extends Component {
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
-    axios('http://localhost:8080/login', {
+    axios('http://localhost:8080/customers/addCustomer', {
       method: 'POST',
       data: formData
     })
     .then(response => {
-      this.setState({responseStatus: response.status});
+      this.setState({responseStatus: response.status})
     })
     .catch(error => {
-      this.setState({responseStatus: error.response.status});
-      }
-    );
-    }
-
+      this.setState({responseStatus: error.response.status})
+    });
+  }
+  
 
   render() {
 
-  let statusCode = this.state.responseStatus;
-  let warning;
+    let statusCode = this.state.responseStatus;
+    let warning;
 
-  if (statusCode === 200) {
-    return <Redirect push to="/"/>;
-  }
+    if (statusCode === 303) {
+      return <Redirect push to="/success"/>;
+    }
 
-  if (statusCode === 401) {
-    warning = <p className="warning">
-      Incorrect password.
-    </p>
-  }
+    if (statusCode === 409) {
+      warning = <p className="warning">
+        There is already an account with this e-mail.
+      </p>
+    }
 
-  if (statusCode === 404) {
-    warning = <p className="warning">
-      No account exists for this e-mail.
-    </p>
-  }
-
-  return (
-    <div className="default-body">
-      <div>
-        <h1>Please sign in</h1>
-          <input 
+    return (
+      <div className="default-body">
+        <h1>Create Account</h1>
+        <input 
             type="text" 
             placeholder="Email"
             onBlur = {this.handleEmail}
-          />
-          <br/>
-          <input
+        />
+        <br/>
+        <input
             type="password" 
             placeholder="Password"
             onBlur = {this.handlePassword}
-          />
-          <br/>
-          <button 
+        />
+        <br/>
+        <button 
             className="login-button"
             type="submit"
             value="Login"
             onClick={this.handleSubmit}
-          >
-            Sign in
-          </button>
-          <br/>
-          <p>Need an account? 
-            <a className="register" href="/register">Register</a>
-          </p>
-          {warning != null ? warning : null}
-        </div>
+        >
+            Submit
+        </button>
+        <br/>
+        <p>
+          <a className="register" href="/login">Already have an account?</a>
+        </p>
+        {warning != null ? warning : null}
       </div>
     )
   }
 }
 
-export default Login;
+export default Register;

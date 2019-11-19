@@ -9,6 +9,9 @@ import Directory from '../admin/Directory';
 import CustomersTable from '../admin/CustomersTable';
 import UnitsTable from '../admin/UnitsTable';
 import Login from '../security/Login';
+import Register from '../security/Register';
+import Success from '../security/Success';
+import Private from '../admin/Private';
 
 class Routes extends Component {
   render() {
@@ -19,9 +22,12 @@ class Routes extends Component {
         <Route path = "/billing" component={Billing} />
         <Route path = "/contact" component={Contact} />
         <Route exact path = "/login" component={Login} />
+        <Route exact path = "/register" component={Register} />
+        <Route exact path = "/success" component={Success} />
         <Route exact path = "/admin" component={Directory} />
         <Route path = "/admin/customers" component={CustomersTable} />
         <Route path = "/admin/units" component={UnitsTable} />
+        <Route exact path = "/private" component={Private} />
       </Switch>
     );
   }
