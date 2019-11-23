@@ -27,14 +27,14 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
-
     let formData = new URLSearchParams();
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
     axios('http://localhost:8080/login', {
       method: 'POST',
-      data: formData
+      data: formData,
+      withCredentials: true
     })
     .then(response => {
       this.setState({responseStatus: response.status});
@@ -61,7 +61,7 @@ class Login extends Component {
     </p>
   }
 
-  if (statusCode === 404) {
+  if (statusCode === 403) {
     warning = <p className="warning">
       No account exists for this e-mail.
     </p>
