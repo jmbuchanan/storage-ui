@@ -9,12 +9,20 @@ class CustomersTable extends Component {
       this.state = {
         data: [],
       };
+
+    this.handleClick = this.handleClick.bind(this);
+
     }
+
+    handleClick() {
+      window.location.href = "http://localhost:8080/customers/getAllCustomers/export";
+    }
+
 
     componentDidMount() {
       const api = "http://localhost:8080/customers/getAllCustomers";
 
-      axios.get(api)
+      axios.get(api, {withCredentials: true})
         .then((result) => {
           console.log(result);
           this.setState({data: result.data})
@@ -55,6 +63,7 @@ class CustomersTable extends Component {
       <div className="default-body">
         <a href="/admin">Return</a>
         <h1>Customers</h1>
+        <button onClick={this.handleClick}>click</button>
         <div className="table-div">
         <table>
           <thead>
