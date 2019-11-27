@@ -9,10 +9,17 @@ class UnitsTable extends Component {
       this.state = {
         data: [],
       };
+
+    this.handleClick = this.handleClick.bind(this);
+
+    }
+
+    handleClick() {
+      window.location.href = "https://www.jeffersonminiwarehouses.com/api/units/getAllUnits/export";
     }
 
     componentDidMount() {
-      const api = "http://localhost:8080/units/getAllUnits";
+      const api = "https://www.jeffersonminiwarehouses.com/api/units/getAllUnits";
 
 
       axios.get(api, {withCredentials: true})
@@ -52,7 +59,11 @@ class UnitsTable extends Component {
     return (
       <div className="default-body">
         <a href="/admin">Return</a>
+        <div className="table-header">
         <h1>Units</h1>
+        <button className="excel-icon" onClick={this.handleClick}>
+        </button>
+        </div>
         <div className="table-div">
         <table>
           <thead>

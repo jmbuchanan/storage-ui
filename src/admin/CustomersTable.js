@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 
 class CustomersTable extends Component {
@@ -15,12 +14,12 @@ class CustomersTable extends Component {
     }
 
     handleClick() {
-      window.location.href = "http://localhost:8080/customers/getAllCustomers/export";
+      window.location.href = "https://www.jeffersonminiwarehouses.com/api/customers/getAllCustomers/export";
     }
 
 
     componentDidMount() {
-      const api = "http://localhost:8080/customers/getAllCustomers";
+      const api = "https://www.jeffersonminiwarehouses.com/api/customers/getAllCustomers";
 
       axios.get(api, {withCredentials: true})
         .then((result) => {
@@ -62,8 +61,11 @@ class CustomersTable extends Component {
     return (
       <div className="default-body">
         <a href="/admin">Return</a>
+        <div className="table-header">
         <h1>Customers</h1>
-        <button onClick={this.handleClick}>click</button>
+        <button className="excel-icon" onClick={this.handleClick}>
+        </button>
+        </div>
         <div className="table-div">
         <table>
           <thead>

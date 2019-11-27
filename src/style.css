@@ -151,6 +151,30 @@ button {
   padding: 5px;
 }
 
+a {
+  text-decoration: none;
+  color: #2C3E50;
+}
+
+.toc {
+  width: 200px;
+  background-color: whitesmoke;
+  box-shadow: 2px 2px 5px grey;
+  list-style: none;
+  padding-left: 0px;
+}
+
+.toc li {
+  padding: 10px 0px;
+  border-bottom: 1px solid;
+}
+
+.toc li a {
+  padding: 10px 100px 10px 10px;
+  color: #2C3E50;
+}
+
+
 .register {
   padding-left: 5px;
   text-decoration: none;
@@ -187,7 +211,20 @@ Units
 /**************************
 Tables
 **************************/
-.table-div {
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.excel-icon {
+  align-self: end;
+  cursor: pointer;
+  padding: 0px;
+  border: none;
+  height: 64px;
+  width: 64px;
+  background-image: url('img/calc.jpg');
 }
 
 table {
@@ -296,7 +333,9 @@ tr:nth-child(even) {
   }
 
   .nav-links {
-    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
     width: 100%;
     flex-direction: column;
     justify-content: space-around;
@@ -316,7 +355,8 @@ tr:nth-child(even) {
     height: 200px;
   }
   .toggle-nav-links {
-    display: block;
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
   }
 
   .hidden-when-mobile {

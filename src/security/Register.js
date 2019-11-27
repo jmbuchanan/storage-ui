@@ -33,7 +33,7 @@ class Register extends Component {
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
-    axios('http://localhost:8080/customers/addCustomer', {
+    axios('https://www.jeffersonminiwarehouses.com/api/customers/addCustomer', {
       method: 'POST',
       data: formData
     })

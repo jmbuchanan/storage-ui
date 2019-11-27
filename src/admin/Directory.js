@@ -5,7 +5,7 @@ class Directory extends Component {
         return (
           <div className="default-body">
             <h1>Table of Contents</h1>
-            <ul>
+            <ul className="toc">
                 <li><a href="/admin/customers">Customers</a></li>
                 <li><a href="/admin/units">Units</a></li>
             </ul>

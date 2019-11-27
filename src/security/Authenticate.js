@@ -12,7 +12,7 @@ class Authenticate extends Component {
     }
 
     componentDidMount() {
-      const api = "http://localhost:8080/authenticate";
+      const api = "https://www.jeffersonminiwarehouses.com/api/authenticate";
 
       axios.get(api)
         .then((result) => {

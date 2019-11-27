@@ -31,7 +31,7 @@ class Login extends Component {
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
-    axios('http://localhost:8080/login', {
+    axios('https://www.jeffersonminiwarehouses.com/api/login', {
       method: 'POST',
       data: formData,
       withCredentials: true
@@ -52,7 +52,7 @@ class Login extends Component {
   let warning;
 
   if (statusCode === 200) {
-    return <Redirect push to="/"/>;
+    return <Redirect push to="/admin"/>;
   }
 
   if (statusCode === 401) {

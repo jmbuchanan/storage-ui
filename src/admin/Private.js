@@ -12,7 +12,7 @@ class Private extends Component {
     }
 
     componentDidMount() {
-      const api = "http://localhost:8080/private";
+      const api = "https://www.jeffersonminiwarehouses.com/api/private";
 
       axios.get(api)
         .then((result) => {
