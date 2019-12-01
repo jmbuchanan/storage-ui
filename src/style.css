@@ -140,6 +140,10 @@ footer {
   color: white;
 }
 
+form {
+  font-size: 16px;
+}
+
 input {
   margin-bottom: 10px;
   background-color: #f2f2f2;
