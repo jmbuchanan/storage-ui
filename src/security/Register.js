@@ -44,6 +44,7 @@ class Register extends Component {
       this.setState({responseStatus: error.response.status})
     });
     document.body.style.zoom="100%";
+    window.scrollTo(0,0);
   }
   
 
