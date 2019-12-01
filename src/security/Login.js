@@ -46,6 +46,7 @@ class Login extends Component {
     );
 
     document.body.style.zoom="100%";
+    window.scrollTo(0,0);
     }
 
 
