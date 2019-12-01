@@ -11,7 +11,6 @@ import UnitsTable from '../admin/UnitsTable';
 import Login from '../security/Login';
 import Register from '../security/Register';
 import Success from '../security/Success';
-import Private from '../admin/Private';
 
 class Routes extends Component {
   render() {
@@ -27,7 +26,6 @@ class Routes extends Component {
         <Route exact path = "/admin" component={Directory} />
         <Route path = "/admin/customers" component={CustomersTable} />
         <Route path = "/admin/units" component={UnitsTable} />
-        <Route exact path = "/private" component={Private} />
       </Switch>
     );
   }

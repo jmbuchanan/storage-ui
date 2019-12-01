@@ -14,12 +14,12 @@ class CustomersTable extends Component {
     }
 
     handleClick() {
-      window.location.href = "https://www.jeffersonminiwarehouses.com/api/customers/getAllCustomers/export";
+      window.location.href = process.env.REACT_APP_DOMAIN + "customers/getAllCustomers/export";
     }
 
 
     componentDidMount() {
-      const api = "https://www.jeffersonminiwarehouses.com/api/customers/getAllCustomers";
+      const api = process.env.REACT_APP_DOMAIN + "customers/getAllCustomers";
 
       axios.get(api, {withCredentials: true})
         .then((result) => {

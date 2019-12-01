@@ -27,11 +27,12 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     let formData = new URLSearchParams();
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
-    axios('https://www.jeffersonminiwarehouses.com/api/login', {
+    axios(process.env.REACT_APP_DOMAIN + 'login', {
       method: 'POST',
       data: formData,
       withCredentials: true
@@ -43,6 +44,8 @@ class Login extends Component {
       this.setState({responseStatus: error.response.status});
       }
     );
+
+    document.body.style.zoom="100%";
     }
 
 
@@ -71,6 +74,7 @@ class Login extends Component {
     <div className="default-body">
       <div>
         <h1>Please sign in</h1>
+        <form onSubmit={this.handleSubmit}>
           <input 
             type="text" 
             placeholder="Email"
@@ -80,17 +84,17 @@ class Login extends Component {
           <input
             type="password" 
             placeholder="Password"
-            onBlur = {this.handlePassword}
+            onChange = {this.handlePassword}
           />
           <br/>
           <button 
             className="login-button"
             type="submit"
             value="Login"
-            onClick={this.handleSubmit}
           >
             Sign in
           </button>
+        </form>
           <br/>
           <p>Need an account? 
             <a className="register" href="/register">Register</a>

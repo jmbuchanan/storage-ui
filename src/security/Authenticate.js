@@ -12,7 +12,7 @@ class Authenticate extends Component {
     }
 
     componentDidMount() {
-      const api = "https://www.jeffersonminiwarehouses.com/api/authenticate";
+      const api = process.env.REACT_APP_DOMAIN + "authenticate";
 
       axios.get(api)
         .then((result) => {

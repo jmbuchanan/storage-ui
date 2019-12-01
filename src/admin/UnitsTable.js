@@ -15,11 +15,11 @@ class UnitsTable extends Component {
     }
 
     handleClick() {
-      window.location.href = "https://www.jeffersonminiwarehouses.com/api/units/getAllUnits/export";
+      window.location.href = process.env.REACT_APP_DOMAIN + "units/getAllUnits/export";
     }
 
     componentDidMount() {
-      const api = "https://www.jeffersonminiwarehouses.com/api/units/getAllUnits";
+      const api = process.env.REACT_APP_DOMAIN + "units/getAllUnits";
 
 
       axios.get(api, {withCredentials: true})

@@ -28,12 +28,12 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
-
+    e.preventDefault();
     let formData = new URLSearchParams();
     formData.set('email', this.state.email);
     formData.set('password', this.state.password);
 
-    axios('https://www.jeffersonminiwarehouses.com/api/customers/addCustomer', {
+    axios(process.env.REACT_APP_DOMAIN + 'customers/addCustomer', {
       method: 'POST',
       data: formData
     })
@@ -43,6 +43,7 @@ class Register extends Component {
     .catch(error => {
       this.setState({responseStatus: error.response.status})
     });
+    document.body.style.zoom="100%";
   }
   
 
@@ -52,7 +53,7 @@ class Register extends Component {
     let warning;
 
     if (statusCode === 303) {
-      return <Redirect push to="/success"/>;
+      return <Redirect push to="/admin"/>;
     }
 
     if (statusCode === 409) {
@@ -64,6 +65,7 @@ class Register extends Component {
     return (
       <div className="default-body">
         <h1>Create Account</h1>
+        <form onSubmit={this.handleSubmit}>
         <input 
             type="text" 
             placeholder="Email"
@@ -73,17 +75,17 @@ class Register extends Component {
         <input
             type="password" 
             placeholder="Password"
-            onBlur = {this.handlePassword}
+            onChange = {this.handlePassword}
         />
         <br/>
         <button 
             className="login-button"
             type="submit"
             value="Login"
-            onClick={this.handleSubmit}
         >
             Submit
         </button>
+        </form>
         <br/>
         <p>
           <a className="register" href="/login">Already have an account?</a>
