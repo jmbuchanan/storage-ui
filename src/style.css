@@ -4,9 +4,9 @@ html {
 
 body {
   margin: 0px;
-  font-family: Arial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 18px;
-  color: #404040;
+  color: #1a1a1a;
 }
 
 .container {
@@ -52,6 +52,10 @@ nav {
   color: inherit;
   display: inline-block;
   padding: 25px 15px;
+}
+
+.nav-links li a:hover {
+  color: #bdcbdb;
 }
 
 .logo-and-menu-button {
@@ -109,6 +113,7 @@ nav {
 
 .body-text h1 {
   color: #2C3E50;
+  text-shadow: 1px 1px;
 }
 
 .body-text p {
