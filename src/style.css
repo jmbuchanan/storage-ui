@@ -113,7 +113,6 @@ nav {
 
 .body-text h1 {
   color: #2C3E50;
-  text-shadow: 1px 1px;
 }
 
 .body-text p {
@@ -202,10 +201,13 @@ Units
 }
 
 .unit-div {
-  margin: 50px 0px;
+  max-width: 800px;
+  margin: 20px 0px;
+  background-color:#f2f2f2;
   border-style: solid;
   border-width: 1px;
   border-color:  #364D63;
+  box-shadow: 2px 2px 5px grey;
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -214,6 +216,7 @@ Units
 
 .unit-picture-div {
   margin: 0px 25px 0px 0px;
+  height: 375px;
 }
 
 .unit-picture-div-mobile {
