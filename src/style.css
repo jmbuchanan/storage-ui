@@ -216,6 +216,10 @@ Units
   margin: 0px 25px 0px 0px;
 }
 
+.unit-picture-div-mobile {
+  display: none;
+}
+
 .unit-features-div {
 }
 
@@ -364,7 +368,8 @@ tr:nth-child(even) {
 
   .unit-div {
     flex-direction: column;
-    height: 200px;
+    width: 345px;
+    height: 400px;
   }
   .toggle-nav-links {
     max-height: 500px;
@@ -375,6 +380,14 @@ tr:nth-child(even) {
     display: none;
   }
 
+  .unit-picture-div {
+    display: none;
+  }
+  
+  .unit-picture-div-mobile {
+    display: block;
+  }
+  
   td, th {
     font-size: 14px;
   }
