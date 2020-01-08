@@ -2,7 +2,7 @@ import React from 'react';
 
 import Jumbotron from './Jumbotron';
 import BodyText from './BodyText';
-import GoogleMap from './GoogleMap';
+import Features from './Features';
 
 function Home() {
 
@@ -10,7 +10,7 @@ function Home() {
         <div className="home">
           <Jumbotron />
           <BodyText />
-          <GoogleMap />
+          <Features />
         </div>
     );
 }
