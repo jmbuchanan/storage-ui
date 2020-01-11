@@ -21,7 +21,7 @@ function Units() {
             <div className="unit-features-div">
               <p className="unit-title">Small 5' x 10'</p>
               <p>$20/<span className="per-month">mo</span>  <span className='strike-through-price'>$30/<span className="per-month">mo</span></span></p>
-              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17069141601">706-612-5081</a></p>
+              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17066125081">706-612-5081</a></p>
             </div>
           </div>
           <div className="unit-div">
@@ -34,7 +34,7 @@ function Units() {
             <div className="unit-features-div">
               <p className="unit-title">Large 10' x 10'</p>
               <p>$40/<span className="per-month">mo</span>  <span className='strike-through-price'>$50/<span className="per-month">mo</span></span></p>
-              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17069141601">706-612-5081</a></p>
+              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17066125081">706-612-5081</a></p>
             </div>
           </div>
         </div>
