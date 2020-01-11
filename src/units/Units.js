@@ -1,4 +1,5 @@
 import React from 'react';
+import { Phone } from 'react-feather';
 
 import storageSmallDesktop from '../img/storage-small-desktop.jpg'; 
 import storageLargeDesktop from '../img/storage-large-desktop.jpg'; 
@@ -18,9 +19,9 @@ function Units() {
               <img src={ storageSmallMobile } alt="Small Storage units are five by ten feet and rent for $20 a month."/>
             </div>
             <div className="unit-features-div">
-              <p>5x10 - Small Storage</p>
-              <p>$20 / mo.</p>
-              <p>Call now to book! 706-612-5081</p>
+              <p className="unit-title">Small 5' x 10'</p>
+              <p>$20/<span className="per-month">mo</span>  <span className='strike-through-price'>$30/<span className="per-month">mo</span></span></p>
+              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17069141601">706-612-5081</a></p>
             </div>
           </div>
           <div className="unit-div">
@@ -31,9 +32,9 @@ function Units() {
               <img src={ storageLargeMobile } alt="Large Storage units are ten by ten feet and rent for $40 a month."/>
             </div>
             <div className="unit-features-div">
-              <p>10x10 - Large Storage</p>
-              <p>$40 / mo.</p>
-              <p>Call now to book! 706-612-5081</p>
+              <p className="unit-title">Large 10' x 10'</p>
+              <p>$40/<span className="per-month">mo</span>  <span className='strike-through-price'>$50/<span className="per-month">mo</span></span></p>
+              <p><Phone size='15' color='#212F3D'/> <a className="phone" href="tel://+17069141601">706-612-5081</a></p>
             </div>
           </div>
         </div>
