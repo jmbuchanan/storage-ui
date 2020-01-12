@@ -1,12 +1,18 @@
 import React from 'react';
 
-import storageOne from '../img/storage-1.jpg'; 
+import storageDesktop from '../img/storage-main-desktop.jpg'; 
+import storageMobile from '../img/storage-main-mobile.jpg'; 
 
 var Jumbotron = function () {
   return (
-    <div className="picture-div">
-        <img src={ storageOne } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
-    </div>
+    <React.Fragment>
+      <div className="picture-div">
+          <img src={ storageDesktop } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
+      </div>
+      <div className="picture-div-mobile">
+          <img src={ storageMobile } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -99,6 +99,10 @@ nav {
   grid-area: 1 / 1 / 2 / 3;
 }
 
+.picture-div-mobile {
+  display: none;
+}
+
 .picture {
   height: 100%;
   width: 1250px;
@@ -362,9 +366,6 @@ tr:nth-child(even) {
     text-align: center;
     color: white;
   }
-
-
-
 }
 
 @media only screen and (max-width: 500px) {
@@ -421,6 +422,22 @@ tr:nth-child(even) {
 
   .unit-picture-div {
     display: none;
+  }
+
+  .picture-div {
+    display: none;
+  }
+
+  .picture {
+    height: unset;
+    width: unset;
+    float: unset;
+  }
+
+  .picture-div-mobile {
+    display: block;
+    width: 375px;
+    height: 400px;
   }
   
   .unit-picture-div-mobile {
