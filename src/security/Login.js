@@ -72,37 +72,7 @@ class Login extends Component {
   }
 
   return (
-    <div className="default-body">
-      <div>
-        <h1>Please sign in</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="Email"
-            onBlur = {this.handleEmail}
-          />
-          <br/>
-          <input
-            type="password" 
-            placeholder="Password"
-            onChange = {this.handlePassword}
-          />
-          <br/>
-          <button 
-            className="login-button"
-            type="submit"
-            value="Login"
-          >
-            Sign in
-          </button>
-        </form>
-          <br/>
-          <p>Need an account? 
-            <a className="register" href="/register">Register</a>
-          </p>
-          {warning != null ? warning : null}
-        </div>
-      </div>
+    <div></div>
     )
   }
 }

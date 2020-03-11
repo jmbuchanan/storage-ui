@@ -1,17 +1,27 @@
 import React from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import './style.css';
 
-import Header from './common/Header';
-import Footer from './common/Footer';
-import Routes from './common/Routes';
+import Home from './home/Home';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#2a373c'
+    },
+    secondary: deepOrange
+  }
+});
 
 function App() {
   return (
-    <div className="container">
-    <Header />
-    <Routes />
-    <Footer />
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Home />
+    </MuiThemeProvider>
   );
 }
 
