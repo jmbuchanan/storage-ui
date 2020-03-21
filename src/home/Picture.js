@@ -1,24 +1,26 @@
 import React from 'react';
 
-import storageDesktop from '../img/storage-main-desktop.jpg';
-import { makeStyles } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 
+import storageDesktop from '../img/storage-main-desktop.jpg';
 
 function Picture() {
 
   const useStyles = makeStyles({
     root: {
-      gridArea: 'picture'
+      overflowX: 'hidden'
     }
   })
 
   const classes = useStyles();
 
-    return (
-        <div className={classes.root}>
-          <img src={ storageDesktop } className="jumbotron" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
-        </div>
-    );
+
+  return (
+    <Paper className={classes.root}>
+      <img src={ storageDesktop } alt="Storage units located conveniently close to downtown Jefferson, GA"/>
+    </Paper>
+  );
 }
 
 export default Picture;

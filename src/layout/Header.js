@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 
 import {AppBar, Toolbar, IconButton, Tabs, Tab} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import logo from '../img/logo.svg'; 
 
-  const styles = {
+  const styles = theme => ({
 
     root: {
       padding: '0px 5px',
@@ -25,6 +24,7 @@ import logo from '../img/logo.svg';
       fontSize: '1.5rem'
     },
     tabs: {
+      flexDirection: 'column',
       width: '100%',
       '&& a': {
         borderTop: '1px solid gray'
@@ -34,10 +34,11 @@ import logo from '../img/logo.svg';
       }
     },
     hidden: {
-      display: 'none'
+      display: 'none',
+      overflow: 'hidden'
     },
 
-    '@media (min-width: 768px)': {
+    [theme.breakpoints.up('sm')] : {
       root: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -47,7 +48,19 @@ import logo from '../img/logo.svg';
         display: 'none'
       },
       tabs: {
-        display: 'block',
+        display: 'flex',
+        flexDirection: 'row',
+        width: 'auto',
+        '&& a': {
+          borderTop: 'none'
+        },
+        '&&& span': {
+          alignItems: 'center'
+        }
+      },
+      hidden: {
+        display: 'flex',
+        flexDirection: 'row',
         width: 'auto',
         '&& a': {
           borderTop: 'none'
@@ -57,13 +70,12 @@ import logo from '../img/logo.svg';
         }
       }
     },
-
-    '@media (min-width: 1024px)': {
+    [theme.breakpoints.up('md')]: {
       root: {
         padding: '0px 16.6%'
       }
     }
-  };
+  });
 
 
 
@@ -95,7 +107,7 @@ class Header extends Component {
             <img src={logo} alt="Logo" />
           </IconButton>
         </div>
-        <Tabs orientation={false ? 'horizontal' : 'vertical'} className={true ? classes.tabs : classes.hidden}>
+        <Tabs orientation={classes.tabs.flexDirection} className={this.state.isToggled ? classes.tabs : classes.hidden}>
           <Tab label="Units" component={Link} to="/units" />
           <Tab label="Billing" component={Link} to="/billing" />
           <Tab label="Contact Us" component={Link} to="/contact" />

@@ -9,7 +9,6 @@ function Features() {
 
 const useStyles = makeStyles({
   root: {
-    gridArea: 'features',
     height: '100%',
     listStyleType: 'none',
     '& li': {

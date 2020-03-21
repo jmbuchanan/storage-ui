@@ -23,9 +23,6 @@ function Text() {
   })(Typography)
 
   const useStyles = makeStyles({
-    root: {
-      gridArea: 'text'
-    },
     phone: {
       fontSize: '20px',
       color: '#669'
@@ -35,7 +32,7 @@ function Text() {
   const classes = useStyles();
   
     return (
-      <PaddedPaper className={classes.root}>
+      <PaddedPaper>
         <HeaderTypography color="primary" variant="h4" component="h1">
           Warehouses in Jefferson, GA for Your Storage Needs
         </HeaderTypography>
