@@ -24,8 +24,12 @@ import logo from '../img/logo.svg';
       fontSize: '1.5rem'
     },
     tabs: {
-      flexDirection: 'column',
+      transition: 'display 0.15s ease-out',
+      overflow: 'hidden',
       width: '100%',
+      '& div': {
+        flexDirection: 'column',
+      },
       '&& a': {
         borderTop: '1px solid gray'
       },
@@ -48,9 +52,11 @@ import logo from '../img/logo.svg';
         display: 'none'
       },
       tabs: {
-        display: 'flex',
         flexDirection: 'row',
         width: 'auto',
+      '& div': {
+        flexDirection: 'row',
+      },
         '&& a': {
           borderTop: 'none'
         },
@@ -107,7 +113,7 @@ class Header extends Component {
             <img src={logo} alt="Logo" />
           </IconButton>
         </div>
-        <Tabs orientation={classes.tabs.flexDirection} className={this.state.isToggled ? classes.tabs : classes.hidden}>
+        <Tabs className={this.state.isToggled ? classes.tabs : `${this.props.classes.tabs} ${this.props.classes.hidden}`}>
           <Tab label="Units" component={Link} to="/units" />
           <Tab label="Billing" component={Link} to="/billing" />
           <Tab label="Contact Us" component={Link} to="/contact" />
