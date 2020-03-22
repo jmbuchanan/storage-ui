@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import {AppBar, Toolbar, IconButton, Tabs, Tab} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import {AppBar, Toolbar, IconButton, Tabs, Tab, useMediaQuery} from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 import logo from '../img/logo.svg'; 
 
-  const styles = theme => ({
+function Header() {
+
+  const useStyles = makeStyles(theme => ({
 
     root: {
       padding: '0px 5px',
@@ -14,32 +16,38 @@ import logo from '../img/logo.svg';
       alignItems: 'flex-start',
     },
     logoAndHamburger: {
+      width: '100%',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'flex-start'
     },
     hamburger: {
       width: '50px',
-      padding: '20px',
+      padding: '0 20px',
       fontSize: '1.5rem'
     },
     tabs: {
-      transition: 'display 0.15s ease-out',
+      minHeight: '0px',
       overflow: 'hidden',
+      '& div': {
+        maxHeight: '0px',
+        flexDirection: 'column',
+        transition: 'max-height .2s ease-in-out'
+      }
+    },
+    navToggled: {
       width: '100%',
       '& div': {
-        flexDirection: 'column',
+        maxHeight: '500px',
+        transition: 'max-height 0.2s ease-in-out'
       },
       '&& a': {
+        maxWidth: '100%',
         borderTop: '1px solid gray'
       },
       '&&& span': {
         alignItems: 'flex-start'
       }
-    },
-    hidden: {
-      display: 'none',
-      overflow: 'hidden'
     },
 
     [theme.breakpoints.up('sm')] : {
@@ -47,6 +55,9 @@ import logo from '../img/logo.svg';
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+      },
+      logoAndHamburger: {
+        width: 'auto'
       },
       hamburger: {
         display: 'none'
@@ -58,13 +69,14 @@ import logo from '../img/logo.svg';
         flexDirection: 'row',
       },
         '&& a': {
+          maxWidth: 'auto',
           borderTop: 'none'
         },
         '&&& span': {
           alignItems: 'center'
         }
       },
-      hidden: {
+      navToggled: {
         display: 'flex',
         flexDirection: 'row',
         width: 'auto',
@@ -81,47 +93,40 @@ import logo from '../img/logo.svg';
         padding: '0px 16.6%'
       }
     }
-  });
+  }));
 
+  const isMobile = useMediaQuery('(max-width:600px)');
 
+  const [isBurgerToggled, setIsBurgerToggled] = useState(false);
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggled: false};
+  const classes = useStyles(); 
 
-    this.toggle = this.toggle.bind(this);
+  const toggle = () => {
+    setIsBurgerToggled(!isBurgerToggled);
   }
 
-  toggle() {
-    this.setState(state => (
-      {isToggled : !state.isToggled}
-    ));
-    }
+  const toggleFalse = () => {
+    setIsBurgerToggled(false);
+  }
 
-
-  render() {
-
-  const { classes } = this.props;
-
-    return (
+ 
+  return (
     <AppBar position="static">
       <Toolbar className={classes.root}>
         <div className={classes.logoAndHamburger}>
-          <Tab label="&#9776;" className={classes.hamburger} onClick={this.toggle} />
-          <IconButton color="inherit" aria-disabled='true' component={Link} to="/">
+          <Tab label="&#9776;" className={classes.hamburger} onClick={toggle} />
+          <IconButton color="inherit" aria-disabled='true' component={Link} to="/" onClick={toggleFalse}>
             <img src={logo} alt="Logo" />
           </IconButton>
         </div>
-        <Tabs className={this.state.isToggled ? classes.tabs : `${this.props.classes.tabs} ${this.props.classes.hidden}`}>
-          <Tab label="Units" component={Link} to="/units" />
-          <Tab label="Billing" component={Link} to="/billing" />
-          <Tab label="Contact Us" component={Link} to="/contact" />
+        <Tabs className={isMobile && isBurgerToggled ? `${classes.tabs} ${classes.navToggled}` : classes.tabs}>
+          <Tab label= "Units" component={Link} to="/units" onClick={toggleFalse} />
+          <Tab label= "Billing" component={Link} to="/billing" onClick={toggleFalse} />
+          <Tab label="Contact Us" component={Link} to="/contact" onClick={toggleFalse} />
         </Tabs>
       </Toolbar>
     </AppBar>
   );
-    }
-  }
+}
   
-export default withStyles(styles)(Header); 
+export default Header; 
