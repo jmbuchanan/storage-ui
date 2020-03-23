@@ -33,20 +33,20 @@ class Header extends Component {
     return (
       <>
       <header>
+        <nav>
+          <div className="logo-and-menu-button">
+            <Link className="logo" onClick={this.removeToggle} to="/">
+              <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
+            </Link>
+            <div className="menu-button" onClick={this.toggle}>&#9776;</div>
+          </div>
+          <ul className={toggled}>
+            <li><Link onClick={this.removeToggle} to="/units">Units</Link></li>
+            <li><Link onClick={this.removeToggle} to="/billing">Pay Bill</Link></li>
+            <li><Link onClick={this.removeToggle} to="/contact">Contact Us</Link></li>
+          </ul>
+        </nav>
       </header>
-      <nav>
-        <div className="logo-and-menu-button">
-          <Link className="logo" onClick={this.removeToggle} to="/">
-            <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
-          </Link>
-          <div className="menu-button" onClick={this.toggle}>&#9776;</div>
-        </div>
-        <ul className={toggled}>
-          <li><Link onClick={this.removeToggle} to="/units">Units</Link></li>
-          <li><Link onClick={this.removeToggle} to="/billing">Pay Bill</Link></li>
-          <li><Link onClick={this.removeToggle} to="/contact">Contact Us</Link></li>
-        </ul>
-      </nav>
       </>
       );
     }

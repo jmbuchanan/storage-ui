@@ -7,11 +7,11 @@ import Routes from './common/Routes';
 
 function App() {
   return (
-    <div className="container">
-    <Header />
-    <Routes />
-    <Footer />
-    </div>
+    <>
+      <Header />
+      <Routes />
+      <Footer />
+    </>
   );
 }
 
