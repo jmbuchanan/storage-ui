@@ -219,7 +219,7 @@ tr:nth-child(even) {
   .nav-links {
     overflow: hidden;
     max-height: 0;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.25s ease-out;
     width: 100%;
     flex-direction: column;
     justify-content: space-around;
@@ -229,7 +229,7 @@ tr:nth-child(even) {
 
   .toggle-nav-links {
     max-height: 500px;
-    transition: max-height 0.3s ease-in;
+    transition: max-height 0.25s ease-in;
   }
 
   .nav-links li a {
