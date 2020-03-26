@@ -4,10 +4,9 @@ import Jumbotron from './Jumbotron';
 import BodyText from './BodyText';
 import Features from './Features';
 
-import './styles.css';
+import './_styles.css';
 
-function Home() {
-
+const Home = () => {
     return (
         <div className="home">
           <Jumbotron />

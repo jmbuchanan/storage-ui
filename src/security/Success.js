@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Success extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-
-  render() {
-      return (
-      <div className="default-body">
-        <h1>Success!</h1>
-      </div>
-      )
-  }
-    
+const Success = () => {
+  return (
+    <div className="default-body">
+      <h1>Success!</h1>
+    </div>
+  )
 }
 
 export default Success;

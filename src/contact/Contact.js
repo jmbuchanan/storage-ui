@@ -1,7 +1,7 @@
 import React from 'react';
 import { Phone } from 'react-feather';
 
-function Contact() {
+const Contact = () => {
     return (
       <div className="default-body">      
         <h1>Contact Us</h1>

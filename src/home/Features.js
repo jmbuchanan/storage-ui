@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Lock, Box, DollarSign } from 'react-feather';
 
-var Features = function () {
+const Features = () => {
   return (
     <div className="features paper">
       <ul>
@@ -13,4 +13,5 @@ var Features = function () {
     </div>
   );
 }
+
 export default Features;

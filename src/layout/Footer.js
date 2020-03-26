@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './styles.css';
+import './_styles.css';
 
-var Footer = function () {
+const Footer = () => {
   return (
     <footer className="shadow">
       <address>
@@ -13,4 +13,5 @@ var Footer = function () {
     </footer>
   );
 }
+
 export default Footer;
