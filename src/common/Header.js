@@ -37,7 +37,7 @@ class Header extends Component {
       <header>
         <nav>
           <div className="logo-and-menu-button">
-            <div className="menu-button" onClick={this.toggle}>&#9776;</div>
+            <div className="menu-button" onClick={this.toggle}>&#8801;</div>
             <Link className="logo" onClick={this.removeToggle} to="/">
               <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
             </Link>

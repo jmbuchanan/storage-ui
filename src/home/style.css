@@ -53,8 +53,9 @@
 }
 
 .feature {
-  font-size: 20px;
+  font-size: 26px;
   margin-left: 20px;
+  color: #212F3D;
 }
 
 @media (min-width: 500px) {
