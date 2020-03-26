@@ -4,7 +4,7 @@ import Jumbotron from './Jumbotron';
 import BodyText from './BodyText';
 import Features from './Features';
 
-import './style.css';
+import './styles.css';
 
 function Home() {
 

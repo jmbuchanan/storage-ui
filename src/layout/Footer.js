@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './style.css';
+import './styles.css';
 
 var Footer = function () {
   return (
-    <footer>
+    <footer className="shadow">
       <address>
         50 Professional Drive,
         <br />

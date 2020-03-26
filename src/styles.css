@@ -1,3 +1,13 @@
+.paper {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(142, 157, 168, 0.5);
+  box-shadow: 2px 2px 5px grey;
+  border-radius: 4px;
+  margin: 2px 5px 5px 5px;
+}
+
+
 html {
   height: 100vh;
   box-sizing: border-box;
@@ -196,6 +206,13 @@ tr:nth-child(even) {
     "header header header"
     "leftGutter main rightGutter"
     "footer footer footer";
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .paper {
+    margin: 0px 0px 5px 0px;
   }
 }
 

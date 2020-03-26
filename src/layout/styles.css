@@ -2,6 +2,10 @@ header {
   grid-area: header;
   background-color: #212F3D;
   padding: 0px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(142, 157, 168, 0.5);
+  box-shadow: 2px 2px 5px grey;
 }
 
 nav {

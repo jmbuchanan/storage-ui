@@ -1,9 +1,9 @@
 import React from 'react';
-import './style.css';
+import './styles.css';
 
-import Header from './common/Header';
-import Footer from './common/Footer';
-import Routes from './common/Routes';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+import Routes from './layout/Routes';
 
 function App() {
   return (
