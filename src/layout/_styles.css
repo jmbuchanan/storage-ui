@@ -72,7 +72,6 @@ nav {
 }
 
 .menu-button {
-  display: block;
   outline: none;
   text-decoration: none;
   padding: 10px 20px;
@@ -112,15 +111,12 @@ footer {
   .logo-and-menu-button {
     width: auto;
   }
-  .menu-button {
-    display: none;
-  }
 
   .logo {
     padding: 15px 0px;
   }
   .nav-links {
-    max-height: unset;
+    max-height: revert;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

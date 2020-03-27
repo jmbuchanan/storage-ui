@@ -4,7 +4,7 @@ import './_styles.css';
 
 const Footer = () => {
   return (
-    <footer className="shadow">
+    <footer>
       <address>
         50 Professional Drive,
         <br />

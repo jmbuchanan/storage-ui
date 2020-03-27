@@ -8,17 +8,17 @@ import storageLargeDesktop from '../img/storage-large-desktop.jpg';
 import storageSmallMobile from '../img/storage-small-mobile.jpg'; 
 import storageLargeMobile from '../img/storage-large-mobile.jpg'; 
 
-export const Units = () => {
+const Units = () => {
   return (
     <div className="default-body">      
       <h1>Available Units</h1>
 
       <h2>Small 5' x 10'</h2>
       <div className="unit-div paper">
-        <div className="unit-picture-div">
+        <div className="unit-picture-div md lg">
           <img src={ storageSmallDesktop } alt="Small Storage units are five by ten feet and rent for $40 a month."/>
         </div>
-        <div className="unit-picture-div-mobile">
+        <div className="unit-picture-div sm">
           <img src={ storageSmallMobile } alt="Small Storage units are five by ten feet and rent for $40 a month."/>
         </div>
         <div className="unit-features-div">
@@ -29,10 +29,10 @@ export const Units = () => {
 
       <h2>Large 10' x 20'</h2>
       <div className="unit-div paper">
-        <div className="unit-picture-div">
+        <div className="unit-picture-div md lg">
           <img src={ storageLargeDesktop } alt="Large Storage units are ten by ten feet and rent for $80 a month."/>
         </div>
-        <div className="unit-picture-div-mobile">
+        <div className="unit-picture-div sm">
           <img src={ storageLargeMobile } alt="Large Storage units are ten by ten feet and rent for $80 a month."/>
         </div>
         <div className="unit-features-div">
@@ -43,3 +43,5 @@ export const Units = () => {
     </div>
   );
 }
+
+export default Units;

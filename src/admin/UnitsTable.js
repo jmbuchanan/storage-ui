@@ -46,9 +46,9 @@ class UnitsTable extends Component {
           <td>{data.unitNumber}</td>
           <td>{data.large ? "t" : "f"}</td>
           <td>{data.occupied ? "t" : "f"}</td>
-          <td className="hidden-when-mobile">{(data.startDate == null) ? "" : data.startDate.substring(0,10)}</td>
+          <td className="lg">{(data.startDate == null) ? "" : data.startDate.substring(0,10)}</td>
           <td>{data.delinquent ? "t" : "f"}</td>
-          <td className="hidden-when-mobile">{data.daysDelinquent}</td>
+          <td className="lg">{data.daysDelinquent}</td>
         </tr>
         )
       )
@@ -71,9 +71,9 @@ class UnitsTable extends Component {
             <th>Unit Number</th>
             <th>Large</th>
             <th>Occupied</th>
-            <th className="hidden-when-mobile">Start Date</th>
+            <th className="lg">Start Date</th>
             <th>Delinquent</th>
-            <th className="hidden-when-mobile">Days Delinquent</th>
+            <th className="lg">Days Delinquent</th>
           </tr>
           </thead>
           <tbody>

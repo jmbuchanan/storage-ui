@@ -9,17 +9,12 @@
   "features";
 }
 
-.picture-div-mobile {
+.picture-div {
   grid-area: picture;
-  display: block;
-  width: 100%;
   height: 400px;
   overflow: hidden;
 }
 
-.picture-div {
-  display: none;
-}
 
 .body-text {
   grid-area: text;
@@ -61,14 +56,9 @@
 @media (min-width: 500px) {
 
   .picture-div {
-    display: initial;
     max-height: 400px;
     overflow: hidden;
     grid-area: picture;
-  }
-
-  .picture-div-mobile {
-    display: none;
   }
 
   .picture {

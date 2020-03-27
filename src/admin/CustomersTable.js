@@ -44,15 +44,15 @@ class CustomersTable extends Component {
 
       return content.map((data, i) => (
         <tr key={i}>
-          <td className="hidden-when-mobile">{data.customerId}</td>
+          <td className="lg">{data.customerId}</td>
           <td>{data.firstName}</td>
           <td>{data.lastName}</td>
           <td>{data.email}</td>
           <td>{data.phoneNumber}</td>
-          <td className="hidden-when-mobile">{data.streetAddress}</td>
-          <td className="hidden-when-mobile">{data.secondStreetAddress}</td>
-          <td className="hidden-when-mobile">{data.state}</td>
-          <td className="hidden-when-mobile">{data.zip}</td>
+          <td className="lg">{data.streetAddress}</td>
+          <td className="lg">{data.secondStreetAddress}</td>
+          <td className="lg">{data.state}</td>
+          <td className="lg">{data.zip}</td>
         </tr>
         )
       )
@@ -72,15 +72,15 @@ class CustomersTable extends Component {
         <table>
           <thead>
           <tr>
-            <th className="hidden-when-mobile">Id</th>
+            <th className="lg">Id</th>
             <th>First</th>
             <th>Last</th>
             <th>Email</th>
-            <th>Number</th>
-            <th className="hidden-when-mobile">Address</th>
-            <th className="hidden-when-mobile">Address (2)</th>
-            <th className="hidden-when-mobile">State</th>
-            <th className="hidden-when-mobile">Zip</th>
+            <th>Phone</th>
+            <th className="lg">Address</th>
+            <th className="lg">Address (2)</th>
+            <th className="lg">State</th>
+            <th className="lg">Zip</th>
           </tr>
           </thead>
           <tbody>

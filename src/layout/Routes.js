@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import './_styles.css';
 
 import Home from '../home/Home';
-import {Units} from '../units/Units';
+import Units from '../units/Units';
 import Billing from '../billing/Billing';
 import Contact from '../contact/Contact';
 import Directory from '../admin/Directory';

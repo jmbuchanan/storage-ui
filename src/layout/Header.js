@@ -19,7 +19,7 @@ const Header = () => {
     <header>
       <nav>
         <div className="logo-and-menu-button">
-          <div className="menu-button" onClick={toggle}>&#8801;</div>
+          <div className="menu-button sm" onClick={toggle}>&#8801;</div>
           <Link className="logo" onClick={removeToggle} to="/">
             <img src={logo} alt="Logo for Jefferson Mini Warehouses" />
           </Link>
