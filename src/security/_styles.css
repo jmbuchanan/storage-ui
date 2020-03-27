@@ -1,0 +1,9 @@
+.register {
+  padding-left: 5px;
+  text-decoration: none;
+}
+
+.warning {
+  color: darkred;
+  font-size: 14px;
+}

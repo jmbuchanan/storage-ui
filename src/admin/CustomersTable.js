@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import './_styles.css';
+
 class CustomersTable extends Component {
 
     constructor(props) {

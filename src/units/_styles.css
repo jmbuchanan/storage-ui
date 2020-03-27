@@ -1,0 +1,49 @@
+.unit-div {
+  width: 345px;
+  height: 400px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.unit-picture-div {
+    display: none;
+}
+
+.unit-features-div {
+  letter-spacing: .5px;
+}
+
+.per-month {
+  font-size: smaller;
+}
+
+.strike-through-price {
+  text-decoration: line-through;
+  color: #999999; 
+}
+
+
+@media only screen and (min-width: 500px) {
+
+  .unit-div {
+    width: 500px;
+    height: auto;
+  }
+
+  .unit-picture-div {
+    display: unset;
+    height: 375px;
+  }
+
+  .unit-picture-div-mobile {
+    display: none;
+  }
+}
+
+
+@media only screen and (min-width: 1100px) {
+
+
+}
