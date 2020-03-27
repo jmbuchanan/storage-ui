@@ -25,10 +25,15 @@
   grid-area: features;
 }
 
+.material-icons {
+  font-size: 48px;
+  color: #212F3D;
+}
+
 .phone {
   text-decoration: underline;
   font-weight: normal;
-  color: #666699;
+  color: #0f576a;
 }
 
 .features ul {
