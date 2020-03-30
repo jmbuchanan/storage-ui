@@ -116,7 +116,7 @@ footer {
     padding: 15px 0px;
   }
   .nav-links {
-    max-height: revert;
+    max-height: unset;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

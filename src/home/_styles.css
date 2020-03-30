@@ -25,11 +25,6 @@
   grid-area: features;
 }
 
-.material-icons {
-  font-size: 48px;
-  color: #212F3D;
-}
-
 .phone {
   text-decoration: underline;
   font-weight: normal;
@@ -57,7 +52,7 @@
   color: #212F3D;
 }
 
-@media (min-width: 500px) {
+@media screen and (min-width: 500px) {
 
   .picture-div {
     max-height: 400px;
@@ -72,7 +67,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media screen and (min-width: 900px) {
 
   .home {
     overflow: hidden;

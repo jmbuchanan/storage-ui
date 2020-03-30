@@ -21,7 +21,7 @@
 }
 
 
-@media only screen and (min-width: 500px) {
+@media screen and (min-width: 500px) {
 
   .unit-div {
     width: 500px;
@@ -35,7 +35,7 @@
 }
 
 
-@media only screen and (min-width: 1100px) {
+@media screen and (min-width: 1100px) {
 
   .unit-div {
     flex-direction: row;

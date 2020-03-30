@@ -53,6 +53,7 @@ class CustomersTable extends Component {
           <td className="lg">{data.secondStreetAddress}</td>
           <td className="lg">{data.state}</td>
           <td className="lg">{data.zip}</td>
+          <td className="lg">{data.admin ? "true" : "false"}</td>
         </tr>
         )
       )
@@ -81,6 +82,7 @@ class CustomersTable extends Component {
             <th className="lg">Address (2)</th>
             <th className="lg">State</th>
             <th className="lg">Zip</th>
+            <th className="lg">Admin</th>
           </tr>
           </thead>
           <tbody>

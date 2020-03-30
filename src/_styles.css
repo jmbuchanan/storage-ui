@@ -53,6 +53,10 @@ button {
   cursor: 'pointer';
 }
 
+.material-icons {
+  font-size: 48px;
+  color: #212F3D;
+}
 
 .default-body {
   grid-area: main;
@@ -80,7 +84,7 @@ button {
 }
 
 .sm {
-  display: revert;
+  display: block;
 }
 
 /**/
@@ -94,7 +98,7 @@ button {
   }
 
   .md {
-    display: revert;
+    display: block;
   }
 
 /**/
@@ -124,7 +128,7 @@ button {
   }
 
   .lg {
-    display: revert;
+    display: block;
   }
 /**/
 
