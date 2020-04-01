@@ -130,6 +130,14 @@ button {
   .lg {
     display: block;
   }
+
+  th.lg {
+    display: table-cell;
+  }
+
+  td.lg {
+    display: table-cell;
+  }
 /**/
 
 }
