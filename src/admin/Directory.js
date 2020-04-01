@@ -7,15 +7,15 @@ const fetchUser = async () => {
 
 
 const Directory = () => {
-
+/*
   const [admin, setAdmin] = useState(false);
 
   useEffect(async () => {
     const url = process.env.REACT_APP_DOMAIN  
     const response = await axios.get('a')
   })
-
-  if (admin) {
+*/
+ // if (admin) {
     return (
       <div className="default-body">
         <h1>Table of Contents</h1>
@@ -25,13 +25,15 @@ const Directory = () => {
         </ul>
       </div>
     )
-  } else {
+
+  /*} else {
     return (
       <div className="default-body">
         <p>Checking credentials...</p>
       </div>
     )
   }
+  */
 }
 
 export default Directory;
