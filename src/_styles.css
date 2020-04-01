@@ -84,7 +84,7 @@ button {
 }
 
 .sm {
-  display: revert;
+  display: block;
 }
 
 /**/
@@ -98,7 +98,7 @@ button {
   }
 
   .md {
-    display: revert;
+    display: block;
   }
 
 /**/
@@ -128,7 +128,7 @@ button {
   }
 
   .lg {
-    display: revert;
+    display: block;
   }
 /**/
 
