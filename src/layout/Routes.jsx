@@ -10,9 +10,9 @@ import Contact from '../contact/Contact';
 import Directory from '../admin/Directory';
 import CustomersTable from '../admin/CustomersTable';
 import UnitsTable from '../admin/UnitsTable';
-import Login from '../security/Login';
-import Register from '../security/Register';
-import Success from '../security/Success';
+import TransactionsTable from '../admin/TransactionsTable';
+import Login from '../login/Login';
+import Register from '../login/Register';
 
 const Routes = () => {
   return (
@@ -23,10 +23,10 @@ const Routes = () => {
       <Route path = "/contact" component={Contact} />
       <Route exact path = "/login" component={Login} />
       <Route exact path = "/register" component={Register} />
-      <Route exact path = "/success" component={Success} />
       <Route exact path = "/admin" component={Directory} />
       <Route path = "/admin/customers" component={CustomersTable} />
       <Route path = "/admin/units" component={UnitsTable} />
+      <Route path = "/admin/transactions" component={TransactionsTable} />
     </Switch>
   );
 }

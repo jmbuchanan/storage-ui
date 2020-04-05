@@ -37,13 +37,13 @@ table {
 }
 
 td, th {
-  border: 1px solid #404040;
+  border: 1px solid #979797;
   padding: 8px;
 }
 
 th {
   text-align: left;
-  background-color: #364D63;
+  background-color: #212F3DE6;
   color: white;
 }
 

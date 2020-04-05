@@ -42,8 +42,14 @@ a {
 input {
   font-size: 18px;
   margin-bottom: 10px;
-  background-color: #f2f2f2;
   padding: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  max-width: 100%;
 }
 
 button {
@@ -51,6 +57,7 @@ button {
   background-color: #e6e6e6; 
   padding: 5px;
   cursor: 'pointer';
+  width: 100px;
 }
 
 .material-icons {
@@ -60,6 +67,7 @@ button {
 
 .default-body {
   grid-area: main;
+  padding: 15px;
 }
 
 .paper {
@@ -73,13 +81,10 @@ button {
   overflow: hidden;
 }
 
+
 /* ordering important */
 
-.md {
-  display: none;
-}
-
-.lg {
+.md, .lg {
   display: none;
 }
 
@@ -102,7 +107,6 @@ button {
   }
 
 /**/
-
 }
 
 @media only screen and (min-width: 900px) {
@@ -118,6 +122,10 @@ button {
     "footer footer footer";
   }
 
+  .default-body {
+    padding: 10px 0px;
+  }
+
   .paper {
     margin: 5px;
   }
@@ -131,13 +139,10 @@ button {
     display: block;
   }
 
-  th.lg {
+  th.lg, td.lg {
     display: table-cell;
   }
 
-  td.lg {
-    display: table-cell;
-  }
 /**/
 
 }

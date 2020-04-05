@@ -7,3 +7,9 @@
   color: darkred;
   font-size: 14px;
 }
+
+.login, .register {
+  padding: 10px;
+  max-width: 100%;
+  width: max-content;
+}

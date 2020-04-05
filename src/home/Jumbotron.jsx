@@ -6,10 +6,10 @@ import storageMobile from '../img/storage-main-mobile.jpg';
 const Jumbotron = () => {
   return (
     <>
-      <div className="picture-div paper sm">
+      <div className="picture-div paper no-pad sm">
           <img src={ storageMobile } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
       </div>
-      <div className="picture-div paper md lg">
+      <div className="picture-div paper no-pad md lg">
           <img src={ storageDesktop } className="picture" alt="Storage units located conveniently close to downtown Jefferson, GA"/>
       </div>
     </>

@@ -82,11 +82,6 @@ nav {
   color: white;
 }
 
-.default-body {
-  grid-area: main;
-  padding: 15px;
-}
-
 footer {
   grid-area: footer;
   display: flex;
