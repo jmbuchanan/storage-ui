@@ -88,7 +88,8 @@ const Register = () => {
 
     axios(process.env.REACT_APP_DOMAIN + '/customers/addCustomer', {
       method: 'POST',
-      data: formData
+      data: formData,
+      withCredentials: true
     })
     .then(response => {
       setStatusCode(response.status);
@@ -101,8 +102,8 @@ const Register = () => {
   }
   
 
-  if (statusCode === 303) {
-    return <Redirect push to="/"/>;
+  if (statusCode === 200) {
+    window.history.back();
   }
 
   if (statusCode === 409) {
@@ -177,6 +178,7 @@ const Register = () => {
             className="login-button"
             type="submit"
             value="Login"
+            disabled={warning}
         >
             Submit
         </button>
