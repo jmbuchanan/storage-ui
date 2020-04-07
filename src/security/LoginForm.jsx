@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
 import axios from 'axios';
 
 import './_styles.css';
@@ -62,12 +61,14 @@ const LoginForm = (props) => {
         <input 
           type="text" 
           placeholder="Email"
-          onBlur = {handleEmail}
+          value={email}
+          onChange = {handleEmail}
         />
         <br/>
         <input
           type="password" 
           placeholder="Password"
+          value={password}
           onChange = {handlePassword}
         />
         <br/>

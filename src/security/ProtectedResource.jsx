@@ -12,7 +12,7 @@ const ProtectedResource = (Component) => {
 
   const fetchData = async () => {
     const api = process.env.REACT_APP_DOMAIN + "/authenticate";
-    const response = await axios
+    await axios
       .get( api, {withCredentials: true})
       .then(response => {
         setAuthenticateStatusCode(response.status)})

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
 import axios from 'axios';
 
 import './_styles.css';
@@ -20,13 +19,7 @@ const Register = () => {
   const [warning, setWarning] = useState('');
 
   const handleEmail = (e) => {
-
-    if (isValidEmail(e.target.value)) {
       setEmail(e.target.value);
-      setWarning('');
-    } else {
-      setWarning("Please enter a valid e-mail address");
-    }
   }
 
   const isValidEmail = (email) => {
@@ -73,6 +66,12 @@ const Register = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
+
+    if (!isValidEmail(email)) {
+      setWarning("Please enter a valid e-mail address");
+      return;
+    }
+
     let formData = new URLSearchParams();
 
     formData.set('email', email);
@@ -108,7 +107,9 @@ const Register = () => {
 
   if (statusCode === 409) {
     setWarning( "There is already an account with this e-mail.");
+    setStatusCode('');
   }
+
 
   const warningMessage = (warning) => {
     return (
@@ -126,70 +127,80 @@ const Register = () => {
         <input 
             type="text" 
             placeholder="Email"
-            onBlur = {handleEmail}
+            value={email}
+            onChange = {handleEmail}
         />
         <input
             type="password" 
             placeholder="Password"
+            value={password}
             onChange = {handlePassword}
         />
 
         <input 
             type="text" 
             placeholder="First Name"
-            onBlur = {handleFirstName}
+            value={firstName}
+            onChange = {handleFirstName}
         />
         <input
             type="text" 
             placeholder="Last Name"
+            value={lastName}
             onChange = {handleLastName}
         />
         <input
             type="text" 
             placeholder="Phone"
+            value={phoneNumber}
             onChange = {handlePhoneNumber}
         />
         <input 
             type="text" 
             placeholder="Street Address"
-            onBlur = {handleStreetAddress}
+            value={streetAddress}
+            onChange = {handleStreetAddress}
         />
         <input
             type="text" 
             placeholder="Street Address (2)"
+            value={streetAddress2}
             onChange = {handleStreetAddress2}
         />
         <input 
             type="text" 
             placeholder="State"
-            onBlur = {handleState}
+            value={state}
+            onChange = {handleState}
         />
         <input
             type="text" 
             placeholder="Zip"
+            value={zip}
             onChange = {handleZip}
         />
         <input 
             type="text" 
             placeholder="Country"
-            onBlur = {handleCountry}
+            value={country}
+            onChange = {handleCountry}
         />
         <button 
             className="login-button"
             type="submit"
             value="Login"
-            disabled={warning}
+            onClick={handleSubmit}
         >
             Submit
         </button>
         </form>
         <p>Already have an account? 
-          <a className="register" onClick={() => window.history.back()}>Sign in</a>
+          <a className="register"  href="/billing" onClick={() => window.history.back()}>Sign in</a>
         </p>
         {warning ? warningMessage(warning) : null}
       </div>
     </div>
   )
-}
+  }
 
 export default Register;
