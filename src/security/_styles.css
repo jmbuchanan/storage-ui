@@ -13,3 +13,9 @@
   max-width: 100%;
   width: max-content;
 }
+
+.login-form {
+    padding: 15px;
+    width: min-content;
+    height: min-content;
+}

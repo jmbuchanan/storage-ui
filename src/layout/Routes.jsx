@@ -11,8 +11,7 @@ import Directory from '../admin/Directory';
 import CustomersTable from '../admin/CustomersTable';
 import UnitsTable from '../admin/UnitsTable';
 import TransactionsTable from '../admin/TransactionsTable';
-import Login from '../login/Login';
-import Register from '../login/Register';
+import Register from '../security/Register';
 
 const Routes = () => {
   return (
@@ -21,7 +20,6 @@ const Routes = () => {
       <Route path = "/units" component={Units} />
       <Route path = "/billing" component={Billing} />
       <Route path = "/contact" component={Contact} />
-      <Route exact path = "/login" component={Login} />
       <Route exact path = "/register" component={Register} />
       <Route exact path = "/admin" component={Directory} />
       <Route path = "/admin/customers" component={CustomersTable} />

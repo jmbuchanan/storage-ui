@@ -86,7 +86,6 @@ const Register = () => {
     formData.set('zip', zip);
     formData.set('country', country);
 
-
     axios(process.env.REACT_APP_DOMAIN + '/customers/addCustomer', {
       method: 'POST',
       data: formData
@@ -103,7 +102,7 @@ const Register = () => {
   
 
   if (statusCode === 303) {
-    return <Redirect push to="/admin"/>;
+    return <Redirect push to="/"/>;
   }
 
   if (statusCode === 409) {
@@ -183,7 +182,7 @@ const Register = () => {
         </button>
         </form>
         <p>Already have an account? 
-          <a className="register" href="/login">Sign in</a>
+          <a className="register" onClick={() => window.history.back()}>Sign in</a>
         </p>
         {warning ? warningMessage(warning) : null}
       </div>

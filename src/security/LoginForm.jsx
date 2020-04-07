@@ -8,7 +8,6 @@ const LoginForm = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [statusCode, setStatusCode] = useState('');
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -28,12 +27,15 @@ const LoginForm = (props) => {
       method: 'POST',
       data: formData,
       withCredentials: true
+
     })
     .then(response => {
-      setStatusCode(response.status);
+      props.onSubmit(response.status);
+
     })
     .catch(error => {
-      setStatusCode(error.response.status);
+      props.onSubmit(error.response.status);
+
       }
     );
 
@@ -41,14 +43,9 @@ const LoginForm = (props) => {
     window.scrollTo(0,0);
   }
 
-
   let warning;
 
-  if (statusCode === 200) {
-    return <Redirect push to={props.redirect}/>;
-  }
-
-  if (statusCode === 404 || statusCode === 401) {
+  if (props.statusCode === 404 || props.statusCode === 401) {
     warning = <p className="warning">
       The e-mail or password you entered was incorrect.
     </p>

@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Directory = () => {
+import ProtectedResource from '../security/ProtectedResource';
+
+const WrappedDirectory = () => {
     return (
       <div className="default-body">
         <h1>Table of Contents</h1>
@@ -10,7 +12,14 @@ const Directory = () => {
             <li><a href="/admin/transactions">Transactions</a></li>
         </ul>
       </div>
-    )
+    );
+}
+
+const Directory = () => {
+
+  const Component = ProtectedResource(WrappedDirectory);
+
+  return <Component />;
 }
 
 export default Directory;
