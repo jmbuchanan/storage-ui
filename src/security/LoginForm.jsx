@@ -76,6 +76,7 @@ const LoginForm = (props) => {
           className="login-button"
           type="submit"
           value="Login"
+          onSubmit={handleSubmit}
         >
           Sign in
         </button>
