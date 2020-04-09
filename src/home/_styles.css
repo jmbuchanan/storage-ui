@@ -27,7 +27,6 @@
 
 .map {
   grid-area: map;
-  height: 400px;
   padding: 0px 20px 20px 20px;
 }
 
