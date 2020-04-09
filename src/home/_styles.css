@@ -2,11 +2,12 @@
   display: grid;
   grid-area: main;
   grid-template-columns: 100%;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas:
   "picture"
   "text"
-  "features";
+  "features"
+  "map";
 }
 
 .picture-div {
@@ -15,7 +16,6 @@
   overflow: hidden;
 }
 
-
 .body-text {
   grid-area: text;
   padding: 0px 20px 20px 20px;
@@ -23,6 +23,19 @@
 
 .features {
   grid-area: features;
+}
+
+.map {
+  grid-area: map;
+  height: 400px;
+  padding: 0px 20px 20px 20px;
+}
+
+#google-map {
+  height: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(58, 68, 82, 0.35);
 }
 
 .phone {
@@ -72,9 +85,10 @@
   .home {
     overflow: hidden;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr 1fr;
     grid-template-areas:
     "picture picture"
-    "text features";
+    "text features"
+    "map map";
   }
 }

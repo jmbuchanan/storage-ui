@@ -3,6 +3,7 @@ import React from 'react';
 import Jumbotron from './Jumbotron';
 import BodyText from './BodyText';
 import Features from './Features';
+import GoogleMaps from './GoogleMaps';
 
 import './_styles.css';
 
@@ -12,6 +13,7 @@ const Home = () => {
           <Jumbotron />
           <BodyText />
           <Features />
+          <GoogleMaps />
         </div>
     );
 }
