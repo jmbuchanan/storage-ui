@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-const GOOGLE_MAP_API_KEY = 'AIzaSyAzI1AAxN83L1DKT31cP-LM3-hTmG3Amm4';
+const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
 const myLocation = {
     lat: 34.1131834,
