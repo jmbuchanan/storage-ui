@@ -37,8 +37,10 @@ table {
 }
 
 td, th {
-  border: 1px solid #979797;
+  border: 1px solid rgba(58, 68, 82, 0.35);
   padding: 8px;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 th {
