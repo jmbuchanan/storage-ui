@@ -73,10 +73,7 @@ button {
 
 .paper {
   background-color: #fcfcfc;
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(58, 68, 82, 0.35);
-  box-shadow: 2px 2px 5px grey;
+  box-shadow: 1px 1px 4px grey;
   border-radius: 4px;
   margin: 0px 0px 5px 0px;
   overflow: hidden;

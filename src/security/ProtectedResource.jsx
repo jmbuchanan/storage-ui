@@ -17,7 +17,11 @@ const ProtectedResource = (Component) => {
       .then(response => {
         setAuthenticateStatusCode(response.status)})
       .catch(error => {
-        setAuthenticateStatusCode(error.response.status)
+        if (error.response) {
+          setAuthenticateStatusCode(error.response.status)
+        } else {
+          setAuthenticateStatusCode(500);
+        }
       });
   }
 
@@ -32,7 +36,12 @@ const ProtectedResource = (Component) => {
   const renderBody = (authenticateStatusCode, loginStatusCode, props) => {
     if (!authenticateStatusCode) {
       return null;
-
+    } else if (authenticateStatusCode === 500) {
+      return (
+        <div className="default-body">
+          <p>Something went wrong...this is likely a server issue.</p>
+        </div>
+      );
     } else if (authenticateStatusCode !== 200 && loginStatusCode !== 200) {
       return (
         <div className="default-body">
