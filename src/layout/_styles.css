@@ -43,7 +43,8 @@ nav {
 
 .nav-links li a {
   text-transform: uppercase;
-  font-weight: bold;
+  font-size: .875rem;
+  font-weight: 500;
   width: 100%;
   outline: none;
   text-decoration: none;

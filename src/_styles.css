@@ -25,12 +25,13 @@ body {
 }
 
 h1 {
-  font-size: 38px;
+  font-weight: 500;
   line-height: 1;
   color: #212F3D;
 }
 
 h2 {
+  font-weight: 500;
   color: #212F3D;
 }
 
