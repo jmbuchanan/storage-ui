@@ -44,9 +44,7 @@ const ProtectedResource = (Component) => {
       );
     } else if (authenticateStatusCode !== 200 && loginStatusCode !== 200) {
       return (
-        <div className="default-body">
           <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>
-        </div>
       );
 
     } else {

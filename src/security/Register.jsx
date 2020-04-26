@@ -121,8 +121,10 @@ const Register = () => {
 
   return (
     <div className="default-body">
+      <h1>Register</h1>
       <div className="register paper">
         <h2>Create Account</h2>
+        <p>Enter your details below to create an account.</p>
         <form onSubmit={handleSubmit}>
         <input 
             type="text" 

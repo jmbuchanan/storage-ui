@@ -35,7 +35,15 @@ const GoogleMaps = () => {
   }
 
   useEffect(() => {
+
+    const scriptElement = document.getElementById("googleMapScript");
+
+    if (scriptElement !== null) {
+      scriptElement.remove();
+    }
+
     const googleMapScript = document.createElement('script');
+    googleMapScript.setAttribute("id", "googleMapScript");
     googleMapScript.src = `https://maps.googleapis.com/maps/api` 
     + `/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`;
     window.document.body.appendChild(googleMapScript);
@@ -45,6 +53,7 @@ const GoogleMaps = () => {
         marker.current = createMarker();
     })
   });
+  
 
   return (
     <div className="map paper">

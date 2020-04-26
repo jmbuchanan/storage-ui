@@ -1,4 +1,12 @@
 .billing {
     padding: 10px;
-    width: max-content;
+    width: 280px;
+}
+
+.stripe {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100px;
+    width: 335px;
 }
