@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import './_styles.css';
 
 import LoginForm from '../security/LoginForm';
+import { AuthContext } from '../context/AuthContext';
+
 
 const ProtectedResource = (Component) => {
 
   const [authenticateStatusCode, setAuthenticateStatusCode] = useState('');
   const [loginStatusCode, setLoginStatusCode] = useState('');
+
+  const { checkLogin } = useContext(AuthContext);
 
   const fetchData = async () => {
     const api = process.env.REACT_APP_DOMAIN + "/authenticate";
@@ -33,7 +37,8 @@ const ProtectedResource = (Component) => {
     setLoginStatusCode(statusCode);
   }
 
-  const renderBody = (authenticateStatusCode, loginStatusCode, props) => {
+
+  const renderBody = (authenticateStatusCode, loginStatusCode, Component) => {
     if (!authenticateStatusCode) {
       return null;
     } else if (authenticateStatusCode === 500) {
@@ -48,15 +53,13 @@ const ProtectedResource = (Component) => {
       );
 
     } else {
-      return <Component {...props}/>;
+      checkLogin();
+      return <Component />;
     }
   }
 
-  const WrappedComponent = (props) => {
-      return renderBody(authenticateStatusCode, loginStatusCode, props);
-  }
+  return renderBody(authenticateStatusCode, loginStatusCode, Component);
 
-  return WrappedComponent;
 }
 
 export default ProtectedResource;

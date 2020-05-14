@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const UnitsTable = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   
   const handleClick = () => {
     window.location.href = process.env.REACT_APP_DOMAIN + "/units/getAllUnits/export";
@@ -27,17 +27,13 @@ const UnitsTable = () => {
       if (data.length === 0) {
         return null;
       }
-      var content = [];
-      for (var i = 0; i < data.length; i++) {
-        content.push(data[i]);
-      }
 
-      return content.map((data, i) => (
+      return data.map((data, i) => (
         <tr key={i}>
           <td>{data.unitNumber}</td>
           <td>{data.large ? "Yes" : "No"}</td>
           <td>{data.occupied ? "Yes" : "No"}</td>
-          <td className="lg">{(data.startDate == null) ? "" : data.startDate.substring(0,10)}</td>
+          <td className="lg">{(data.startDate == null) ? "" : data.startDate}</td>
           <td>{data.delinquent ? "Yes" : "No"}</td>
           <td className="lg">{data.daysDelinquent}</td>
         </tr>
@@ -51,7 +47,7 @@ const UnitsTable = () => {
         <a href="/admin">Return</a>
         <div className="table-header">
         <h1>Units</h1>
-        <button className="excel-icon" onClick={handleClick}>
+        <button className="excel-icon paper" onClick={handleClick}>
         </button>
         </div>
         <div className="table-div">

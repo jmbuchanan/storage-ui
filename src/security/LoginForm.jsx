@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
 import './_styles.css';
@@ -58,20 +58,20 @@ const LoginForm = (props) => {
         to access your account.
       </p>
       <form onSubmit={handleSubmit}>
+        <label>Email</label>
         <input 
           type="text" 
           placeholder="Email"
           value={email}
           onChange = {handleEmail}
         />
-        <br/>
+        <label>Password</label>
         <input
           type="password" 
           placeholder="Password"
           value={password}
           onChange = {handlePassword}
         />
-        <br/>
         <button 
           className="login-button"
           type="submit"
@@ -81,7 +81,6 @@ const LoginForm = (props) => {
           Sign in
         </button>
       </form>
-      <br/>
       <p>Need an account? 
         <a className="register" href="/register">Register</a>
       </p>

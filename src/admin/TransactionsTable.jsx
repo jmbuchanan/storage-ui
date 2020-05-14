@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const TransactionsTable = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   
   const handleClick = () => {
     window.location.href = process.env.REACT_APP_DOMAIN + "/transactions/getAllTransactions/export";
@@ -27,12 +27,8 @@ const TransactionsTable = () => {
       if (data.length === 0) {
         return null;
       }
-      var content = [];
-      for (var i = 0; i < data.length; i++) {
-        content.push(data[i]);
-      }
 
-      return content.map((data, i) => (
+      return data.map((data, i) => (
         <tr key={i}>
           <td>{data.id}</td>
           <td>{data.type}</td>
@@ -51,7 +47,7 @@ const TransactionsTable = () => {
         <a href="/admin">Return</a>
         <div className="table-header">
         <h1>Transactions</h1>
-        <button className="excel-icon" onClick={handleClick}>
+        <button className="excel-icon paper" onClick={handleClick}>
         </button>
         </div>
         <div className="table-div">

@@ -6,7 +6,7 @@ const WrappedDirectory = () => {
     return (
       <div className="default-body">
         <h1>Table of Contents</h1>
-        <ul className="toc">
+        <ul className="toc paper">
             <li><a href="/admin/customers">Customers</a></li>
             <li><a href="/admin/units">Units</a></li>
             <li><a href="/admin/transactions">Transactions</a></li>
@@ -17,9 +17,15 @@ const WrappedDirectory = () => {
 
 const Directory = () => {
 
-  const Component = ProtectedResource(WrappedDirectory);
+  const Component = () => {
+    return ProtectedResource(WrappedDirectory);
+  }
 
-  return <Component />;
+  return (
+    <div className="default-body">
+      <Component />
+    </div>
+  );
 }
 
 export default Directory;

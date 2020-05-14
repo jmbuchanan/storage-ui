@@ -1,6 +1,6 @@
 .unit-div {
   width: 345px;
-  height: 400px;
+  height: 450px;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -26,11 +26,11 @@
 
   .unit-div {
     width: 500px;
-    height: auto;
+    height: 615px;
   }
 
   .unit-picture-div {
-    height: 375px;
+    height: 505px;
   }
 
 }
@@ -41,6 +41,7 @@
   .unit-div {
     flex-direction: row;
     width: 800px;
+    height: 505px;
   }
 
   .unit-features-div {

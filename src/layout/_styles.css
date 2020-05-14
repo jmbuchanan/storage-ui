@@ -8,6 +8,7 @@ header {
   box-shadow: 2px 2px 5px grey;
 }
 
+
 nav {
   color: white;
   display: flex;
@@ -83,6 +84,18 @@ nav {
   text-align: center;
   background-color: #212F3D;
   color: white;
+}
+
+.greeting {
+  grid-area: greeting;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.greeting p {
+  font-size: 12px;
+  margin: 3px 10px;
 }
 
 footer {

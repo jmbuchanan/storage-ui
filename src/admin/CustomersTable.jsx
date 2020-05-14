@@ -5,7 +5,7 @@ import './_styles.css';
 
 const CustomersTable = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   const handleClick = () => {
     window.location.href = process.env.REACT_APP_DOMAIN + "/customers/getAllCustomers/export";
@@ -27,12 +27,7 @@ const CustomersTable = () => {
     if (data.length === 0) {
       return null;
     }
-    var content = [];
-    for (var i = 0; i < data.length; i++) {
-      content.push(data[i]);
-    }
-
-    return content.map((data, i) => (
+    return data.map((data, i) => (
       <tr key={i}>
         <td className="lg">{data.id}</td>
         <td>{data.firstName}</td>
@@ -41,6 +36,7 @@ const CustomersTable = () => {
         <td>{data.phoneNumber}</td>
         <td className="lg">{data.streetAddress}</td>
         <td className="lg">{data.secondStreetAddress}</td>
+        <td className="lg">{data.city}</td>
         <td className="lg">{data.state}</td>
         <td className="lg">{data.zip}</td>
         <td className="lg">{data.admin ? "Yes" : "No"}</td>
@@ -54,7 +50,7 @@ const CustomersTable = () => {
       <a href="/admin">Return</a>
       <div className="table-header">
       <h1>Customers</h1>
-      <button className="excel-icon" onClick={handleClick}>
+      <button className="excel-icon paper" onClick={handleClick}>
       </button>
       </div>
       <div className="table-div">
@@ -68,6 +64,7 @@ const CustomersTable = () => {
           <th>Phone</th>
           <th className="lg">Address</th>
           <th className="lg">Address (2)</th>
+          <th className="lg">City</th>
           <th className="lg">State</th>
           <th className="lg">Zip</th>
           <th className="lg">Admin</th>

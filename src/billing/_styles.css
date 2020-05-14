@@ -10,3 +10,11 @@
     height: 100px;
     width: 335px;
 }
+
+.stripe-input {
+  background-color: #f8f8fa;
+  padding: 7px 5px;
+  border-style: solid;
+  border-color: #a4a4a4;
+  border-width: 1px;
+}

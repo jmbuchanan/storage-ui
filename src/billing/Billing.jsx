@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CheckoutForm from './CheckoutForm';
+import Balance from './Balance';
 
 import './_styles.css';
 import ProtectedResource from '../security/ProtectedResource';
 
-const BillingBody = () => {
-  return (
-    <CheckoutForm />
-  );
-}
-
 const Billing = () => {
 
-  const Component = ProtectedResource(BillingBody);
+  const [pay, setPay] = useState(false);
+
+  const handleClick = () => {
+    setPay(!pay);
+  }
+
+  const BillingBody = () => {
+    return pay ? <CheckoutForm onClick={handleClick} /> : <Balance balance={20.00} onClick={handleClick}/>;
+  }
+
+  const ProtectedBillingBody = () => {
+    return ProtectedResource(BillingBody);
+  }
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
     return (
       <div className="default-body">
         <h1>Pay Bill</h1>
-        <Component />
+        <ProtectedBillingBody />
       </div>
     );
   } else {
     return (
       <div className="default-body">
         <h1>Pay Bill</h1>
-        <p>Coming soon...</p>
+        <div className="default-body">
+          <p>Coming soon...</p>
+        </div>
       </div>
     );
   }

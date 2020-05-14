@@ -12,8 +12,7 @@
 
 .picture-div {
   grid-area: picture;
-  height: 400px;
-  overflow: hidden;
+  height: 270px;
 }
 
 .body-text {
@@ -67,16 +66,16 @@
 @media screen and (min-width: 500px) {
 
   .picture-div {
-    max-height: 400px;
+    height: 482px;
     overflow: hidden;
     grid-area: picture;
   }
 
   .picture {
-    height: 100%;
-    width: 1250px;
-    float: right;
+    height: 482px;
+    width: auto;
   }
+
 }
 
 @media screen and (min-width: 900px) {
@@ -90,4 +89,5 @@
     "text features"
     "map map";
   }
+
 }
