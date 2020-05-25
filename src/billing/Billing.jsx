@@ -34,7 +34,9 @@ const Billing = () => {
       <div className="default-body">
         <h1>Pay Bill</h1>
         <div className="default-body">
-          <p>Coming soon...</p>
+	  <div className="paper">
+	    <p>Coming soon...</p>
+          </div>
         </div>
       </div>
     );
