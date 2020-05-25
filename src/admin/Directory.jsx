@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import ProtectedResource from '../security/ProtectedResource';
 
 const WrappedDirectory = () => {
@@ -7,9 +9,9 @@ const WrappedDirectory = () => {
       <div className="default-body">
         <h1>Table of Contents</h1>
         <ul className="toc paper">
-            <li><a href="/admin/customers">Customers</a></li>
-            <li><a href="/admin/units">Units</a></li>
-            <li><a href="/admin/transactions">Transactions</a></li>
+            <li><Link to="/admin/customers">Customers</Link></li>
+            <li><Link to="/admin/units">Units</Link></li>
+            <li><Link to="/admin/transactions">Transactions</Link></li>
         </ul>
       </div>
     );

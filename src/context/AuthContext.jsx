@@ -6,15 +6,19 @@ const AuthContextProvider = (props) => {
     const [firstName, setFirstName] = useState(undefined);
 
     const checkLogin = () => {
-        console.log("checkingLogin");
+        console.log("Checking login...");
         const c = document.cookie;
-        const token = c.split(';').filter(x => x.startsWith("Authorization="))[0];
+        console.log("Cookie: " + c)
+        c.split(';').filter(x => console.log(x))
+        const token = c.split(';').filter(x => x.includes("Authorization="))[0];
         if (token) {
+            console.log("token exists")
             setFirstName(JSON.parse(atob(token.split('.')[1])).firstName);
         } else {
+            console.log("no token")
             setFirstName(undefined);
         }
-        console.log("firstName: " + firstName);
+        console.log("First Name: " + firstName);
     }
 
     return (

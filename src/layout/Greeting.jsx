@@ -10,7 +10,6 @@ const Greeting = () => {
 
   const handleLogout = () => {
     document.cookie = "Authorization=;expires= Thu, 21 Aug 2014 20:00:00 UTC";
-    document.location.reload();
     checkLogin();
   }
 

@@ -12,7 +12,7 @@ const ProtectedResource = (Component) => {
   const [authenticateStatusCode, setAuthenticateStatusCode] = useState('');
   const [loginStatusCode, setLoginStatusCode] = useState('');
 
-  const { checkLogin } = useContext(AuthContext);
+  const { checkLogin, firstName } = useContext(AuthContext);
 
   const fetchData = async () => {
     const api = process.env.REACT_APP_DOMAIN + "/authenticate";
@@ -31,14 +31,19 @@ const ProtectedResource = (Component) => {
 
   useEffect(() => {
     fetchData();
+    checkLogin();
   }, []);
 
   const handleStatusCode = (statusCode) => {
+    checkLogin();
     setLoginStatusCode(statusCode);
   }
 
 
   const renderBody = (authenticateStatusCode, loginStatusCode, Component) => {
+    console.log("Authentication Status Code: " + authenticateStatusCode)
+    console.log("Login Status Code: " + loginStatusCode)
+    console.log("First Name: " + firstName)
     if (!authenticateStatusCode) {
       return null;
     } else if (authenticateStatusCode === 500) {
@@ -47,13 +52,12 @@ const ProtectedResource = (Component) => {
           <p>Something went wrong...this is likely a server issue.</p>
         </div>
       );
-    } else if (authenticateStatusCode !== 200 && loginStatusCode !== 200) {
+    } else if (!firstName || authenticateStatusCode !== 200 && loginStatusCode !== 200) {
       return (
           <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>
       );
 
     } else {
-      checkLogin();
       return <Component />;
     }
   }
