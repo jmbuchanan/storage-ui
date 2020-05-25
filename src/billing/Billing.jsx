@@ -33,10 +33,8 @@ const Billing = () => {
     return (
       <div className="default-body">
         <h1>Pay Bill</h1>
-        <div className="default-body">
-	  <div className="paper">
-	    <p>Coming soon...</p>
-          </div>
+        <div className="billing paper">
+          <p>Coming soon...</p>
         </div>
       </div>
     );
