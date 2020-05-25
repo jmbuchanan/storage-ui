@@ -41,9 +41,6 @@ const ProtectedResource = (Component) => {
 
 
   const renderBody = (authenticateStatusCode, loginStatusCode, Component) => {
-    console.log("Authentication Status Code: " + authenticateStatusCode)
-    console.log("Login Status Code: " + loginStatusCode)
-    console.log("First Name: " + firstName)
     if (!authenticateStatusCode) {
       return null;
     } else if (authenticateStatusCode === 500) {
