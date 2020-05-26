@@ -3,26 +3,36 @@ import React, { createContext, useState } from 'react';
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
+
     const [firstName, setFirstName] = useState(undefined);
 
-    const checkLogin = () => {
-        console.log("Checking login...");
-        const c = document.cookie;
-        console.log("Cookie: " + c)
-        c.split(';').filter(x => console.log(x))
-        const token = c.split(';').filter(x => x.includes("Authorization="))[0];
-        if (token) {
-            console.log("token exists")
-            setFirstName(JSON.parse(atob(token.split('.')[1])).firstName);
+    const setUserBasedOnAuthCookie = () => {
+        console.log("set user based on auth cookie");
+
+        const authCookie = getCookieByName(document.cookie, "Authorization");
+
+        console.log(authCookie);
+        if (authCookie) {
+            const firstName = getFirstNameClaim(authCookie);
+            setFirstName(firstName);
         } else {
-            console.log("no token")
             setFirstName(undefined);
         }
-        console.log("First Name: " + firstName);
+    }
+
+    const getCookieByName = (cookies, name) => {
+        console.log(cookies);
+        if (cookies) {
+            return cookies.split(';').filter(cookie => cookie.includes(name))[0];
+        }
+    }
+
+    const getFirstNameClaim = (authCookie) => {
+        return JSON.parse(atob(authCookie.split('.')[1])).firstName;
     }
 
     return (
-        <AuthContext.Provider value={{firstName, checkLogin}}>
+        <AuthContext.Provider value={{firstName, setUserBasedOnAuthCookie}}>
             {props.children}
         </AuthContext.Provider>
     );

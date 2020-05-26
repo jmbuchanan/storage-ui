@@ -12,7 +12,7 @@ const ProtectedResource = (Component) => {
   const [authenticateStatusCode, setAuthenticateStatusCode] = useState('');
   const [loginStatusCode, setLoginStatusCode] = useState('');
 
-  const { checkLogin, firstName } = useContext(AuthContext);
+  const { setUserBasedOnAuthCookie, firstName } = useContext(AuthContext);
 
   const fetchData = async () => {
     const api = process.env.REACT_APP_DOMAIN + "/authenticate";
@@ -31,11 +31,11 @@ const ProtectedResource = (Component) => {
 
   useEffect(() => {
     fetchData();
-    checkLogin();
+    setUserBasedOnAuthCookie();
   }, []);
 
   const handleStatusCode = (statusCode) => {
-    checkLogin();
+    setUserBasedOnAuthCookie();
     setLoginStatusCode(statusCode);
   }
 

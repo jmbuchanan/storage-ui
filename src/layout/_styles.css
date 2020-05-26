@@ -94,8 +94,14 @@ nav {
 }
 
 .greeting p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 3px 10px;
+}
+
+.logout {
+  cursor: pointer;
+  color: #0f576a;
+  padding-left: 5px;
 }
 
 footer {
