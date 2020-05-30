@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+
+import { AuthContext } from '../context/AuthContext';
 
 import './_styles.css';
 
@@ -13,6 +15,8 @@ const states = [
 ]
 
 const Register = () => {
+
+  const { setUserBasedOnAuthCookie } = useContext(AuthContext);
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -108,9 +112,9 @@ const Register = () => {
     document.body.style.zoom="100%";
     window.scrollTo(0,0);
   }
-  
 
   if (statusCode === 200) {
+    setUserBasedOnAuthCookie();
     window.history.back();
   }
 

@@ -9,11 +9,10 @@ const Greeting = () => {
   const { firstName, setUserBasedOnAuthCookie } = useContext(AuthContext);
 
   const handleLogout = () => {
-    document.cookie = emptyAndExpired;
+    document.cookie = "Authorization=;expires= Thu, 21 Aug 2014 20:00:00 UTC";
     setUserBasedOnAuthCookie();
   }
 
-  const emptyAndExpired = "Authorization=;expires= Thu, 21 Aug 2014 20:00:00 UTC";
 
   const GreetingMessage = () => (
     <div className="greeting">

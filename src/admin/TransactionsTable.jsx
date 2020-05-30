@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ProtectedResource from '../security/ProtectedResource';
 
 import axios from 'axios';
 
@@ -44,6 +45,7 @@ const TransactionsTable = () => {
 
     return (
       <div className="default-body">
+        <ProtectedResource isAdminRequired>
         <a href="/admin">Return</a>
         <div className="table-header">
         <h1>Transactions</h1>
@@ -67,6 +69,7 @@ const TransactionsTable = () => {
           </tbody>
         </table>
         </div>
+        </ProtectedResource>
       </div>
     );
   }

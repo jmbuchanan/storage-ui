@@ -4,24 +4,27 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
 
-    const [firstName, setFirstName] = useState(undefined);
+    const [firstName, setFirstName] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const setUserBasedOnAuthCookie = () => {
-        console.log("set user based on auth cookie");
 
         const authCookie = getCookieByName(document.cookie, "Authorization");
 
-        console.log(authCookie);
         if (authCookie) {
             const firstName = getFirstNameClaim(authCookie);
+            const isAdmin = getAdminClaim(authCookie);
+
             setFirstName(firstName);
+            setIsAdmin(isAdmin);
+            
         } else {
-            setFirstName(undefined);
+            setFirstName('');
+            setIsAdmin(false);
         }
     }
 
     const getCookieByName = (cookies, name) => {
-        console.log(cookies);
         if (cookies) {
             return cookies.split(';').filter(cookie => cookie.includes(name))[0];
         }
@@ -31,8 +34,12 @@ const AuthContextProvider = (props) => {
         return JSON.parse(atob(authCookie.split('.')[1])).firstName;
     }
 
+    const getAdminClaim = (authCookie) => {
+        return JSON.parse(atob(authCookie.split('.')[1])).isAdmin;
+    }
+
     return (
-        <AuthContext.Provider value={{firstName, setUserBasedOnAuthCookie}}>
+        <AuthContext.Provider value={{firstName, isAdmin, setUserBasedOnAuthCookie}}>
             {props.children}
         </AuthContext.Provider>
     );

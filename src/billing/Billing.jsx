@@ -18,15 +18,13 @@ const Billing = () => {
     return pay ? <CheckoutForm onClick={handleClick} /> : <Balance balance={20.00} onClick={handleClick}/>;
   }
 
-  const ProtectedBillingBody = () => {
-    return ProtectedResource(BillingBody);
-  }
-
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
     return (
       <div className="default-body">
         <h1>Pay Bill</h1>
-        <ProtectedBillingBody />
+        <ProtectedResource>
+          <BillingBody />
+        </ProtectedResource>
       </div>
     );
   } else {

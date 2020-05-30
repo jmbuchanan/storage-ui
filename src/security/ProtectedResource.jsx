@@ -7,14 +7,14 @@ import LoginForm from '../security/LoginForm';
 import { AuthContext } from '../context/AuthContext';
 
 
-const ProtectedResource = (Component) => {
+const ProtectedResource = (props) => {
 
   const [authenticateStatusCode, setAuthenticateStatusCode] = useState('');
   const [loginStatusCode, setLoginStatusCode] = useState('');
 
-  const { setUserBasedOnAuthCookie, firstName } = useContext(AuthContext);
+  const { setUserBasedOnAuthCookie, firstName, isAdmin } = useContext(AuthContext);
 
-  const fetchData = async () => {
+  const fetchAuthenticationStatus = async () => {
     const api = process.env.REACT_APP_DOMAIN + "/authenticate";
     await axios
       .get( api, {withCredentials: true})
@@ -30,7 +30,7 @@ const ProtectedResource = (Component) => {
   }
 
   useEffect(() => {
-    fetchData();
+    fetchAuthenticationStatus();
     setUserBasedOnAuthCookie();
   }, []);
 
@@ -38,29 +38,28 @@ const ProtectedResource = (Component) => {
     setUserBasedOnAuthCookie();
     setLoginStatusCode(statusCode);
   }
+  
 
+  if (authenticateStatusCode === 500) {
+    return (
+      <div className="default-body">
+        <p>Something went wrong...this is likely a server issue.</p>
+      </div>
+    );
 
-  const renderBody = (authenticateStatusCode, loginStatusCode, Component) => {
-    if (!authenticateStatusCode) {
-      return null;
-    } else if (authenticateStatusCode === 500) {
-      return (
-        <div className="default-body">
-          <p>Something went wrong...this is likely a server issue.</p>
-        </div>
-      );
-    } else if (!firstName || authenticateStatusCode !== 200 && loginStatusCode !== 200) {
-      return (
-          <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>
-      );
+  } else if (firstName == '') {
+    return <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>;
 
-    } else {
-      return <Component />;
-    }
+  } else if (props.isAdminRequired && !isAdmin){
+    return (
+      <div className="default-body">
+        <p>You need admin rights to access this resource. Contact your administrator.</p>
+      </div>
+    );
+
+  } else {
+      return props.children;
   }
-
-  return renderBody(authenticateStatusCode, loginStatusCode, Component);
-
 }
 
 export default ProtectedResource;

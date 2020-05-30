@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
+import ProtectedResource from '../security/ProtectedResource';
 
 const UnitsTable = () => {
 
@@ -44,6 +45,7 @@ const UnitsTable = () => {
 
     return (
       <div className="default-body">
+        <ProtectedResource isAdminRequired>
         <a href="/admin">Return</a>
         <div className="table-header">
         <h1>Units</h1>
@@ -67,6 +69,7 @@ const UnitsTable = () => {
           </tbody>
         </table>
         </div>
+        </ProtectedResource>
       </div>
     );
   }
