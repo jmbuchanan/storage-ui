@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import ProtectedResource from '../security/ProtectedResource';
 
+import './_styles.css';
 
 const Directory = () => {
 

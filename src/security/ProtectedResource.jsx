@@ -32,33 +32,41 @@ const ProtectedResource = (props) => {
   useEffect(() => {
     fetchAuthenticationStatus();
     setUserBasedOnAuthCookie();
+    // eslint-disable-next-line
   }, []);
 
   const handleStatusCode = (statusCode) => {
     setUserBasedOnAuthCookie();
     setLoginStatusCode(statusCode);
   }
-  
 
-  if (authenticateStatusCode === 500) {
+  const checkingAuthentication = !authenticateStatusCode;
+  const isServerError = authenticateStatusCode === 500; 
+  const notLoggedIn = firstName === '';
+  const adminProtected = props.isAdminRequired;
+  const userIsNotAdmin = !isAdmin;
+  const wrappedComponent = props.children;
+
+  if (checkingAuthentication) {
+    return null;
+
+  } else if (isServerError) {
     return (
-      <div className="default-body">
         <p>Something went wrong...this is likely a server issue.</p>
-      </div>
     );
 
-  } else if (firstName == '') {
-    return <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>;
-
-  } else if (props.isAdminRequired && !isAdmin){
+  } else if (notLoggedIn) {
     return (
-      <div className="default-body">
+      <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>
+    );
+
+  } else if (adminProtected && userIsNotAdmin){
+    return (
         <p>You need admin rights to access this resource. Contact your administrator.</p>
-      </div>
     );
 
   } else {
-      return props.children;
+      return wrappedComponent;
   }
 }
 

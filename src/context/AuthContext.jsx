@@ -4,7 +4,9 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
 
+    const [customerId, setCustomerId] = useState(0);
     const [firstName, setFirstName] = useState('');
+    const [stripeCustomerId, setStripeCustomerId] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
 
     const setUserBasedOnAuthCookie = () => {
@@ -12,13 +14,16 @@ const AuthContextProvider = (props) => {
         const authCookie = getCookieByName(document.cookie, "Authorization");
 
         if (authCookie) {
-            const firstName = getFirstNameClaim(authCookie);
-            const isAdmin = getAdminClaim(authCookie);
+            const claims = parseClaims(authCookie);
 
-            setFirstName(firstName);
-            setIsAdmin(isAdmin);
+            setCustomerId(claims.customerId);
+            setStripeCustomerId(claims.stripeCustomerId);
+            setFirstName(claims.firstName);
+            setIsAdmin(claims.isAdmin);
             
         } else {
+            setCustomerId(0);
+            setStripeCustomerId('');
             setFirstName('');
             setIsAdmin(false);
         }
@@ -30,16 +35,12 @@ const AuthContextProvider = (props) => {
         }
     }
 
-    const getFirstNameClaim = (authCookie) => {
-        return JSON.parse(atob(authCookie.split('.')[1])).firstName;
-    }
-
-    const getAdminClaim = (authCookie) => {
-        return JSON.parse(atob(authCookie.split('.')[1])).isAdmin;
+    const parseClaims = (authCookie) => {
+        return JSON.parse(atob(authCookie.split('.')[1]));
     }
 
     return (
-        <AuthContext.Provider value={{firstName, isAdmin, setUserBasedOnAuthCookie}}>
+        <AuthContext.Provider value={{customerId, firstName, stripeCustomerId, isAdmin, setUserBasedOnAuthCookie}}>
             {props.children}
         </AuthContext.Provider>
     );

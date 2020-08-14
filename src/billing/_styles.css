@@ -1,6 +1,13 @@
 .billing {
     padding: 10px;
     width: 280px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.balance-amount {
+  font-size: 2rem;
 }
 
 .stripe {
@@ -17,4 +24,28 @@
   border-style: solid;
   border-color: #a4a4a4;
   border-width: 1px;
+}
+
+.anchor {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.material-icons-payment {
+  padding-top: 3px;
+  font-size: 20px;
+}
+
+.radio-option {
+  height: 25px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.radio-option-label {
+  margin-left: 5px;
+  padding-bottom: 5px;
+  font-weight: normal;
+  font-size: .9rem;
 }

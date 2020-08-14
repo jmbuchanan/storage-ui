@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import ProtectedResource from '../security/ProtectedResource';
 
 const UnitsTable = () => {
@@ -46,7 +47,7 @@ const UnitsTable = () => {
     return (
       <div className="default-body">
         <ProtectedResource isAdminRequired>
-        <a href="/admin">Return</a>
+        <Link to="/admin">Return</Link>
         <div className="table-header">
         <h1>Units</h1>
         <button className="excel-icon paper" onClick={handleClick}>

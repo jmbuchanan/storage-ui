@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ProtectedResource from '../security/ProtectedResource';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import ProtectedResource from '../security/ProtectedResource';
 
 const TransactionsTable = () => {
 
@@ -46,7 +47,7 @@ const TransactionsTable = () => {
     return (
       <div className="default-body">
         <ProtectedResource isAdminRequired>
-        <a href="/admin">Return</a>
+        <Link to="/admin">Return</Link>
         <div className="table-header">
         <h1>Transactions</h1>
         <button className="excel-icon paper" onClick={handleClick}>

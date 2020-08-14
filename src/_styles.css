@@ -34,6 +34,7 @@ h1 {
 
 h2 {
   font-weight: 500;
+  margin: 12px 0px;
   color: #212F3D;
 }
 
@@ -74,7 +75,8 @@ button {
   background-color: #212F3D; 
   padding: 10px;
   cursor: pointer;
-  width: 100px;
+  min-width: 100px;
+  max-width: fit-content;
   border: none;
 }
 
