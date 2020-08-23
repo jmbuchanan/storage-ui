@@ -12,12 +12,14 @@ import CustomersTable from '../admin/CustomersTable';
 import UnitsTable from '../admin/UnitsTable';
 import TransactionsTable from '../admin/TransactionsTable';
 import Register from '../security/Register';
+import BookUnit from '../units/BookUnit';
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path = "/units" component={Units} />
+      <Route path = "/book" component={BookUnit} />
       <Route path = "/billing" component={Billing} />
       <Route path = "/contact" component={Contact} />
       <Route exact path = "/register" component={Register} />

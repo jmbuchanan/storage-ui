@@ -45,28 +45,27 @@ const ProtectedResource = (props) => {
   const notLoggedIn = firstName === '';
   const adminProtected = props.isAdminRequired;
   const userIsNotAdmin = !isAdmin;
-  const wrappedComponent = props.children;
+  const protectedResource = props.children;
 
-  if (checkingAuthentication) {
-    return null;
+  switch (true) {
+    case checkingAuthentication:
+      return null;
 
-  } else if (isServerError) {
-    return (
-        <p>Something went wrong...this is likely a server issue.</p>
-    );
+    case isServerError:
+      return <p>Something went wrong...this is likely a server issue.</p>;
 
-  } else if (notLoggedIn) {
-    return (
-      <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>
-    );
+    case notLoggedIn:
+      return <LoginForm onSubmit={handleStatusCode} statusCode={loginStatusCode}/>;
 
-  } else if (adminProtected && userIsNotAdmin){
-    return (
-        <p>You need admin rights to access this resource. Contact your administrator.</p>
-    );
+    case adminProtected && userIsNotAdmin:
+      return (
+        <div className="paper">
+          <p>You need admin rights to access this resource. Contact your administrator.</p>
+        </div>
+      );
 
-  } else {
-      return wrappedComponent;
+    default:
+      return protectedResource;
   }
 }
 

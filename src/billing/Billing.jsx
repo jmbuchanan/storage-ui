@@ -7,19 +7,43 @@ import AddPaymentMethod from './AddPaymentMethod';
 import Balance from './Balance';
 
 import './_styles.css';
+import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Billing = () => {
 
-  const [pay, setPay] = useState(false);
+  const [hasCardOnFile, setHasCardOnFile] = useState(false);
+  const [cardsOnFile, setCardsOnFile] = useState([]);
+
+  const getBalance = async () => {
+    const api = process.env.REACT_APP_DOMAIN + '/balance/fetchByCustomerId';
+  }
+
+  const getCardsOnFile = async () => {
+    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+    await axios
+        .get(api, { withCredentials: true })
+        .then(response => {
+            setCardsOnFile(response.data)
+        })
+        .catch(error => {
+            if (error.response) {
+                console.log("Error Response from Server");
+            } else {
+                console.log("No Response from Server");
+            }
+        });
+  }
 
   useEffect(() => {
-    return () => {
-      clearStripeiFrames();
-    }
+    clearStripeiFrames();
+    getBalance();
+    getCardsOnFile();
   }, [])
 
+  
+  //stripe can add too many iframes on rerender, so this cleans up
   const clearStripeiFrames = () => {
       var iframes = document.querySelectorAll('iframe');
       for (var i = 0; i < iframes.length; i++) {
@@ -28,11 +52,15 @@ const Billing = () => {
   }
 
   const handleClick = () => {
-    setPay(!pay);
+    setHasCardOnFile(!hasCardOnFile);
   }
 
-  const BillingBody = () => {
-    return pay ? <AddPaymentMethod onClick={handleClick} /> : <Balance balance={20.00} onClick={handleClick}/>;
+  const PaymentMethod = () => {
+    if (hasCardOnFile) {
+      return null //<SelectPaymentMethod onClick={handleClick} />
+    } else {
+      return <AddPaymentMethod onClick={handleClick} />
+    }
   }
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
@@ -41,7 +69,8 @@ const Billing = () => {
         <div className="default-body">
           <h1>Pay Bill</h1>
             <ProtectedResource>
-              <BillingBody />
+              <Balance />
+              <PaymentMethod />
             </ProtectedResource>
         </div>
       </Elements>

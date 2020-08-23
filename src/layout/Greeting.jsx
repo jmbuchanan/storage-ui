@@ -13,11 +13,14 @@ const Greeting = () => {
     setUserBasedOnAuthCookie();
   }
 
+  const capitalize = (word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 
   const GreetingMessage = () => (
     <div className="greeting">
       <p>
-        {"Hello, " + firstName + "! "}
+        {"Hello, " + capitalize(firstName) + "! "}
         <span
           className="logout"
           onClick={handleLogout}>
