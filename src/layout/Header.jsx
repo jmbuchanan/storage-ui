@@ -26,7 +26,7 @@ const Header = () => {
         </div>
         <ul className={toggled}>
           <li><Link onClick={removeToggle} to="/units">Units</Link></li>
-          <li><Link onClick={removeToggle} to="/billing">Pay Bill</Link></li>
+          <li><Link onClick={removeToggle} to="/portal">Portal</Link></li>
           <li><Link onClick={removeToggle} to="/contact">Contact Us</Link></li>
         </ul>
       </nav>

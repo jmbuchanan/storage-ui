@@ -25,20 +25,6 @@ const Balance = (props) => {
           });
   }
 
-  const BalanceSection = () => {
-      return (
-          <div className="billing paper">
-              <h2>Balance</h2>
-              <span className="balance-amount">{'$' + props.balance}</span>
-              {paymentMethods.length > 0 ? null
-                  :
-                  <button onClick={props.onClick}>
-                      Pay Now
-                  </button>
-              }
-          </div>
-      );
-  }
 
   const PaymentMethods = () => {
       const options = [];
@@ -98,7 +84,6 @@ const Balance = (props) => {
 
   return (
       <>
-          <BalanceSection />
           <PaymentDetails />
       </>
   );

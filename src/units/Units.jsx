@@ -25,7 +25,7 @@ const Units = () => {
         <div className="unit-features-div">
           <p>$40/<span className="per-month">mo</span>  <span className='strike-through-price'>$50/<span className="per-month">mo</span></span></p>
           <p><Phone size='15' color='#0f576a'/> <a className="phone" href="tel://+14044417583">404-441-7583</a></p>
-          <Link to="/book" className="book-now">Book Now</Link>
+          <Link to="/portal" className="book-now">Book Now</Link>
         </div>
       </div>
 
@@ -40,7 +40,7 @@ const Units = () => {
         <div className="unit-features-div">
           <p>$80/<span className="per-month">mo</span>  <span className='strike-through-price'>$90/<span className="per-month">mo</span></span></p>
           <p><Phone size='15' color='#0f576a'/> <a className="phone" href="tel://+14044417583">404-441-7583</a></p>
-          <Link to="/book" className="book-now">Book Now</Link>
+          <Link to="/portal" className="book-now">Book Now</Link>
         </div>
       </div>
     </div>

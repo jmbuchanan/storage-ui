@@ -5,7 +5,7 @@ import './_styles.css';
 
 import Home from '../home/Home';
 import Units from '../units/Units';
-import Billing from '../billing/Billing';
+import Portal from '../portal/Portal';
 import Contact from '../contact/Contact';
 import Directory from '../admin/Directory';
 import CustomersTable from '../admin/CustomersTable';
@@ -19,8 +19,7 @@ const Routes = () => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path = "/units" component={Units} />
-      <Route path = "/book" component={BookUnit} />
-      <Route path = "/billing" component={Billing} />
+      <Route path = "/portal" component={Portal} />
       <Route path = "/contact" component={Contact} />
       <Route exact path = "/register" component={Register} />
       <Route exact path = "/admin" component={Directory} />

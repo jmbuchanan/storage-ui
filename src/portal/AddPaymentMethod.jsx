@@ -12,7 +12,6 @@ const AddPaymentMethod = (props) => {
   const [ isSubmitted, setIsSubmitted ] = useState(false);
   const [ statusMessage, setStatusMessage ] = useState('');
   const { customerId, stripeCustomerId } = useContext(AuthContext);
-
   const stripe = useStripe();
   const elements = useElements();
 

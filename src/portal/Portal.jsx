@@ -4,14 +4,15 @@ import {loadStripe} from '@stripe/stripe-js';
 
 import ProtectedResource from '../security/ProtectedResource';
 import AddPaymentMethod from './AddPaymentMethod';
-import Balance from './Balance';
+import UserDetails from './UserDetails';
+import UserUnits from './UserUnits';
 
 import './_styles.css';
 import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Billing = () => {
+const Portal = () => {
 
   const [hasCardOnFile, setHasCardOnFile] = useState(false);
   const [cardsOnFile, setCardsOnFile] = useState([]);
@@ -23,17 +24,17 @@ const Billing = () => {
   const getCardsOnFile = async () => {
     const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
     await axios
-        .get(api, { withCredentials: true })
-        .then(response => {
-            setCardsOnFile(response.data)
-        })
-        .catch(error => {
-            if (error.response) {
-                console.log("Error Response from Server");
-            } else {
-                console.log("No Response from Server");
-            }
-        });
+      .get(api, { withCredentials: true })
+      .then(response => {
+        setCardsOnFile(response.data)
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log("Error Response from Server");
+        } else {
+          console.log("No Response from Server");
+        }
+    });
   }
 
   useEffect(() => {
@@ -67,9 +68,10 @@ const Billing = () => {
     return (
       <Elements stripe={stripePromise}>
         <div className="default-body">
-          <h1>Pay Bill</h1>
+          <h1>Portal</h1>
             <ProtectedResource>
-              <Balance />
+              <UserDetails />
+              <UserUnits />
               <PaymentMethod />
             </ProtectedResource>
         </div>
@@ -78,7 +80,7 @@ const Billing = () => {
   } else {
     return (
       <div className="default-body">
-        <h1>Pay Bill</h1>
+        <h1>Portal</h1>
         <div className="billing paper">
           <p>Coming soon...</p>
         </div>
@@ -88,4 +90,4 @@ const Billing = () => {
 
 }
 
-export default Billing;
+export default Portal;
