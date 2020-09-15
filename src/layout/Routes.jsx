@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import './_styles.css';
 
 import Home from '../home/Home';
-import Units from '../units/Units';
 import Portal from '../portal/Portal';
 import Contact from '../contact/Contact';
 import Directory from '../admin/Directory';
@@ -12,13 +11,11 @@ import CustomersTable from '../admin/CustomersTable';
 import UnitsTable from '../admin/UnitsTable';
 import TransactionsTable from '../admin/TransactionsTable';
 import Register from '../security/Register';
-import BookUnit from '../units/BookUnit';
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path = "/units" component={Units} />
       <Route path = "/portal" component={Portal} />
       <Route path = "/contact" component={Contact} />
       <Route exact path = "/register" component={Register} />

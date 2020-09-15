@@ -8,8 +8,6 @@ const BookUnit = () => {
     return;
   }
 
-  const date = new Date();
-
   //earliest date to book is tomorrow
   const tomorrow = date.getDate() + 1;
   const tomorrowString = tomorrow.toString();
