@@ -28,7 +28,7 @@ nav {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
 }
 
@@ -135,7 +135,7 @@ footer {
   .nav-links {
     max-height: unset;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 66%;
   }

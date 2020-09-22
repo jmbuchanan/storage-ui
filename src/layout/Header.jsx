@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Phone } from 'react-feather';
 import logo from '../img/logo.svg';
 
 import './_styles.css';
@@ -26,7 +27,7 @@ const Header = () => {
         </div>
         <ul className={toggled}>
           <li><Link onClick={removeToggle} to="/portal">Portal</Link></li>
-          <li><Link onClick={removeToggle} to="/contact">Contact Us</Link></li>
+          <li><a className="phone" href="tel://+14044417583"><Phone size='14' color='white'/> 404-441-7583</a></li>
         </ul>
       </nav>
     </header>

@@ -67,31 +67,33 @@ const AddPaymentMethod = (props) => {
 
   const PaymentDetailsForm = () => {
     return (
-    <div className="billing paper">
-      <h2>Add A Payment Method</h2>
-      <p>
-        We do not currently have a payment method on file for your account.
-        Enter your credit card information below to add a payment method.
-      </p>
-      <form style={{width: '100%'}} onSubmit={handleSubmit}>
-        <label>Card Number</label>
-        <div className="stripe-input">
-          {stripe ? <CardNumberElement /> : <span>1234 1234 1234</span>}
+      <>
+      <h2>Your Payment Methods</h2>
+      <div className="billing paper">
+        <p>
+          We do not currently have a payment method on file for your account.
+          Enter your credit card information below to add a payment method.
+        </p>
+        <form style={{width: '100%'}} onSubmit={handleSubmit}>
+          <label>Card Number</label>
+          <div className="stripe-input">
+            {stripe ? <CardNumberElement /> : <span>1234 1234 1234</span>}
+          </div>
+          <label>Expiration</label>
+          <div className="stripe-input">
+            {stripe ? <CardExpiryElement /> : <span>MM / YY</span>}
+          </div>
+          <label>CVC</label>
+          <div className="stripe-input">
+            {stripe ? <CardCvcElement /> : <span>CVC</span>}
+          </div>
+          <button type="submit">
+            Add Payment Method
+          </button>
+          <span onClick={props.onClick} className="anchor">View outstanding balance</span>
+        </form>
         </div>
-        <label>Expiration</label>
-        <div className="stripe-input">
-          {stripe ? <CardExpiryElement /> : <span>MM / YY</span>}
-        </div>
-        <label>CVC</label>
-        <div className="stripe-input">
-          {stripe ? <CardCvcElement /> : <span>CVC</span>}
-        </div>
-        <button type="submit">
-          Add Payment Method
-        </button>
-        <span onClick={props.onClick} className="anchor">View outstanding balance</span>
-      </form>
-      </div>
+        </>
     );
   }
 

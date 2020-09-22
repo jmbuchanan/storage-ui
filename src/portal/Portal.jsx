@@ -4,7 +4,6 @@ import {loadStripe} from '@stripe/stripe-js';
 
 import ProtectedResource from '../security/ProtectedResource';
 import AddPaymentMethod from './AddPaymentMethod';
-import UserDetails from './UserDetails';
 import UserUnits from './UserUnits';
 
 import './_styles.css';
@@ -13,6 +12,7 @@ import axios from 'axios';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Portal = () => {
+
 
   const [hasCardOnFile, setHasCardOnFile] = useState(false);
   const [cardsOnFile, setCardsOnFile] = useState([]);
@@ -70,7 +70,6 @@ const Portal = () => {
         <div className="default-body">
           <h1>Portal</h1>
             <ProtectedResource>
-              <UserDetails />
               <UserUnits />
               <PaymentMethod />
             </ProtectedResource>
