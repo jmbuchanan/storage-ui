@@ -58,7 +58,6 @@ const GoogleMaps = () => {
   return (
     <div className="map paper">
       <div id="google-map" ref={googleMapRef}> </div>
-      <p>50 Professional Drive, Jefferson, GA 30549</p>
     </div>
   );
 }

@@ -3,8 +3,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
 import ProtectedResource from '../security/ProtectedResource';
-import AddPaymentMethod from './AddPaymentMethod';
-import UserUnits from './UserUnits';
+import YourPaymentMethods from './YourPaymentMethods';
+import YourUnits from './YourUnits';
 
 import './_styles.css';
 import axios from 'axios';
@@ -13,15 +13,34 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Portal = () => {
 
-
-  const [hasCardOnFile, setHasCardOnFile] = useState(false);
+  const [units, setUnits] = useState([]);
   const [cardsOnFile, setCardsOnFile] = useState([]);
 
-  const getBalance = async () => {
-    const api = process.env.REACT_APP_DOMAIN + '/balance/fetchByCustomerId';
+  //stripe can add too many iframes on rerender, so this cleans up
+  const clearStripeiFrames = () => {
+      var iframes = document.querySelectorAll('iframe');
+      for (var i = 0; i < iframes.length; i++) {
+          iframes[i].parentNode.removeChild(iframes[i]);
+      }
   }
 
-  const getCardsOnFile = async () => {
+  const fetchUnits = async () => {
+    const api = process.env.REACT_APP_DOMAIN + '/units/fetchByCustomerId';
+    await axios
+      .get(api, { withCredentials: true })
+      .then(response => {
+        setUnits(response.data)
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log("Error Response from Server");
+        } else {
+          console.log("No Response from Server");
+        }
+    });
+  }
+
+  const fetchCardsOnFile = async () => {
     const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
     await axios
       .get(api, { withCredentials: true })
@@ -36,33 +55,12 @@ const Portal = () => {
         }
     });
   }
-
+  
   useEffect(() => {
     clearStripeiFrames();
-    getBalance();
-    getCardsOnFile();
+    fetchUnits();
+    fetchCardsOnFile();
   }, [])
-
-  
-  //stripe can add too many iframes on rerender, so this cleans up
-  const clearStripeiFrames = () => {
-      var iframes = document.querySelectorAll('iframe');
-      for (var i = 0; i < iframes.length; i++) {
-          iframes[i].parentNode.removeChild(iframes[i]);
-      }
-  }
-
-  const handleClick = () => {
-    setHasCardOnFile(!hasCardOnFile);
-  }
-
-  const PaymentMethod = () => {
-    if (hasCardOnFile) {
-      return null //<SelectPaymentMethod onClick={handleClick} />
-    } else {
-      return <AddPaymentMethod onClick={handleClick} />
-    }
-  }
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
     return (
@@ -70,8 +68,8 @@ const Portal = () => {
         <div className="default-body">
           <h1>Portal</h1>
             <ProtectedResource>
-              <UserUnits />
-              <PaymentMethod />
+              <YourUnits units={units}/>
+              <YourPaymentMethods cardsOnFile={cardsOnFile}/>
             </ProtectedResource>
         </div>
       </Elements>
