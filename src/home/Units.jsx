@@ -8,6 +8,12 @@ import storageSmallMobile from '../img/cropped-storage-small.jpg';
 import storageLargeMobile from '../img/cropped-storage-large.jpg'; 
 
 const Units = () => {
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0)
+
+  }
+
   return (
     <div className="units paper">      
       <div className="unit-div">
@@ -18,7 +24,7 @@ const Units = () => {
           <p>Small 5x10</p>
           <p>$40/<span className="per-month">mo</span>  <span className='strike-through-price'>$50/<span className="per-month">mo</span></span></p>
           <p><Phone size='15' color='#0f576a'/> <a className="phone" href="tel://+14044417583">404-441-7583</a></p>
-          <Link to="/portal" className="book-now">Book Now</Link>
+          <Link to="/book" onClick={scrollToTop} className="book-now">Book Now</Link>
         </div>
       </div>
       <div className="unit-div">
@@ -29,7 +35,7 @@ const Units = () => {
           <p>Large 10x20</p>
           <p>$80/<span className="per-month">mo</span>  <span className='strike-through-price'>$90/<span className="per-month">mo</span></span></p>
           <p><Phone size='15' color='#0f576a'/> <a className="phone" href="tel://+14044417583">404-441-7583</a></p>
-          <Link to="/portal" className="book-now">Book Now</Link>
+          <Link to="/book" onClick={scrollToTop} className="book-now">Book Now</Link>
         </div>
       </div>
     </div>

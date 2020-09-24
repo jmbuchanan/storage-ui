@@ -9,11 +9,11 @@ const BookUnit = () => {
   }
 
   //earliest date to book is tomorrow
-  const tomorrow = date.getDate() + 1;
+  const tomorrow = Date.getDate() + 1;
   const tomorrowString = tomorrow.toString();
 
   //latest date to book is 30 days out
-  const nextMonth = date.getDate() + 30;
+  const nextMonth = Date.getDate() + 30;
   const nextMonthString = nextMonth.toString();
 
   return (
