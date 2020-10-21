@@ -26,7 +26,6 @@ const LoginForm = (props) => {
       method: 'POST',
       data: formData,
       withCredentials: true
-
     })
     .then(response => {
       props.onSubmit(response.status);

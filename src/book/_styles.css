@@ -4,8 +4,20 @@
     padding: 15px;
 }
 
+.choice {
+    display: flex;
+    flex-direction: row;
+}
+
+.choice-stacked {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+}
+
 .navigator {
     max-width: 500px;
     display: flex;
+    padding: 5px;
     justify-content: space-between;
 }

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import ProtectedResource from '../security/ProtectedResource';
 import BookUnit from './BookUnit';
@@ -8,50 +9,62 @@ import ConfirmBooking from './ConfirmBooking';
 
 const Book = () => {
 
-  const CONFIRM = 4;
+  const CONFIRM = 3;
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
+  const [cards, setCards] = useState([]);
+  const [details, setDetails] = useState();
+  const [nextEnabled, setNextEnabled] = useState([true, false])
+
+  const fetchCards = async () => {
+      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+      await axios
+          .get(api, { withCredentials: true })
+          .then(response => {
+              setCards(response.data)
+          })
+          .catch(error => {
+              console.log("Server or stripe issue");
+          });
+  }
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  const setUnitDetails = (unitNumber, startDate) => {
+      details.unitNumber = unitNumber;
+      details.startDate = startDate;
+      setDetails(details);
+  }
+
+  const setNextEnabledByIndex = (i, boolean) => {
+      const newState = nextEnabled.slice();
+      newState[i] = boolean;
+      setNextEnabled(newState);
+  }
+
+
+  const selectCard = (cardIndex) => {
+      const card = cards[cardIndex];
+      details.lastFour = card.lastFour;
+      details.brand = card.brand;
+      setDetails(details);
+  }
 
   const Step = () => {
       switch(step) {
+          case 0:
+              return <BookUnit setUnitDetails={setUnitDetails} setStep={setStep}/>;
+
           case 1:
-              return <BookUnit />;
+              return <PaymentMethods cards={cards} selectCard={selectCard} setNextEnabled={setNextEnabledByIndex} />;
 
           case 2:
-              return <PaymentMethods />;
-
-          case 3:
-              return <ConfirmBooking />;
+              return <ConfirmBooking details={details}/>;
       }
   }
 
-  const Navigator = () => {
-      switch(step) {
-          case 1:
-              return (
-                <>
-                <Blank />
-                <Next />
-                </>
-              );
-
-          case 2:
-              return (
-                  <>
-                  <Back />
-                  <Next />
-                  </>
-              );
-        
-          case 3:
-              return (
-                  <>
-                  <Back />
-                  <Confirm />
-                  </>
-              );
-      }
-  }
 
   const Blank = () => {
       return <div></div>
@@ -64,33 +77,26 @@ const Book = () => {
         </div>
       );
   }
-  const Next = () => {
-      return (
-        <div>
-            <button onClick={goNext}>Next</button>
-        </div>
-      );
-  }
 
   const Confirm = () => {
-      return (
-        <div>
-            <button onClick={goConfirm}>Confirm</button>
-        </div>
-      );
+        return (
+            <div>
+                <button onClick={goConfirm}>Confirm</button>
+            </div>
+        );
   }
 
   const goBack = () => {
       setStep(step - 1);
   }
 
-  const goNext = () => {
-      setStep(step + 1);
-  }
 
   const goConfirm = () => {
       setStep(CONFIRM);
   }
+
+  const brand = cards.length > 0 ? cards[0].brand : "No card";
+  const lastFour = cards.length > 0 ? cards[0].lastFour : null;
 
   if (step == CONFIRM) {
     return <Redirect to="/portal" />;
@@ -100,9 +106,8 @@ const Book = () => {
         <div className="default-body">
         <ProtectedResource>
             <Step />
-            <div className="navigator">
-                <Navigator />
-            </div>
+            <p>{brand}</p>
+            <p>{lastFour}</p>
         </ProtectedResource>
         </div>
     )
