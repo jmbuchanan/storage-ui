@@ -13,19 +13,19 @@ const Book = () => {
 
   const [step, setStep] = useState(0);
   const [cards, setCards] = useState([]);
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState({"unitNumber": "", "startDate": ""});
   const [nextEnabled, setNextEnabled] = useState([true, false])
 
   const fetchCards = async () => {
-      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
-      await axios
-          .get(api, { withCredentials: true })
-          .then(response => {
-              setCards(response.data)
-          })
-          .catch(error => {
-              console.log("Server or stripe issue");
-          });
+    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+    await axios
+        .get(api, { withCredentials: true })
+        .then(response => {
+            setCards(response.data)
+        })
+        .catch(error => {
+            console.log("Server or stripe issue");
+    });
   }
 
   useEffect(() => {
