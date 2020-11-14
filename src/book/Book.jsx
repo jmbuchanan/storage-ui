@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 import axios from 'axios';
 
 import ProtectedResource from '../security/ProtectedResource';
@@ -7,14 +9,26 @@ import BookUnit from './BookUnit';
 import PaymentMethods from './PaymentMethods';
 import ConfirmBooking from './ConfirmBooking';
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 const Book = () => {
 
-  const CONFIRM = 3;
+  const BOOK = 0;
+  const PAYMENT = 1;
+  const CONFIRM = 2;
+  const SUBMITTED = 3;
+
+  //earliest date to book is tomorrow
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const tomorrowString = tomorrow.toISOString().slice(0,10);
 
   const [step, setStep] = useState(0);
   const [cards, setCards] = useState([]);
-  const [details, setDetails] = useState({"unitNumber": "", "startDate": ""});
-  const [nextEnabled, setNextEnabled] = useState([true, false])
+  const [selectedCard, setSelectedCard] = useState(0);
+  const [unitSize, setUnitSize] = useState(0);
+  const [bookStartDate, setBookStartDate] = useState(tomorrowString);
 
   const fetchCards = async () => {
     const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
@@ -32,83 +46,43 @@ const Book = () => {
     fetchCards();
   }, []);
 
-  const setUnitDetails = (unitNumber, startDate) => {
-      details.unitNumber = unitNumber;
-      details.startDate = startDate;
-      setDetails(details);
-  }
-
-  const setNextEnabledByIndex = (i, boolean) => {
-      const newState = nextEnabled.slice();
-      newState[i] = boolean;
-      setNextEnabled(newState);
-  }
-
-
-  const selectCard = (cardIndex) => {
-      const card = cards[cardIndex];
-      details.lastFour = card.lastFour;
-      details.brand = card.brand;
-      setDetails(details);
+  const setUnitDetails = (unitSize, startDate) => {
+      setUnitSize(unitSize);
+      setBookStartDate(startDate);
   }
 
   const Step = () => {
       switch(step) {
-          case 0:
-              return <BookUnit setUnitDetails={setUnitDetails} setStep={setStep}/>;
+          case BOOK:
+              return <BookUnit unitSize={unitSize} bookStartDate={bookStartDate} setUnitDetails={setUnitDetails} setStep={setStep}/>;
 
-          case 1:
-              return <PaymentMethods cards={cards} selectCard={selectCard} setNextEnabled={setNextEnabledByIndex} />;
+          case PAYMENT:
+              return <PaymentMethods cards={cards} setSelectedCard={setSelectedCard} setStep={setStep} />;
 
-          case 2:
-              return <ConfirmBooking details={details}/>;
+          case CONFIRM:
+              return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep}/>;
       }
   }
 
-
-  const Blank = () => {
-      return <div></div>
-  }
-
-  const Back = () => {
-      return (
-        <div>
-            <button onClick={goBack}>Back</button>
-        </div>
-      );
-  }
-
-  const Confirm = () => {
-        return (
-            <div>
-                <button onClick={goConfirm}>Confirm</button>
-            </div>
-        );
-  }
-
-  const goBack = () => {
-      setStep(step - 1);
-  }
-
-
-  const goConfirm = () => {
-      setStep(CONFIRM);
-  }
-
-  const brand = cards.length > 0 ? cards[0].brand : "No card";
+  const brand = cards.length > 0 ? cards[0].cardBrand : "No card";
   const lastFour = cards.length > 0 ? cards[0].lastFour : null;
 
-  if (step == CONFIRM) {
+  if (step == SUBMITTED) {
     return <Redirect to="/portal" />;
-
   } else {
     return (
         <div className="default-body">
-        <ProtectedResource>
-            <Step />
-            <p>{brand}</p>
-            <p>{lastFour}</p>
-        </ProtectedResource>
+          <ProtectedResource>
+            <Elements stripe={stripePromise}>
+              <h1>Book A Unit</h1>
+              <Step />
+              <p>Step: {step}</p>
+              <p>Unit Type: {unitSize}</p>
+              <p>Start Date: {bookStartDate}</p>
+              <p>Card Brand: {brand}</p>
+              <p>Card Last Four: {lastFour}</p>
+            </Elements>
+          </ProtectedResource>
         </div>
     )
   }

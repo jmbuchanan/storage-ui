@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import Navigator from './Navigator';
 
 import './_styles.css';
+
 
 const BookUnit = (props) => {
 
@@ -20,19 +22,15 @@ const BookUnit = (props) => {
 
   const DATE_WARNING_MESSAGE = "Units can only be booked one to thirty days out."
 
-  //earliest date to book is tomorrow
   const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  const tomorrowString = tomorrow.toISOString().slice(0,10);
 
   //latest date to book is 30 days out
   const nextMonth = new Date(today);
   nextMonth.setDate(today.getDate() + 30);
 
   //state
-  const [unit, setUnit] = useState(SMALL);
-  const [date, setDate] = useState(tomorrowString);
+  const [unit, setUnit] = useState(props.unitSize);
+  const [date, setDate] = useState(props.bookStartDate);
   const [dateWarning, setDateWarning] = useState(VALID_DATE);
   const [nextEnabled, setNextEnabled] = useState(true);
 
@@ -45,6 +43,8 @@ const BookUnit = (props) => {
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     const code = verifyDate(selectedDate, today);
+    const isValidDate = (code == VALID_DATE);
+    setNextEnabled(isValidDate);
     setDateWarning(code);
     setDate(selectedDate);
   }
@@ -80,62 +80,38 @@ const BookUnit = (props) => {
     }
   }
 
-
-  const Blank = () => {
-      return <div></div>
-  }
-
-
-  const Next = (props) => {
-      if (props.enabled) {
-        return (
-            <div>
-                <button onClick={goNext}>Next</button>
-            </div>
-        );
-      } else {
-          return (
-              <div>
-                  <button style={{backgroundColor: "gray"}}>Next</button>
-              </div>
-          )
-      }
-  }
-
-  const Navigator = () => {
-    return (
-      <>
-      <Blank />
-      <Next enabled={nextEnabled}/>
-      </>
-    );
-  }
-
   const goNext = () => {
-      props.setStep(STEP_INDEX + 1);
+    props.setUnitDetails(unit, date);
+    props.setStep(STEP_INDEX + 1);
+  }
+
+  const goBack = () => {
+    props.setStep(STEP_INDEX - 1);
   }
 
   return (
     <>
-      <h1>Book A Unit</h1>
       <div className="book-unit paper">
-        <h2>Choose a size:</h2>
+        <h2>Choose Unit Size</h2>
         <div className="choice">
           <label for="small">Small - $40</label>
           <input type="radio"
             id="small"
-            defaultChecked
+            checked={unit == SMALL}
             onChange={handleUnitChange}
             name="unitsize"
-            value="small" />
+            value="small"
+            />
         </div>
         <div className="choice">
           <label for="large">Large - $80</label>
           <input type="radio"
             id="large"
+            checked={unit == LARGE}
             onChange={handleUnitChange}
             name="unitsize"
-            value="small" />
+            value="small"
+            />
         </div>
         <div className="choice-stacked">
           <label for="start">Requested Move In Date:</label>
@@ -144,7 +120,12 @@ const BookUnit = (props) => {
       </div>
       <DateWarning dateWarning={dateWarning}/>
       <div className="navigator">
-        <Navigator />
+        <Navigator 
+          backEnabled={false}
+          nextEnabled={nextEnabled}
+          goBack={goBack}
+          goNext={goNext}
+        />
       </div>
     </>
   );

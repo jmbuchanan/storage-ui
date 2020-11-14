@@ -90,7 +90,6 @@ const AddPaymentMethod = (props) => {
           <button type="submit">
             Add Payment Method
           </button>
-          <span onClick={props.onClick} className="anchor">View outstanding balance</span>
         </form>
         </div>
         </>
