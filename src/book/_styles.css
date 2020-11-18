@@ -1,5 +1,6 @@
 .book-unit {
     box-sizing: border-box;
+    min-height: 225px;
     max-width: 500px;
     padding: 15px;
 }
@@ -20,4 +21,12 @@
     display: flex;
     padding: 5px;
     justify-content: space-between;
+}
+
+.back-button {
+    background-color: #f1f1f4;
+    color: #00af4f;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00af4f;
 }

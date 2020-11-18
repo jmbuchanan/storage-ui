@@ -72,7 +72,8 @@ button {
   font-size: 12px;
   font-weight: bold;
   color: #fff;
-  background-color: #212F3D; 
+  background-color: #00af4f; 
+  border-radius: 5px;
   padding: 10px;
   cursor: pointer;
   min-width: 100px;

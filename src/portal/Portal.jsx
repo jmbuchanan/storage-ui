@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
@@ -6,12 +6,16 @@ import ProtectedResource from '../security/ProtectedResource';
 import YourPaymentMethods from './YourPaymentMethods';
 import YourUnits from './YourUnits';
 
+import { AuthContext } from '../context/AuthContext';
+
 import './_styles.css';
 import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Portal = () => {
+
+  const { firstName } = useContext(AuthContext);
 
   const [units, setUnits] = useState([]);
   const [cardsOnFile, setCardsOnFile] = useState([]);
@@ -25,42 +29,46 @@ const Portal = () => {
   }
 
   const fetchUnits = async () => {
-    const api = process.env.REACT_APP_DOMAIN + '/units/fetchByCustomerId';
-    await axios
-      .get(api, { withCredentials: true })
-      .then(response => {
-        setUnits(response.data)
-      })
-      .catch(error => {
-        if (error.response) {
-          console.log("Error Response from Server");
-        } else {
-          console.log("No Response from Server");
-        }
-    });
+    if (firstName != '') {
+      const api = process.env.REACT_APP_DOMAIN + '/units/fetchByCustomerId';
+      await axios
+        .get(api, { withCredentials: true })
+        .then(response => {
+          setUnits(response.data)
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log("Error Response from Server");
+          } else {
+            console.log("No Response from Server");
+          }
+      });
+    }
   }
 
   const fetchCardsOnFile = async () => {
-    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
-    await axios
-      .get(api, { withCredentials: true })
-      .then(response => {
-        setCardsOnFile(response.data)
-      })
-      .catch(error => {
-        if (error.response) {
-          console.log("Error Response from Server");
-        } else {
-          console.log("No Response from Server");
-        }
-    });
+    if (firstName != '') {
+      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+      await axios
+        .get(api, { withCredentials: true })
+        .then(response => {
+          setCardsOnFile(response.data)
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log("Error Response from Server");
+          } else {
+            console.log("No Response from Server");
+          }
+      });
+    }
   }
   
   useEffect(() => {
     clearStripeiFrames();
-    fetchUnits();
+    //fetchUnits();
     fetchCardsOnFile();
-  }, [])
+  }, [firstName])
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
     return (

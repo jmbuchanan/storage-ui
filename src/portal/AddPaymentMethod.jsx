@@ -59,17 +59,13 @@ const AddPaymentMethod = (props) => {
     if (serverResponse.error) {
       setStatusMessage("Error occurred on the server.");
     } else {
-      setStatusMessage("Payment successfully added!");
-      await new Promise(r => setTimeout(r, 1200));
-      props.onClick();
+      props.onSubmit();
     }
   }
 
   const PaymentDetailsForm = () => {
     return (
       <>
-      <h2>Your Payment Methods</h2>
-      <div className="billing paper">
         <p>
           We do not currently have a payment method on file for your account.
           Enter your credit card information below to add a payment method.
@@ -91,16 +87,13 @@ const AddPaymentMethod = (props) => {
             Add Payment Method
           </button>
         </form>
-        </div>
         </>
     );
   }
 
   const StatusMessage = () => {
     return (
-      <div className="billing paper">
         <p>{statusMessage}</p>
-      </div>
     );
   }
 

@@ -26,6 +26,7 @@ const Book = () => {
 
   const [step, setStep] = useState(0);
   const [cards, setCards] = useState([]);
+  const [cardsFetched, setCardsFetched] = useState(false);
   const [selectedCard, setSelectedCard] = useState(0);
   const [unitSize, setUnitSize] = useState(0);
   const [bookStartDate, setBookStartDate] = useState(tomorrowString);
@@ -36,19 +37,18 @@ const Book = () => {
         .get(api, { withCredentials: true })
         .then(response => {
             setCards(response.data)
+            setCardsFetched(true);
         })
         .catch(error => {
             console.log("Server or stripe issue");
     });
   }
 
-  useEffect(() => {
-    fetchCards();
-  }, []);
 
   const setUnitDetails = (unitSize, startDate) => {
       setUnitSize(unitSize);
       setBookStartDate(startDate);
+      fetchCards();
   }
 
   const Step = () => {
@@ -57,15 +57,12 @@ const Book = () => {
               return <BookUnit unitSize={unitSize} bookStartDate={bookStartDate} setUnitDetails={setUnitDetails} setStep={setStep}/>;
 
           case PAYMENT:
-              return <PaymentMethods cards={cards} setSelectedCard={setSelectedCard} setStep={setStep} />;
+              return <PaymentMethods cards={cards} loading={!cardsFetched} fetchCards={fetchCards} setSelectedCard={setSelectedCard} setStep={setStep} />;
 
           case CONFIRM:
               return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep}/>;
       }
   }
-
-  const brand = cards.length > 0 ? cards[0].cardBrand : "No card";
-  const lastFour = cards.length > 0 ? cards[0].lastFour : null;
 
   if (step == SUBMITTED) {
     return <Redirect to="/portal" />;
@@ -76,11 +73,6 @@ const Book = () => {
             <Elements stripe={stripePromise}>
               <h1>Book A Unit</h1>
               <Step />
-              <p>Step: {step}</p>
-              <p>Unit Type: {unitSize}</p>
-              <p>Start Date: {bookStartDate}</p>
-              <p>Card Brand: {brand}</p>
-              <p>Card Last Four: {lastFour}</p>
             </Elements>
           </ProtectedResource>
         </div>

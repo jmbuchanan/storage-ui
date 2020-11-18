@@ -10,7 +10,7 @@ const Navigator = (props) => {
 
     const Back = () => {
         if (backEnabled) {
-            return <button onClick={props.goBack}>Back</button>;
+            return <button className="back-button" onClick={props.goBack}>Back</button>;
         } else {
             return <div></div>;
         }
