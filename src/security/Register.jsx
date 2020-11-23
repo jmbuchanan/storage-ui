@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { AuthContext } from '../context/AuthContext';
@@ -14,9 +15,11 @@ const states = [
   'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
 ]
 
-const Register = () => {
+const Register = (props) => {
 
   const { setUserBasedOnAuthCookie } = useContext(AuthContext);
+
+  const history = useHistory();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +32,7 @@ const Register = () => {
   const [state, setState] = useState(states[0]);
   const [zip, setZip] = useState('');
   const [statusCode, setStatusCode] = useState('');
+  const [awaitingServerResponse, setAwaitingServerResponse] = useState(false);
   const [warning, setWarning] = useState('');
 
   const handleEmail = (e) => {
@@ -98,6 +102,8 @@ const Register = () => {
     formData.set('state', state);
     formData.set('zip', zip);
 
+    setAwaitingServerResponse(true);
+
     axios(process.env.REACT_APP_DOMAIN + '/customers/addCustomer', {
       method: 'POST',
       data: formData,
@@ -115,10 +121,11 @@ const Register = () => {
 
   if (statusCode === 200) {
     setUserBasedOnAuthCookie();
-    window.history.back();
+    history.push("/portal");
   }
 
   if (statusCode === 409) {
+    setAwaitingServerResponse(false);
     setWarning( "There is already an account with this e-mail.");
     setStatusCode('');
   }
@@ -129,6 +136,18 @@ const Register = () => {
       <p className="warning">
         {warning}
       </p>
+    );
+  }
+
+  if (awaitingServerResponse) {
+    return (
+    <div className="default-body">
+      <h1>Register</h1>
+      <div className="register paper">
+        <h2>Create Account</h2>
+        <p>Please wait while your account is being created...</p>
+      </div>
+    </div>
     );
   }
 
@@ -220,7 +239,7 @@ const Register = () => {
         </button>
         </form>
         <p>Already have an account? 
-          <a className="register"  href="/billing" onClick={() => window.history.back()}>Sign in</a>
+          <Link className="register"  to="/portal" >Sign in</Link>
         </p>
         {warning ? warningMessage(warning) : null}
       </div>
