@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './_styles.css';
@@ -81,7 +82,7 @@ const LoginForm = (props) => {
         </button>
       </form>
       <p>Need an account? 
-        <a className="register" href="/register">Register</a>
+        <Link className="register" to="/register">Register</Link>
       </p>
       {warning != null ? warning : null}
     </div>

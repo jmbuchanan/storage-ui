@@ -11,7 +11,7 @@ import ConfirmBooking from './ConfirmBooking';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Book = () => {
+const Book = (props) => {
 
   const BOOK = 0;
   const PAYMENT = 1;

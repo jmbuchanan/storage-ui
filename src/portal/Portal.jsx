@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Portal = () => {
+const Portal = (props) => {
 
   const { firstName } = useContext(AuthContext);
 
@@ -47,21 +47,19 @@ const Portal = () => {
   }
 
   const fetchCardsOnFile = async () => {
-    if (firstName != '') {
-      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
-      await axios
-        .get(api, { withCredentials: true })
-        .then(response => {
-          setCardsOnFile(response.data)
-        })
-        .catch(error => {
-          if (error.response) {
-            console.log("Error Response from Server");
-          } else {
-            console.log("No Response from Server");
-          }
-      });
-    }
+    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+    await axios
+      .get(api, { withCredentials: true })
+      .then(response => {
+        setCardsOnFile(response.data)
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log("Error Response from Server");
+        } else {
+          console.log("No Response from Server");
+        }
+    });
   }
   
   useEffect(() => {
