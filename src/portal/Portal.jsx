@@ -47,6 +47,7 @@ const Portal = (props) => {
   }
 
   const fetchCardsOnFile = async () => {
+    if (firstName != '') {
     const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
     await axios
       .get(api, { withCredentials: true })
@@ -60,6 +61,7 @@ const Portal = (props) => {
           console.log("No Response from Server");
         }
     });
+  }
   }
   
   useEffect(() => {

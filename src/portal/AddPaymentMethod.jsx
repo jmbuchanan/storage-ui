@@ -67,7 +67,6 @@ const AddPaymentMethod = (props) => {
     return (
       <>
         <p>
-          We do not currently have a payment method on file for your account.
           Enter your credit card information below to add a payment method.
         </p>
         <form style={{width: '100%'}} onSubmit={handleSubmit}>

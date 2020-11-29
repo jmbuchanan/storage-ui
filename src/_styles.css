@@ -78,7 +78,7 @@ button {
   cursor: pointer;
   min-width: 100px;
   max-width: fit-content;
-  border: none;
+  border-width: 1px;
 }
 
 .material-icons {
@@ -109,8 +109,7 @@ button {
 .sm {
   display: block;
 }
-
-/**/
+/*--------------------*/
 
 @media (min-width: 500px) {
 
@@ -123,8 +122,7 @@ button {
   .md {
     display: block;
   }
-
-/**/
+/*--------------------*/
 }
 
 @media only screen and (min-width: 900px) {
@@ -162,7 +160,7 @@ button {
     display: table-cell;
   }
 
-/**/
+/*--------------------*/
 
 }
 

@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import { Link } from 'react-router-dom';
 
 import './_styles.css';
 import { AuthContext } from '../context/AuthContext';
@@ -21,11 +22,11 @@ const Greeting = () => {
     <div className="greeting">
       <p>
         {"Hello, " + capitalize(firstName) + "! "}
-        <span
+        <Link
           className="logout"
           onClick={handleLogout}>
             Logout
-        </span>
+        </Link>
       </p>
     </div>
   );

@@ -92,40 +92,42 @@ const BookUnit = (props) => {
   return (
     <>
       <div className="book-unit paper">
-        <h2>Choose Unit Size</h2>
-        <div className="choice">
-          <label for="small">Small - $40</label>
-          <input type="radio"
-            id="small"
-            checked={unit == SMALL}
-            onChange={handleUnitChange}
-            name="unitsize"
-            value="small"
-            />
+        <div>
+          <h2>Choose Unit Size</h2>
+          <div className="choice">
+            <label for="small">Small - $40</label>
+            <input type="radio"
+              id="small"
+              checked={unit == SMALL}
+              onChange={handleUnitChange}
+              name="unitsize"
+              value="small"
+              />
+          </div>
+          <div className="choice">
+            <label for="large">Large - $80</label>
+            <input type="radio"
+              id="large"
+              checked={unit == LARGE}
+              onChange={handleUnitChange}
+              name="unitsize"
+              value="small"
+              />
+          </div>
+          <div className="choice-stacked">
+            <label for="start">Requested Move In Date:</label>
+            <input type="date" id="start" name="start-date" onChange={handleDateChange} value={date}></input>
+          </div>
+          <DateWarning dateWarning={dateWarning}/>
         </div>
-        <div className="choice">
-          <label for="large">Large - $80</label>
-          <input type="radio"
-            id="large"
-            checked={unit == LARGE}
-            onChange={handleUnitChange}
-            name="unitsize"
-            value="small"
-            />
+        <div className="navigator">
+          <Navigator 
+            backEnabled={false}
+            nextEnabled={nextEnabled}
+            goBack={goBack}
+            goNext={goNext}
+          />
         </div>
-        <div className="choice-stacked">
-          <label for="start">Requested Move In Date:</label>
-          <input type="date" id="start" name="start-date" onChange={handleDateChange} value={date}></input>
-        </div>
-      </div>
-      <DateWarning dateWarning={dateWarning}/>
-      <div className="navigator">
-        <Navigator 
-          backEnabled={false}
-          nextEnabled={nextEnabled}
-          goBack={goBack}
-          goNext={goNext}
-        />
       </div>
     </>
   );

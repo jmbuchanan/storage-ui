@@ -8,7 +8,9 @@ const PaymentMethods = (props) => {
 
   const STEP_INDEX = 1;
 
-  const [nextEnabled, setNextEnabled] = useState(props.cards.length > 0);
+  const handleChange = (e) => {
+    props.setSelectedCard(e.target.value);
+  }
 
   const goNext = () => {
     props.setStep(STEP_INDEX + 1);
@@ -43,9 +45,9 @@ const PaymentMethods = (props) => {
 
     var method = (
         <div className="radio-option" key={i}>
-            <input type="radio" id={card.id} checked={i == 0} name="paymentMethod" value={card.id} />
+            <input type="radio" id={i} checked={i == props.selectedCard} onChange={handleChange} name="paymentMethod" value={i} />
             <i className="material-icons material-icons-payment">payment</i>
-            <label className="radio-option-label" htmlFor={card.id}>{labelText}</label>
+            <label className="radio-option-label" htmlFor={i}>{labelText}</label>
         </div>
     );
 
@@ -57,16 +59,18 @@ const PaymentMethods = (props) => {
     return (
       <>
       <div className="book-unit paper">
-        <h2>Payment Methods</h2>
-        {methods}
-      </div>
-      <div className="navigator">
-        <Navigator 
-          backEnabled={true}
-          nextEnabled={nextEnabled}
-          goBack={goBack}
-          goNext={goNext}
-        />
+        <div>
+          <h2>Payment Methods</h2>
+          {methods}
+        </div>
+        <div className="navigator">
+          <Navigator 
+            backEnabled={true}
+            nextEnabled={props.cards.length > 0}
+            goBack={goBack}
+            goNext={goNext}
+          />
+        </div>
       </div>
       </>
     );
@@ -75,14 +79,14 @@ const PaymentMethods = (props) => {
       <>
         <div className="book-unit paper">
           <AddPaymentMethod onSubmit={updatePaymentMethods}/>
-        </div>
-        <div className="navigator">
-          <Navigator 
-            backEnabled={true}
-            nextEnabled={nextEnabled}
-            goBack={goBack}
-            goNext={goNext}
-          />
+          <div className="navigator">
+            <Navigator 
+              backEnabled={true}
+              nextEnabled={props.cards.length > 0}
+              goBack={goBack}
+              goNext={goNext}
+            />
+          </div>
         </div>
       </>
     );

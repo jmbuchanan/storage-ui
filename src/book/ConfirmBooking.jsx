@@ -18,19 +18,21 @@ const ConfirmBooking = (props) => {
   return (
     <>
       <div className="book-unit paper">
-      <h2>Confirm Booking</h2>
-      <p>Small Unit</p>
-      <p>Available 11/02/20</p>
-      <p>Payment Method Visa ending in 4242</p>
-      </div>
-      <div className="navigator">
-        <Navigator 
-          backEnabled={true}
-          nextEnabled={true}
-          goBack={goBack}
-          goNext={goNext}
-          nextLabel={"Confirm"}
-        />
+        <div>
+          <h2>Confirm Booking</h2>
+          <p>Small Unit</p>
+          <p>Available 11/02/20</p>
+          <p>Payment Method Visa ending in 4242</p>
+        </div>
+        <div className="navigator">
+          <Navigator 
+            backEnabled={true}
+            nextEnabled={true}
+            goBack={goBack}
+            goNext={goNext}
+            nextLabel={"Confirm"}
+          />
+        </div>
       </div>
     </>
   );
