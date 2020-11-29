@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import AddPaymentMethod from './AddPaymentMethod';
 
+import axios from 'axios';
+
 const YourPaymentMethods = (props) => {
 
     const [addPaymentMethod, setAddPaymentMethod] = useState(false);
     const [selectedCardIndex, setSelectedCardIndex] = useState(0);
+    const [deleteStatusCode, setDeleteStatusCode] = useState(0);
 
     const handleChange = (e) => {
         setSelectedCardIndex(e.target.value);
     }
 
     const updatePaymentMethods = () => {
-        console.log("lksjfd");
+        setAddPaymentMethod(false);
+        props.refreshApiCall();
     }
 
+    const removePaymentMethod = async () => {
+        const cardId = props.cardsOnFile[selectedCardIndex].id;
 
-    const removePaymentMethod = () => {
-        console.log("sdjfldsjf");
+        const api = process.env.REACT_APP_DOMAIN + "/paymentMethods/" + cardId;
+        console.log(api);
+        await axios
+        .delete( api, {
+            data: selectedCardIndex,
+            withCredentials: true})
+        .then(response => {
+            setDeleteStatusCode(response.status)})
+        .catch(error => {
+            if (error.response) {
+            setDeleteStatusCode(error.response.status)
+            } else {
+            setDeleteStatusCode(500);
+            }
+        });
+
+        setSelectedCardIndex(0);
+        props.refreshApiCall();
     }
 
     const capitalize = (word) => {

@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Portal = (props) => {
+const Portal = () => {
 
   const { firstName } = useContext(AuthContext);
 
@@ -70,6 +70,7 @@ const Portal = (props) => {
     fetchCardsOnFile();
   }, [firstName])
 
+
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
     return (
       <Elements stripe={stripePromise}>
@@ -77,7 +78,7 @@ const Portal = (props) => {
           <h1>Portal</h1>
             <ProtectedResource>
               <YourUnits units={units}/>
-              <YourPaymentMethods cardsOnFile={cardsOnFile}/>
+              <YourPaymentMethods cardsOnFile={cardsOnFile} refreshApiCall={fetchCardsOnFile}/>
             </ProtectedResource>
         </div>
       </Elements>
