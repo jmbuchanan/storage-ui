@@ -19,13 +19,13 @@ const LoginForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let formData = new URLSearchParams();
-    formData.set('email', email);
-    formData.set('password', password);
 
     axios(process.env.REACT_APP_DOMAIN + '/login', {
       method: 'POST',
-      data: formData,
+      data: {
+        email: email,
+        password: password
+      },
       withCredentials: true
     })
     .then(response => {

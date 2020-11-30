@@ -89,18 +89,18 @@ const Register = (props) => {
       return;
     }
 
-    let formData = new URLSearchParams();
-
-    formData.set('email', email);
-    formData.set('password', password);
-    formData.set('firstName', firstName);
-    formData.set('lastName', lastName);
-    formData.set('phoneNumber', phoneNumber);
-    formData.set('streetAddress', streetAddress);
-    formData.set('secondStreetAddress', streetAddress2);
-    formData.set('city', city);
-    formData.set('state', state);
-    formData.set('zip', zip);
+    let formData = {
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      streetAddress: streetAddress,
+      secondStreetAddress: streetAddress2,
+      city: city,
+      state: state,
+      zip: zip
+    }
 
     setAwaitingServerResponse(true);
 
