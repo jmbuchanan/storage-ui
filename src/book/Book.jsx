@@ -57,9 +57,10 @@ const Book = () => {
   }
 
   const confirmBooking = async () => {
+    const formattedDate = formatBookStartDate(bookStartDate);
     const payload = {
       unitSize: unitSize,
-      startDate: bookStartDate,
+      startDate: formattedDate,
       cardId: cards[selectedCard].id,
       customerId: customerId
     }
@@ -76,6 +77,10 @@ const Book = () => {
         .catch(error => {
             console.log("Server or stripe issue");
     });
+  }
+
+  const formatBookStartDate = (date) => {
+    return date + " 00:00:00";
   }
 
   const Step = () => {

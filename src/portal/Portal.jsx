@@ -66,7 +66,7 @@ const Portal = () => {
   
   useEffect(() => {
     clearStripeiFrames();
-    //fetchUnits();
+    fetchUnits();
     fetchCardsOnFile();
   }, [firstName])
 
