@@ -15,10 +15,9 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Portal = () => {
 
-  const { firstName } = useContext(AuthContext);
-
   const [units, setUnits] = useState([]);
   const [cardsOnFile, setCardsOnFile] = useState([]);
+  const [enableApiCall, setEnableApiCall] = useState(false);
 
   //stripe can add too many iframes on rerender, so this cleans up
   const clearStripeiFrames = () => {
@@ -29,12 +28,12 @@ const Portal = () => {
   }
 
   const fetchUnits = async () => {
-    if (firstName != '') {
+    if (enableApiCall) {
       const api = process.env.REACT_APP_DOMAIN + '/units/fetchByCustomerId';
       await axios
         .get(api, { withCredentials: true })
         .then(response => {
-          setUnits(response.data)
+          setUnits(response.data);
         })
         .catch(error => {
           if (error.response) {
@@ -47,28 +46,35 @@ const Portal = () => {
   }
 
   const fetchCardsOnFile = async () => {
-    if (firstName != '') {
-    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
-    await axios
-      .get(api, { withCredentials: true })
-      .then(response => {
-        setCardsOnFile(response.data)
-      })
-      .catch(error => {
-        if (error.response) {
-          console.log("Error Response from Server");
-        } else {
-          console.log("No Response from Server");
-        }
-    });
+    if (enableApiCall) {
+      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+      await axios
+        .get(api, { withCredentials: true })
+        .then(response => {
+          setCardsOnFile(response.data)
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log("Error Response from Server");
+          } else {
+            console.log("No Response from Server");
+          }
+      });
+    }
   }
+
+  const enableApiCallHook = () => {
+    setEnableApiCall(true);
   }
   
   useEffect(() => {
-    clearStripeiFrames();
+    if (!enableApiCall) {
+      clearStripeiFrames();
+    }
     fetchUnits();
-    fetchCardsOnFile();
-  }, [firstName])
+    const timer = setTimeout(fetchCardsOnFile, 10);
+    return () => clearTimeout(timer);
+  }, [enableApiCall])
 
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
@@ -76,7 +82,7 @@ const Portal = () => {
       <Elements stripe={stripePromise}>
         <div className="default-body">
           <h1>Portal</h1>
-            <ProtectedResource>
+            <ProtectedResource enableApiCall={enableApiCallHook}>
               <YourUnits units={units}/>
               <YourPaymentMethods cardsOnFile={cardsOnFile} refreshApiCall={fetchCardsOnFile}/>
             </ProtectedResource>

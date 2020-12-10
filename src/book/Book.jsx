@@ -35,6 +35,8 @@ const Book = () => {
   const [selectedCard, setSelectedCard] = useState(0);
   const [unitSize, setUnitSize] = useState(SMALL);
   const [bookStartDate, setBookStartDate] = useState(tomorrowString);
+  const [enableApiCall, setEnableApiCall] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const fetchCards = async () => {
     const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
@@ -71,8 +73,9 @@ const Book = () => {
           { withCredentials: true }
           )
         .then(response => {
-            setCards(response.data)
-            setCardsFetched(true);
+          if (response.status === 200) {
+            setRedirect(true);
+          }
         })
         .catch(error => {
             console.log("Server or stripe issue");
@@ -81,6 +84,10 @@ const Book = () => {
 
   const formatBookStartDate = (date) => {
     return date + " 00:00:00";
+  }
+
+  const enableApiCallHook = () => {
+    setEnableApiCall(true);
   }
 
   const Step = () => {
@@ -93,24 +100,30 @@ const Book = () => {
 
           case CONFIRM:
               return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep} />;
+
+          case SUBMITTED:
+              return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep} />;
       }
   }
 
+  if (redirect) {
+    return <Redirect to="/portal" />;
+  }
   if (step == SUBMITTED) {
     confirmBooking();
-    return <Redirect to="/portal" />;
-  } else {
-    return (
-        <div className="default-body">
-          <ProtectedResource>
-            <Elements stripe={stripePromise}>
-              <h1>Book A Unit</h1>
-              <Step />
-            </Elements>
-          </ProtectedResource>
-        </div>
-    )
-  }
+  } 
+
+  return (
+      <div className="default-body">
+        <ProtectedResource enableApiCall={enableApiCallHook}>
+          <Elements stripe={stripePromise}>
+            <h1>Book A Unit</h1>
+            <Step />
+          </Elements>
+        </ProtectedResource>
+      </div>
+  )
+  
 }
 
 export default Book;

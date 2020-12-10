@@ -19,7 +19,9 @@ const ProtectedResource = (props) => {
     await axios
       .get( api, {withCredentials: true})
       .then(response => {
-        setAuthenticateStatusCode(response.status)})
+        setAuthenticateStatusCode(response.status);
+        props.enableApiCall();
+      })
       .catch(error => {
         if (error.response) {
           setAuthenticateStatusCode(error.response.status)
@@ -38,6 +40,9 @@ const ProtectedResource = (props) => {
   const handleStatusCode = (statusCode) => {
     setUserBasedOnAuthCookie();
     setLoginStatusCode(statusCode);
+    if (statusCode === 200) {
+      props.enableApiCall();
+    }
   }
 
   const checkingAuthentication = !authenticateStatusCode;
