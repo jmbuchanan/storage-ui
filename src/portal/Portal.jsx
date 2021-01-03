@@ -82,8 +82,13 @@ const Portal = () => {
       <Elements stripe={stripePromise}>
         <div className="default-body">
           <h1>Portal</h1>
+<<<<<<< Updated upstream
             <ProtectedResource enableApiCall={enableApiCallHook}>
               <YourUnits units={units}/>
+=======
+            <ProtectedResource>
+              <YourUnits units={units} refreshApiCall={fetchUnits}/>
+>>>>>>> Stashed changes
               <YourPaymentMethods cardsOnFile={cardsOnFile} refreshApiCall={fetchCardsOnFile}/>
             </ProtectedResource>
         </div>

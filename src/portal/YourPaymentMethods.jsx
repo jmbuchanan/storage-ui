@@ -18,11 +18,10 @@ const YourPaymentMethods = (props) => {
         props.refreshApiCall();
     }
 
-    const removePaymentMethod = async () => {
+    const removePaymentMethod = async (e) => {
+        e.preventDefault();
         const cardId = props.cardsOnFile[selectedCardIndex].id;
-
         const api = process.env.REACT_APP_DOMAIN + "/paymentMethods/" + cardId;
-        console.log(api);
         await axios
         .delete( api, {
             data: selectedCardIndex,
@@ -91,11 +90,13 @@ const YourPaymentMethods = (props) => {
         <h2>Your Payment Methods</h2>
         <div className="payment-methods billing paper">
             <label>Manage Your Payment Methods</label>
+            <form>
             {methods}
             <div className="horizontal-buttons">
                 <button onClick={() => setAddPaymentMethod(true)}>Add</button>
                 <button className="back-button" onClick={removePaymentMethod}>Remove</button>
             </div>
+            </form>
         </div>
         </>
     )
