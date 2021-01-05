@@ -79,15 +79,9 @@ const Book = () => {
           { withCredentials: true }
           )
         .then(response => {
-<<<<<<< Updated upstream
-          if (response.status === 200) {
-            setRedirect(true);
-          }
-=======
             setCards(response.data)
             setCardsFetched(true);
             setStep(step + 1);
->>>>>>> Stashed changes
         })
         .catch(error => {
             console.log("Server or stripe issue");
@@ -112,35 +106,16 @@ const Book = () => {
 
           case CONFIRM:
               return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep} />;
-<<<<<<< Updated upstream
 
           case SUBMITTED:
-              return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep} />;
-=======
-          
-          case SUBMITTED:
               return <p>Submitting request to server...</p>; 
->>>>>>> Stashed changes
       }
       return <Redirect to="/portal" />;
   }
 
-<<<<<<< Updated upstream
-  if (redirect) {
-    return <Redirect to="/portal" />;
-  }
-  if (step == SUBMITTED) {
-    confirmBooking();
-  } 
-
   return (
       <div className="default-body">
         <ProtectedResource enableApiCall={enableApiCallHook}>
-=======
-  return (
-      <div className="default-body">
-        <ProtectedResource>
->>>>>>> Stashed changes
           <Elements stripe={stripePromise}>
             <h1>Book A Unit</h1>
             <Step />
@@ -148,10 +123,6 @@ const Book = () => {
         </ProtectedResource>
       </div>
   )
-<<<<<<< Updated upstream
-  
-=======
->>>>>>> Stashed changes
 }
 
 export default Book;
