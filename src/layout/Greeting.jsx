@@ -10,7 +10,7 @@ const Greeting = () => {
   const { firstName, setUserBasedOnAuthCookie } = useContext(AuthContext);
 
   const handleLogout = () => {
-    document.cookie = "Authorization=;expires= Thu, 21 Aug 2014 20:00:00 UTC";
+    document.cookie = "Authorization=; path=/; expires= Thu, 21 Aug 2014 20:00:00 UTC";
     setUserBasedOnAuthCookie();
   }
 
