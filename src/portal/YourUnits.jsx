@@ -20,7 +20,7 @@ const YourUnits = (props) => {
     const removeUnit = async (e) => {
         e.preventDefault();
         const unitNumber = props.units[selectedUnitIndex].unitNumber;
-        const api = process.env.REACT_APP_DOMAIN + "/units/" + unitNumber;
+        const api = process.env.REACT_APP_DOMAIN + "/transactions/cancel/" + unitNumber;
         await axios( api, {
             method: 'PUT',
             withCredentials: true})
