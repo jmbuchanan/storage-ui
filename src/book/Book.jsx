@@ -72,7 +72,7 @@ const Book = () => {
       cardId: cards[selectedCard].id,
       customerId: customerId
     }
-    const api = process.env.REACT_APP_DOMAIN + '/units/book';
+    const api = process.env.REACT_APP_DOMAIN + '/transactions/book';
     await axios
         .post(api,
           payload,
