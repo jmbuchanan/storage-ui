@@ -1,3 +1,4 @@
+import { CardCvcElement } from '@stripe/react-stripe-js';
 import React from 'react';
 import Navigator from './Navigator';
 
@@ -20,9 +21,9 @@ const ConfirmBooking = (props) => {
       <div className="book-unit paper">
         <div>
           <h2>Confirm Booking</h2>
-          <p>Small Unit</p>
-          <p>Available 11/02/20</p>
-          <p>Payment Method Visa ending in 4242</p>
+          <p>{props.unitSize == 0 ? "Small Unit" : "Large Unit"}</p>
+          <p>{"Available " + props.bookStartDate}</p>
+          <p>{"Payment Method ending in " + props.card.lastFour}</p>
         </div>
         <div className="navigator">
           <Navigator 
