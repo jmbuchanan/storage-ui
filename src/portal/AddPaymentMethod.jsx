@@ -7,6 +7,8 @@ import { CardNumberElement,
 
 import { AuthContext } from '../context/AuthContext';
 
+import loading from '../img/loading.gif';
+
 const AddPaymentMethod = (props) => {
 
   const [ isSubmitted, setIsSubmitted ] = useState(false);
@@ -90,14 +92,9 @@ const AddPaymentMethod = (props) => {
     );
   }
 
-  const StatusMessage = () => {
-    return (
-        <p>{statusMessage}</p>
-    );
-  }
 
   if (isSubmitted) {
-    return <StatusMessage />
+    return <img src={loading} alt="loading" className="loading" />
   } else {
     return <PaymentDetailsForm />
   }

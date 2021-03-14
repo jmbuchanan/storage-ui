@@ -10,6 +10,8 @@ import BookUnit from './BookUnit';
 import PaymentMethods from './PaymentMethods';
 import ConfirmBooking from './ConfirmBooking';
 
+import loading from '../img/loading.gif';
+
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Book = () => {
@@ -108,7 +110,7 @@ const Book = () => {
               return <ConfirmBooking card={cards[selectedCard]} unit={unitSize} bookStartDate={bookStartDate} setStep={setStep} />;
 
           case SUBMITTED:
-              return <p>Submitting request to server...</p>; 
+              return <img className="loading" src={loading} alt="loading" />
       }
       return <Redirect to="/portal" />;
   }
