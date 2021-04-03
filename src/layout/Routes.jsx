@@ -5,6 +5,7 @@ import './_styles.css';
 
 import Home from '../home/Home';
 import Book from '../book/Book';
+import Cancel from '../portal/Cancel';
 import Portal from '../portal/Portal';
 import Directory from '../admin/Directory';
 import CustomersTable from '../admin/CustomersTable';
@@ -19,6 +20,7 @@ const Routes = () => {
       <Route exact path = "/portal" component={Portal} />
       <Route exact path = "/register" component={Register} />
       <Route exact path = "/book" component={Book} />
+      <Route exact path = "/cancel" render = {(props) => <Cancel {...props} />} />
       <Route exact path = "/admin" component={Directory} />
       <Route exact path = "/admin/customers" component={CustomersTable} />
       <Route exact path = "/admin/units" component={UnitsTable} />
