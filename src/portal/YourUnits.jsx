@@ -37,7 +37,7 @@ const YourUnits = (props) => {
             for (var i = 0; i < props.units.length; i++) {
                 var selected = (i == selectedUnitIndex);
                 var unit = props.units[i]; 
-                var largeOrSmall = unit.isLarge ? "Large" : "Small";
+                var largeOrSmall = unit.priceId ? "Large" : "Small";
                 const ele = (
                     <div className="radio-option" key={i}>
                         <input type="radio" id={i} checked={selected} value={i} onChange={handleChange} name="unitNumber" />

@@ -16,7 +16,6 @@ const Cancel = (props) => {
 
   const today = new Date();
 
-  const [cancelStatusFetched, setCancelStatusFetched] = useState(false);
   const [cancelStatus, setCancelStatus] = useState(null);
   const [date, setDate] = useState('');
   const [dateWarning, setDateWarning] = useState(VALID_DATE);
@@ -30,16 +29,25 @@ const Cancel = (props) => {
     const api = process.env.REACT_APP_DOMAIN + "/transactions/cancel/eligibility/" + props.location.state.unitNumber;
     const response = await axios.get(
       api, {withCredentials: true}
-    );
-    setCancelStatus(response.data);
-    setCancelStatusFetched(true);
+    )
+    .then(response => {
+      setCancelStatus(response.data);
+      if (response.data == 0) {
+        submitCancelRequest(response.data);
+      }
+    })
+    .catch(error => {
+      console.log("Server or stripe issue");
+    });
   }
 
-  const submitCancelRequest = async () => {
+  const submitCancelRequest = async (status) => {
+    const cancelImmediately = status == 0 ? true : false;
     const formattedDate = formatCancelDate(date);
     const payload = {
       unitId: props.location.state.unitNumber,
       executionDate: formattedDate,
+      cancelImmediately: cancelImmediately
     }
     const api = process.env.REACT_APP_DOMAIN + '/transactions/cancel';
     await axios
@@ -104,16 +112,15 @@ const Cancel = (props) => {
     setDate(selectedDate);
   }
 
-  if (!cancelStatusFetched) {
+  if (cancelConfirm) {
+    return <Redirect to="/portal" />;
+  }
+
+  if (cancelStatus == null || cancelStatus == 0) {
     return <img className="loading" src={loading} alt="loading" />
   }
 
-  if (cancelStatus == 0) {
-    setDate(new Date());
-    submitCancelRequest();
-  }
-
-  if ((cancelStatus == 1) && !cancelConfirm) {
+  if (cancelStatus == 1) {
     return (
       <div className="default-body">
           <ProtectedResource enableApiCall={enableApiCallHook}>
@@ -126,15 +133,11 @@ const Cancel = (props) => {
               <br />
               <DateWarning dateWarning={dateWarning}/>
               <br />
-              <button onClick={submitCancelRequest}>Cancel</button>
+              <button onClick={submitCancelRequest(date)}>Cancel</button>
             </div>
           </ProtectedResource>
       </div>
     );
-  }
-
-  if (cancelConfirm) {
-    return <Redirect to= "/portal" />
   }
 
   if (cancelStatus == 2) {
