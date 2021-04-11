@@ -124,16 +124,16 @@ const Cancel = (props) => {
     return (
       <div className="default-body">
           <ProtectedResource enableApiCall={enableApiCallHook}>
-            <div className="paper">
-              <h1>Cancel Your Subscription</h1>
+            <h1>Cancel Your Subscription</h1>
+            <div className="paper billing">
               <p>Unit number {props.location.state.unitNumber}</p>
               <label for="start">Requested Cancellation Date:</label>
               <br />
-              <input type="date" id="start" name="cancel-date" onChange={handleDateChange} value={date}></input>
+              <input type="date" id="start" name="cancel-date" style={{maxWidth: 120}} onChange={handleDateChange} value={date}></input>
               <br />
               <DateWarning dateWarning={dateWarning}/>
               <br />
-              <button onClick={submitCancelRequest(date)}>Cancel</button>
+              <button onClick={(date) => submitCancelRequest(date)}>Cancel</button>
             </div>
           </ProtectedResource>
       </div>
