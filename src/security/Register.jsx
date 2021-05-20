@@ -29,11 +29,11 @@ const Register = (props) => {
   const [streetAddress, setStreetAddress] = useState('');
   const [streetAddress2, setStreetAddress2] = useState('');
   const [city, setCity] = useState('');
-  const [state, setState] = useState(states[0]);
+  const [state, setState] = useState('GA');
   const [zip, setZip] = useState('');
   const [statusCode, setStatusCode] = useState('');
   const [awaitingServerResponse, setAwaitingServerResponse] = useState(false);
-  const [warning, setWarning] = useState('');
+  const [warnings, setWarnings] = useState([]);
 
   const handleEmail = (e) => {
       setEmail(e.target.value);
@@ -41,6 +41,10 @@ const Register = (props) => {
 
   const isValidEmail = (email) => {
     return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  }
+
+  const isValidPassword = (password) => {
+    return password.length >= 8;
   }
   
   const handlePassword = (e) => {
@@ -84,10 +88,21 @@ const Register = (props) => {
 
     e.preventDefault();
 
+    const errors = [];
+
     if (!isValidEmail(email)) {
-      setWarning("Please enter a valid e-mail address");
+      errors.push("Please enter a valid e-mail address");
+    }
+    if (!isValidPassword(password)) {
+      errors.push("Password needs to be at least 8 characters in length");
+    }
+
+    if (errors.length > 0) {
+      setWarnings(errors)
       return;
     }
+
+    setWarnings([]);
 
     let formData = {
       email: email,
@@ -126,16 +141,19 @@ const Register = (props) => {
 
   if (statusCode === 409) {
     setAwaitingServerResponse(false);
-    setWarning( "There is already an account with this e-mail.");
+    warnings.push("There is already an account with this e-mail.")
+    setWarnings(warnings);
     setStatusCode('');
   }
 
 
-  const warningMessage = (warning) => {
+  const displayWarnings = (warnings) => {
     return (
+      warnings.map((warning) =>
       <p className="warning">
         {warning}
       </p>
+      )
     );
   }
 
@@ -240,7 +258,7 @@ const Register = (props) => {
           <p>Already have an account? 
             <Link className="register"  to="/portal" >Sign in</Link>
           </p>
-          {warning ? warningMessage(warning) : null}
+          {warnings.length > 0 ? displayWarnings(warnings) : null}
         </div>
       </div>
     )

@@ -6,8 +6,6 @@ import ProtectedResource from '../security/ProtectedResource';
 import YourPaymentMethods from './YourPaymentMethods';
 import YourUnits from './YourUnits';
 
-import { AuthContext } from '../context/AuthContext';
-
 import './_styles.css';
 import axios from 'axios';
 
