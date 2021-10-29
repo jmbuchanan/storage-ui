@@ -47,7 +47,7 @@ const Book = () => {
   }, [step])
 
   const fetchCards = async () => {
-    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+    const api = process.env.REACT_APP_DOMAIN + '/paymentMethods?customerId=' + customerId;
     await axios
         .get(api, { withCredentials: true })
         .then(response => {

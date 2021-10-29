@@ -5,6 +5,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import ProtectedResource from '../security/ProtectedResource';
 import YourPaymentMethods from './YourPaymentMethods';
 import YourUnits from './YourUnits';
+import { AuthContext } from '../context/AuthContext';
 
 import './_styles.css';
 import axios from 'axios';
@@ -17,6 +18,8 @@ const Portal = () => {
   const [cardsOnFile, setCardsOnFile] = useState([]);
   const [enableApiCall, setEnableApiCall] = useState(false);
 
+  const { customerId } = useContext(AuthContext);
+
   //stripe can add too many iframes on rerender, so this cleans up
   const clearStripeiFrames = () => {
       var iframes = document.querySelectorAll('iframe');
@@ -27,7 +30,7 @@ const Portal = () => {
 
   const fetchUnits = async () => {
     if (enableApiCall) {
-      const api = process.env.REACT_APP_DOMAIN + '/units/fetchByCustomerId';
+      const api = process.env.REACT_APP_DOMAIN + '/units?customerId=' + customerId;
       await axios
         .get(api, { withCredentials: true })
         .then(response => {
@@ -45,7 +48,7 @@ const Portal = () => {
 
   const fetchCardsOnFile = async () => {
     if (enableApiCall) {
-      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods/fetchByCustomerId';
+      const api = process.env.REACT_APP_DOMAIN + '/paymentMethods?customerId=' + customerId;
       await axios
         .get(api, { withCredentials: true })
         .then(response => {

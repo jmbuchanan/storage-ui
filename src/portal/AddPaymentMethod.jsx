@@ -39,7 +39,7 @@ const AddPaymentMethod = (props) => {
       setStatusMessage("Error submitting details to Stripe server...");
 
     } else {
-      const serverResponse = await fetch(process.env.REACT_APP_DOMAIN + '/paymentMethods/addPaymentMethod', {
+      const serverResponse = await fetch(process.env.REACT_APP_DOMAIN + '/paymentMethods', {
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
         credentials: 'include',
