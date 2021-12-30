@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React from 'react';
 import Navigator from './Navigator';
 import AddPaymentMethod from '../portal/AddPaymentMethod';
 
@@ -9,7 +9,7 @@ const PaymentMethods = (props) => {
   const STEP_INDEX = 1;
 
   const handleChange = (e) => {
-    props.setSelectedCard(e.target.value);
+    props.setSelectedCard(parseInt(e.target.value));
   }
 
   const goNext = () => {

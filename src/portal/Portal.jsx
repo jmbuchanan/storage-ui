@@ -30,7 +30,7 @@ const Portal = () => {
 
   const fetchUnits = async () => {
     if (enableApiCall) {
-      const api = process.env.REACT_APP_DOMAIN + '/units?customerId=' + customerId;
+      const api = process.env.REACT_APP_DOMAIN + '/subscriptions?customerId=' + customerId;
       await axios
         .get(api, { withCredentials: true })
         .then(response => {
@@ -67,15 +67,17 @@ const Portal = () => {
   const enableApiCallHook = () => {
     setEnableApiCall(true);
   }
-  
-  useEffect(() => {
+
+  const makeApiCalls = () => {
     if (!enableApiCall) {
       clearStripeiFrames();
     }
     fetchUnits();
     const timer = setTimeout(fetchCardsOnFile, 10);
     return () => clearTimeout(timer);
-  }, [enableApiCall])
+  }
+  
+  useEffect(makeApiCalls, [enableApiCall])
 
 
   if (process.env.REACT_APP_BILLING_ENABLED === "true") {
@@ -84,7 +86,7 @@ const Portal = () => {
         <div className="default-body">
           <h1>Portal</h1>
             <ProtectedResource enableApiCall={enableApiCallHook}>
-              <YourUnits units={units} refreshApiCall={fetchUnits}/>
+              <YourUnits units={units} refreshApiCall={makeApiCalls}/>
               <YourPaymentMethods cardsOnFile={cardsOnFile} refreshApiCall={fetchCardsOnFile}/>
             </ProtectedResource>
         </div>

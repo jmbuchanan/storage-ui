@@ -20,11 +20,11 @@ const YourPaymentMethods = (props) => {
 
     const removePaymentMethod = async (e) => {
         e.preventDefault();
-        const cardId = props.cardsOnFile[selectedCardIndex].id;
-        const api = process.env.REACT_APP_DOMAIN + "/paymentMethods/" + cardId;
+        const card = props.cardsOnFile[selectedCardIndex];
+        const api = process.env.REACT_APP_DOMAIN + "/paymentMethods/" + card.id;
         await axios
         .delete( api, {
-            data: selectedCardIndex,
+            //data: selectedCardIndex,
             withCredentials: true})
         .then(response => {
             setDeleteStatusCode(response.status)})
@@ -62,6 +62,7 @@ const YourPaymentMethods = (props) => {
         <>
         <h2>Your Payment Methods</h2>
         <div className="payment-methods billing paper">
+            <label>Manage Your Payment Methods</label>
             <p>You have no cards on file</p>
             <button onClick={() => setAddPaymentMethod(true)}>Add Payment Method</button>
         </div>
@@ -69,22 +70,26 @@ const YourPaymentMethods = (props) => {
         )
     }
 
+
     for (var i = 0; i < props.cardsOnFile.length; i++) {
         var card = props.cardsOnFile[i];
         var selected = (i == selectedCardIndex);
-        var labelText = capitalize(card.cardBrand) +
-            " ending in " + card.lastFour;
+        var labelText = capitalize(card.cardBrand);
 
         var method = (
             <div className="radio-option" key={i}>
                 <input type="radio" id={i} checked={selected} value={i} onChange={handleChange} name="paymentMethod" />
                 <i className="material-icons material-icons-payment">payment</i>
                 <label className="radio-option-label" htmlFor={i}>{labelText}</label>
+                <label className="radio-option-label" htmlFor={i}>{`Ending in ${card.lastFour}`}</label>
             </div>
         );
 
         methods.push(method);
     }
+
+    const paymentMethodRemovable = !props.cardsOnFile[selectedCardIndex].associatedWithActiveSubscription;
+
     return (
         <>
         <h2>Your Payment Methods</h2>
@@ -94,7 +99,10 @@ const YourPaymentMethods = (props) => {
             {methods}
             <div className="horizontal-buttons">
                 <button onClick={() => setAddPaymentMethod(true)}>Add</button>
-                <button className="back-button" onClick={removePaymentMethod}>Remove</button>
+                <button className="back-button"
+                    onClick={paymentMethodRemovable ? removePaymentMethod : (e) => e.preventDefault()} 
+                    style={paymentMethodRemovable ? null : {backgroundColor: "gray", color: "white", cursor: "not-allowed"} }
+                >Remove</button>
             </div>
             </form>
         </div>

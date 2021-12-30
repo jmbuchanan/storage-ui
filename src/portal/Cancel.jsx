@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import ProtectedResource from '../security/ProtectedResource';
 import axios from 'axios';
-import loading from '../img/loading.gif';
 
 const Cancel = (props) => {
 
@@ -12,12 +11,14 @@ const Cancel = (props) => {
   const NO_DATE_SELECTED = 3;
   const MAX_DAYS_OUT = 30;
 
-  const DATE_WARNING_MESSAGE = "Units can only be booked one to thirty days out."
+  const DATE_WARNING_MESSAGE = "Units can only be cancelled one to thirty days out."
 
   const today = new Date();
+  const nextWeek = new Date(today);
+  nextWeek.setDate(today.getDate() + 1);
+  const nextWeekString = nextWeek.toISOString().slice(0,10);
 
-  const [cancelStatus, setCancelStatus] = useState(null);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(nextWeekString);
   const [dateWarning, setDateWarning] = useState(VALID_DATE);
   const [cancelConfirm, setCancelConfirm] = useState(false);
   const [isValidDate, setIsValidDate] = useState(true);
@@ -25,33 +26,18 @@ const Cancel = (props) => {
   const enableApiCallHook = () => {
   }
 
-  const fetchCancelStatus = async () => {
-    const api = process.env.REACT_APP_DOMAIN + "/transactions/cancel/eligibility/" + props.location.state.unitNumber;
-    const response = await axios.get(
-      api, {withCredentials: true}
-    )
-    .then(response => {
-      setCancelStatus(response.data);
-      if (response.data == 0) {
-        submitCancelRequest(response.data);
-      }
-    })
-    .catch(error => {
-      console.log("Server or stripe issue");
-    });
-  }
-
   const submitCancelRequest = async (status) => {
-    const cancelImmediately = status == 0 ? true : false;
+    if (!isValidDate) {
+      return;
+    }
     const formattedDate = formatCancelDate(date);
     const payload = {
-      unitId: props.location.state.unitNumber,
-      executionDate: formattedDate,
-      cancelImmediately: cancelImmediately
+      unitId: props.location.state.unitId,
+      date: formattedDate,
     }
-    const api = process.env.REACT_APP_DOMAIN + '/transactions/cancel';
+    const api = process.env.REACT_APP_DOMAIN + '/subscriptions';
     await axios
-        .post(api,
+        .put(api,
           payload,
           { withCredentials: true }
           )
@@ -62,10 +48,6 @@ const Cancel = (props) => {
             console.log("Server or stripe issue");
     });
   }
-
-  useEffect(() => {
-    fetchCancelStatus();
-  }, []);
 
   //calendar needs to be between tomorrow and 30 days out
   const verifyDate = (bookDate, today) => {
@@ -98,7 +80,6 @@ const Cancel = (props) => {
     }
   }
 
-
   const formatCancelDate = (date) => {
     return date + " 00:00:00";
   }
@@ -114,36 +95,23 @@ const Cancel = (props) => {
 
   if (cancelConfirm) {
     return <Redirect to="/portal" />;
-  }
-
-  if (cancelStatus == null || cancelStatus == 0) {
-    return <img className="loading" src={loading} alt="loading" />
-  }
-
-  if (cancelStatus == 1) {
+  } else {
     return (
       <div className="default-body">
           <ProtectedResource enableApiCall={enableApiCallHook}>
             <h1>Cancel Your Subscription</h1>
             <div className="paper billing">
-              <p>Unit number {props.location.state.unitNumber}</p>
+              <label for="start">Selected Unit</label>
+              <p>Unit {props.location.state.unitId}</p>
               <label for="start">Requested Cancellation Date:</label>
               <br />
               <input type="date" id="start" name="cancel-date" style={{maxWidth: 120}} onChange={handleDateChange} value={date}></input>
               <br />
               <DateWarning dateWarning={dateWarning}/>
               <br />
-              <button onClick={(date) => submitCancelRequest(date)}>Cancel</button>
+              <button onClick={(date) => submitCancelRequest(date)} style={isValidDate ? null : {background : "grey"}}>Cancel</button>
             </div>
           </ProtectedResource>
-      </div>
-    );
-  }
-
-  if (cancelStatus == 2) {
-    return (
-      <div className="default-body">
-        <h1>Something has gone wrong...</h1>
       </div>
     );
   }

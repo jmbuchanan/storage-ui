@@ -1,6 +1,6 @@
 .billing {
     padding: 10px;
-    width: 280px;
+    width: 380px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -60,4 +60,7 @@
   padding-bottom: 5px;
   font-weight: normal;
   font-size: .9rem;
+  display: inline-block;
+  width: 75px;
+  white-space: nowrap;
 }

@@ -1,31 +1,62 @@
 import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
+
+import loading from '../img/loading.gif';
 
 const YourUnits = (props) => {
 
     const [book, setBook] = useState(false);
     const [cancel, setCancel] = useState(false);
     const [selectedUnitIndex, setSelectedUnitIndex] = useState(0);
-    const [cancelStatusCode, setCancelStatusCode] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const redirect = () => {
+    const redirect = (e) => {
+        e.preventDefault();
         setBook(true);
-    }
-
-    const handleChange = (e) => {
-        setSelectedUnitIndex(e.target.value);
     }
 
     const redirectToCancel = () => {
         setCancel(true);
     }
 
+    const handleChange = (e) => {
+        setSelectedUnitIndex(parseInt(e.target.value));
+    }
+
+    const submitCancelRequest = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const unit = props.units[selectedUnitIndex];
+        const date = new Date();
+        const dateStr = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`;
+        if (unit.canBeCancelledImmediately) {
+            const payload = {
+            unitId: unit.unitId,
+            date: dateStr
+            }
+            const api = process.env.REACT_APP_DOMAIN + '/subscriptions';
+            await axios
+                .put(api,
+                payload,
+                { withCredentials: true }
+                )
+                .then(response => {
+                    props.refreshApiCall();
+                })
+                .catch(error => {
+                    console.log("Server or stripe issue");
+            });
+        } else {
+            redirectToCancel();
+        }
+        setIsLoading(false);
+    }
 
     const BackButton = (props) => {
         if (props.units.length > 0) {
-            return <button className="back-button" onClick={redirectToCancel}>Remove</button>;
+            return <button className="back-button" onClick={(e) => submitCancelRequest(e)}>Remove</button>;
         } else {
             return null;
         }
@@ -35,14 +66,16 @@ const YourUnits = (props) => {
         const unitsDom = [];
         if (props.units.length > 0) {
             for (var i = 0; i < props.units.length; i++) {
-                var selected = (i == selectedUnitIndex);
+                var selected = (i === selectedUnitIndex);
                 var unit = props.units[i]; 
                 var largeOrSmall = unit.priceId ? "Large" : "Small";
                 const ele = (
                     <div className="radio-option" key={i}>
                         <input type="radio" id={i} checked={selected} value={i} onChange={handleChange} name="unitNumber" />
                         <i className="material-icons material-icons-storefront">storefront</i>
-                        <label className="radio-option-label" htmlFor={i}>{`Unit ${unit.unitNumber} - ${largeOrSmall}`}</label>
+                        <label className="radio-option-label" htmlFor={i}>{`Unit ${unit.unitId}`}</label>
+                        <label className="radio-option-label" htmlFor={i}>{largeOrSmall}</label>
+                        <label className="radio-option-label" htmlFor={i}>{unit.message}</label>
                     </div>
                 );
                 unitsDom.push(ele);
@@ -53,21 +86,21 @@ const YourUnits = (props) => {
             return <p>You have no units</p>
         }
     }
-
-    if (book) {
+    if (isLoading) {
+        return <img className="loading" src={loading} alt="loading" />
+    } else if (book) {
         return (
             <Redirect to="/book" />
         );
     } else if (cancel) {
-        const unitNumber = props.units[selectedUnitIndex].unitNumber;
-        return (
-            <Redirect 
-                to={{
-                    pathname: "/cancel", 
-                    state: {unitNumber: unitNumber}
-                }}
-            />
-        );
+            return (
+                <Redirect 
+                    to={{
+                        pathname: "/cancel", 
+                        state: {unitId: props.units[selectedUnitIndex].unitId}
+                    }}
+                />
+            );
     } else {
         return (
             <>
