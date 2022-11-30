@@ -35,6 +35,7 @@ const Register = (props) => {
   const [awaitingServerResponse, setAwaitingServerResponse] = useState(false);
   const [warnings, setWarnings] = useState([]);
 
+
   const handleEmail = (e) => {
       setEmail(e.target.value);
   }
@@ -44,7 +45,26 @@ const Register = (props) => {
   }
 
   const isValidPassword = (password) => {
-    return password.length >= 8;
+    //at least 8 characters, letters numbers and special characters allowed
+    return /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/.test(password)
+  }
+
+  const isValidPhoneNumber = (phoneNumber) => {
+    //only 10 digits
+    return /^\d{10}$/.test(phoneNumber);
+  }
+
+  const isValidZip = (zip) => {
+    //only 5 digits
+    return /^\d{5}$/.test(zip);
+  }
+
+  const areRequiredFieldsCompleted = () => {
+    return firstName !== '' &&
+      lastName != '' && 
+      streetAddress != '' &&
+      city != '' && 
+      zip != ''
   }
   
   const handlePassword = (e) => {
@@ -94,7 +114,19 @@ const Register = (props) => {
       errors.push("Please enter a valid e-mail address");
     }
     if (!isValidPassword(password)) {
-      errors.push("Password needs to be at least 8 characters in length");
+      errors.push("Password requires at least eight characters and at least one letter and one number");
+    }
+
+    if (!isValidPhoneNumber(phoneNumber)) {
+      errors.push("Please enter a valid phone number");
+    }
+
+    if (!isValidZip(zip)) {
+      errors.push("Please enter a valid zip code");
+    }
+
+    if (!areRequiredFieldsCompleted()) {
+      errors.push("Please fill out all fields in the form");
     }
 
     if (errors.length > 0) {
